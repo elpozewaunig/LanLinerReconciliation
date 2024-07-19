@@ -1,66 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://x46ieo2mb8a3"]
+[gd_scene load_steps=4 format=3 uid="uid://x46ieo2mb8a3"]
 
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_3rm6l"]
-[ext_resource type="Script" path="res://scripts/PathVisualizer.gd" id="1_y3s6h"]
 [ext_resource type="PackedScene" uid="uid://dc7aktr1f5opg" path="res://scenes/player.tscn" id="3_stg1m"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c68wh"]
-
-[sub_resource type="Curve2D" id="Curve2D_lo8cb"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 81, 335, 0, 0, 0, 0, 104, 187, 0, 0, 0, 0, 143, 101, 0, 0, 0, 0, 184, 15, 0, 0, 0, 0, 302, -69, 0, 0, 0, 0, 441, -110)
-}
-point_count = 6
-
-[sub_resource type="Curve2D" id="Curve2D_roph8"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 82.405, 250.134, 0, 0, 0, 0, 152.035, 217.087, 0, 0, 0, 0, 201.886, 191.555, 0, 0, 0, 0, 249, 184, 0, 0, 0, 0, 288, 154, 0, 0, 0, 0, 297, 130, 0, 0, 0, 0, 323.767, 95.6034, 0, 0, 0, 0, 430, -19)
-}
-point_count = 8
+[ext_resource type="Script" path="res://scenes/PathBuilder.gd" id="5_ej3e2"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_3rm6l")
 
-[node name="LeftPath2D" type="Path2D" parent="."]
-material = SubResource("CanvasItemMaterial_c68wh")
-position = Vector2(123, 142)
-curve = SubResource("Curve2D_lo8cb")
-script = ExtResource("1_y3s6h")
-
-[node name="CenterPath2D" type="Path2D" parent="LeftPath2D"]
-material = SubResource("CanvasItemMaterial_c68wh")
-position = Vector2(358.237, -361.929)
-scale = Vector2(1.00434, 1.00718)
-curve = SubResource("Curve2D_roph8")
-script = ExtResource("1_y3s6h")
-
-[node name="CenterPath2D" type="Path2D" parent="."]
-material = SubResource("CanvasItemMaterial_c68wh")
-position = Vector2(143, 162)
-curve = SubResource("Curve2D_lo8cb")
-script = ExtResource("1_y3s6h")
-
-[node name="Player" parent="CenterPath2D" instance=ExtResource("3_stg1m")]
+[node name="Player" parent="." instance=ExtResource("3_stg1m")]
 z_index = 1
-position = Vector2(81, 335)
+position = Vector2(224, 497)
 rotation = -1.41662
 
-[node name="CenterPath2D" type="Path2D" parent="CenterPath2D"]
-material = SubResource("CanvasItemMaterial_c68wh")
-position = Vector2(358.237, -361.929)
-scale = Vector2(1.00434, 1.00718)
-curve = SubResource("Curve2D_roph8")
-script = ExtResource("1_y3s6h")
-
-[node name="RightPath2D" type="Path2D" parent="."]
-material = SubResource("CanvasItemMaterial_c68wh")
-position = Vector2(163, 182)
-curve = SubResource("Curve2D_lo8cb")
-script = ExtResource("1_y3s6h")
-
-[node name="CenterPath2D" type="Path2D" parent="RightPath2D"]
-material = SubResource("CanvasItemMaterial_c68wh")
-position = Vector2(358.237, -361.929)
-scale = Vector2(1.00434, 1.00718)
-curve = SubResource("Curve2D_roph8")
-script = ExtResource("1_y3s6h")
+[node name="PathBuilder" type="Node2D" parent="."]
+script = ExtResource("5_ej3e2")
