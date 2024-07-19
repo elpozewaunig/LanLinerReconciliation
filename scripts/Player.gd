@@ -15,10 +15,11 @@ func _ready():
 func _process(delta):
 	var change = delta * speed * game_manager.tick_speed
 	var change_ratio  = change / get_parent().curve.get_baked_length()
-	if progress_ratio + change_ratio > 1:
+	if progress_ratio + change_ratio >= 1:
 		progress += change
 		var next = get_parent().get_child(1)
 		reparent(next)
+		progress_ratio -= 1
 	else:
 		progress += change
 	camera.zoom.x = 1 / (speed * game_manager.tick_speed * zoom_fact + 1)
