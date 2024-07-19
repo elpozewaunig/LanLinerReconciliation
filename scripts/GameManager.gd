@@ -1,14 +1,17 @@
 extends Node2D
 
+@onready var player_scene = preload("res://scenes/player.tscn")
+
 var tick_speed = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var pathBuilder = $PathBuilder
-	var player = $Player
 	var path = pathBuilder.createPath()
 	add_child(path)
-	player.reparent(path)
+	var player = player_scene.instantiate()
+	add_child(player)
+	
 	
 
 
