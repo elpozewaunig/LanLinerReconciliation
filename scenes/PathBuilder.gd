@@ -1,15 +1,17 @@
 extends Node2D
 
 
-var pl = 150 # how long is a path-line in px
-var gap = 80 # how many px gap between the duplis 
+var pl = 500 # how long is a path-line in px
+var gap = 160 # how many px gap between the duplis 
 var dc = 4 # how many extra duplicates
 var ec = 3 # how many path elements (recursion!) careful with that
-var lpp = 3 # how many lines per path? (additional to asfo)
-var asfo = 3 # how many lines after a split to fade out into a normal path
+var lpp = 8 # how many lines per path? (additional to asfo)
+var asfo = 5 # how many lines after a split to fade out into a normal path ,sideways "fork"
+var asfof = 5 # after asfo, straight "fork" (SChild is straight for asfo+asfof)
+var bsfo = 4 # how many lines before a split to fade into a a splitter
 var rng = RandomNumberGenerator.new()
 var debuggap = 0
-var debugmove = 1500
+var debugmove = 0#1500
 
 func createPath():
 	var root = Node2D.new()
@@ -20,7 +22,7 @@ func createPath():
 	root.add_child(lane)
 	for i in dc:
 		var dupli = lane.duplicate()
-		dupli.position = Vector2(dupli.position.x-(gap*(i+1)), dupli.position.y)
+		dupli.position = Vector2(dupli.position.x+(gap*(i+1)), dupli.position.y)
 		dupli.name = "lane"+str(i+1)
 		root.add_child(dupli)
 	
@@ -55,13 +57,29 @@ func rec(recursionDepth: int, origin: Vector2, name:String):
 		fadedist = 0
 		path.curve.add_point(Vector2(0,0))
 	
+	for i in asfof:
+		path.curve.add_point(Vector2(prevlr*pl,-((i+1)*pl)-fadedist))
+	
+	fadedist+=asfof*pl
+	
 	
 	for i in lpp:
-		var rdmNum = rng.randi_range(-1,1)
+		var rdmNum
+		if(name=="LChild"): 
+			rdmNum = rng.randi_range(-1,0)
+		elif(name=="SChild"):
+			rdmNum = rng.randi_range(-1,1)
+		elif(name=="RChild"):
+			rdmNum = rng.randi_range(0,1)
+		else:
+			rdmNum = 0
 		prevlr += rdmNum
 		path.curve.add_point(Vector2(prevlr*pl,-((i+1)*pl)-fadedist))		
 	
-	var newOrigin = Vector2(prevlr*pl, -(pl*lpp)-fadedist-debuggap)
+	for i in bsfo:
+		path.curve.add_point(Vector2(prevlr*pl, (-(pl*lpp)-fadedist)-((i+1)*pl)))
+	
+	var newOrigin = Vector2(prevlr*pl, -(pl*lpp)-fadedist-(bsfo*pl)-debuggap)
 	
 	if(recursionDepth!=1):
 		var rdmNum = rng.randi_range(1,3)
