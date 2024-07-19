@@ -34,3 +34,6 @@ func _process(delta):
 	camera.zoom.x = 1 / (speed * game_manager.tick_speed * zoom_fact + 1)
 	camera.zoom.y = 1 / (speed * game_manager.tick_speed * zoom_fact + 1)
 		
+	
+	
+	
