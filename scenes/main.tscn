@@ -1,3 +1,37 @@
-[gd_scene format=3 uid="uid://x46ieo2mb8a3"]
+[gd_scene load_steps=8 format=3 uid="uid://x46ieo2mb8a3"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" path="res://scenes/GameManager.gd" id="1_3rm6l"]
+[ext_resource type="Script" path="res://scripts/PathVisualizer.gd" id="1_y3s6h"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_2jtmd"]
+[ext_resource type="Texture2D" uid="uid://fpt88tf7cjf3" path="res://assets/icon.svg" id="2_82s6o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c68wh"]
+
+[sub_resource type="Curve2D" id="Curve2D_lo8cb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 153, 270, 0, 0, 0, 0, 200, 185, 0, 0, 0, 0, 423, 169)
+}
+point_count = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_3rm6l")
+
+[node name="Path2D" type="Path2D" parent="."]
+material = SubResource("CanvasItemMaterial_c68wh")
+position = Vector2(143, 162)
+curve = SubResource("Curve2D_lo8cb")
+script = ExtResource("1_y3s6h")
+
+[node name="Player" type="PathFollow2D" parent="Path2D"]
+material = SubResource("CanvasItemMaterial_lk7ji")
+position = Vector2(153, 270)
+rotation = -1.0657
+script = ExtResource("2_2jtmd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/Player"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_82s6o")
+
+[node name="Camera2D" type="Camera2D" parent="Path2D/Player"]
