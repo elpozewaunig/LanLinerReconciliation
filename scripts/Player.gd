@@ -2,22 +2,22 @@ extends PathFollow2D
 
 @onready var game_manager = $"/root/GameManager"
 @onready var camera = $Camera2D
+@onready var paths = game_manager.get_node("root")
 
-var speed = 800
+var speed = 100
 var zoom_fact = 0.001
 var current_lane = 1
 
-var parallel_lanes = []
+var lane_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Get lanes
-	for child in game_manager.get_children():
-		if child is Path2D:
-			parallel_lanes.append(child.get_index())
-			
-	# Set player to center lane
-	reparent(game_manager.get_child(parallel_lanes[parallel_lanes.size()/2]))
+	for lane in paths.get_children():
+		lane_count += 1
+		
+	# Set player to center lane, placing it on the lane's first path
+	reparent(paths.get_child(lane_count/2).get_child(0))
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,13 +26,12 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_left"):
 		if current_lane > 0:
 			current_lane -= 1
-			switch_lane(parallel_lanes[current_lane])
-			
+			switch_lane(current_lane)
 			
 	if Input.is_action_just_pressed("ui_right"):
-		if current_lane < parallel_lanes.size() - 1:
+		if current_lane < lane_count - 1:
 			current_lane += 1
-			switch_lane(parallel_lanes[current_lane])
+			switch_lane(current_lane)
 	
 	# Calculate progress along path according to speed
 	var change = delta * speed * game_manager.tick_speed
@@ -40,7 +39,7 @@ func _process(delta):
 	
 	# If progress would exceed current path, reparent to its child "SChild"
 	if progress_ratio + change_ratio >= 1:
-		var next_path = get_node_or_null("SChild")
+		var next_path = get_parent().get_node_or_null("SChild")
 		
 		# If there is another path to continue to, reparent
 		if next_path:
@@ -67,23 +66,23 @@ func switch_lane(index):
 	tree_location[0] = index
 	
 	# Finally, reparent to the node definded by the new tree location
-	reparent(get_child_from_tree_loc(tree_location))
+	reparent(get_child_from_tree_loc(paths, tree_location))
 
 
 # Obtain an array of the indexes of the parents of this element 
 func get_tree_location():
-	var current = self
+	var current = self.get_parent()
 	var indexes = []
 	# Seek parents in hierarchy until root of path lanes is reached
 	while not current.name == "root":
-		current = current.get_parent()
 		indexes.append(current.get_index())
+		current = current.get_parent()
 	indexes.reverse()
 	return indexes
 
 # Returns a child in a scene by following a list of the indexes of its parents
-func get_child_from_tree_loc(indexes):
-	var current = game_manager
+func get_child_from_tree_loc(start, indexes):
+	var current = start
 	for i in indexes:
 		current = current.get_child(i)
 	return current
