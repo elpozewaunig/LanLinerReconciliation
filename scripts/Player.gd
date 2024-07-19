@@ -4,7 +4,7 @@ extends PathFollow2D
 @onready var camera = $Camera2D
 @onready var paths = game_manager.get_node("root")
 
-var speed = 100
+var speed = 500
 var zoom_fact = 0.001
 var current_lane = 1
 

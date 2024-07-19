@@ -1,12 +1,12 @@
 extends Node2D
 
 
-var pl = 500 # how long is a path-line in px
+var pl = 150 # how long is a path-line in px
 var gap = 160 # how many px gap between the duplis 
 var dc = 4 # how many extra duplicates
-var ec = 3 # how many path elements (recursion!) careful with that
-var lpp = 8 # how many lines per path? (additional to asfo)
-var asfo = 5 # how many lines after a split to fade out into a normal path ,sideways "fork"
+var ec = 5 # how many path elements (recursion!) careful with that
+var lpp = 4 # how many lines per path? (additional to asfo)
+var asfo = 10 # how many lines after a split to fade out into a normal path ,sideways "fork"
 var asfof = 5 # after asfo, straight "fork" (SChild is straight for asfo+asfof)
 var bsfo = 4 # how many lines before a split to fade into a a splitter
 var rng = RandomNumberGenerator.new()
