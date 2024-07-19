@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://x46ieo2mb8a3"]
 
-[ext_resource type="Script" path="res://scenes/GameManager.gd" id="1_3rm6l"]
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_3rm6l"]
 [ext_resource type="Script" path="res://scripts/PathVisualizer.gd" id="1_y3s6h"]
 [ext_resource type="PackedScene" uid="uid://dc7aktr1f5opg" path="res://scenes/player.tscn" id="3_stg1m"]
 
@@ -44,7 +44,6 @@ script = ExtResource("1_y3s6h")
 z_index = 1
 position = Vector2(81, 335)
 rotation = -1.41662
-scale = Vector2(1, 1)
 
 [node name="CenterPath2D" type="Path2D" parent="CenterPath2D"]
 material = SubResource("CanvasItemMaterial_c68wh")
