@@ -106,7 +106,17 @@ func rec(recursionDepth: int, origin: Vector2, name:String):
 	if name=="nofade":
 		name = "SChild"
 	path.name = name
+	
+	path.tubele = genTubele(path)
 	return path
+
+func genTubele(path: Path2D):
+	var tubele = []
+	
+	tubele.append([0,path.curve.get_baked_length()/3,"slow"])
+	tubele.append([path.curve.get_baked_length()/3,path.curve.get_baked_length()*0.75,"speed"])
+	return tubele
+
 	
 
 func getInstance() -> Path2D:

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dh3wjho3ke4am"]
 
-[ext_resource type="Script" path="res://scripts/PathVisualizer.gd" id="1_d5dm8"]
+[ext_resource type="Script" path="res://scripts/Path.gd" id="1_gsf7u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c68wh"]
 
 [node name="VisiblePath" type="Path2D"]
 material = SubResource("CanvasItemMaterial_c68wh")
-script = ExtResource("1_d5dm8")
+script = ExtResource("1_gsf7u")
