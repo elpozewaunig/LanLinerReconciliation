@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player = preload("res://scenes/player.tscn").instantiate()
 @onready var enemy = preload("res://scenes/enemy.tscn").instantiate()
+@onready var controls = preload("res://scenes/control_overlay.tscn").instantiate()
 
 var tick_speed = 1
 var branch_choice = null
@@ -15,6 +16,7 @@ func _ready():
 	var path = pathBuilder.createPath()
 	add_child(path)
 	add_child(player)
+	add_child(controls)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
