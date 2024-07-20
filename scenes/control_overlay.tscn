@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ce0c0p1gkceto" path="res://assets/arrow_up.png" id="3_k1t7f"]
 
 [node name="ControlOverlay" type="Node2D"]
+z_index = 99
 scale = Vector2(5, 5)
 script = ExtResource("1_6q0su")
 
