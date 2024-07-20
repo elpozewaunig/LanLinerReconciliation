@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfwkv4n5rre88"
-path="res://.godot/imported/sealtile.jpg-b36c1659d4063c954a5be7b761973768.ctex"
+uid="uid://deifjywux43na"
+path="res://.godot/imported/tile_0079_edit.png-fac5ab3a780b6e1b94c1b983120f31f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sealtile.jpg"
-dest_files=["res://.godot/imported/sealtile.jpg-b36c1659d4063c954a5be7b761973768.ctex"]
+source_file="res://assets/tile_0079_edit.png"
+dest_files=["res://.godot/imported/tile_0079_edit.png-fac5ab3a780b6e1b94c1b983120f31f4.ctex"]
 
 [params]
 

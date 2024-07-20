@@ -113,8 +113,8 @@ func rec(recursionDepth: int, origin: Vector2, name:String):
 func genTubele(path: Path2D):
 	var tubele = []
 	
-	tubele.append([0,path.curve.get_baked_length()/3,"slow"])
-	tubele.append([path.curve.get_baked_length()/3,path.curve.get_baked_length()*0.75,"speed"])
+	tubele.append([path.curve.get_baked_length()/5,path.curve.get_baked_length()/3,"slow"])
+	tubele.append([path.curve.get_baked_length()/2,path.curve.get_baked_length()*0.75,"speed"])
 	return tubele
 
 	
