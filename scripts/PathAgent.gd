@@ -7,6 +7,8 @@ extends PathFollow2D
 @export var default_speed : int = 500
 @export var slow_speed : int = 200
 @export var fast_speed : int = 1000
+@export var extra_slow_speed : int = 100
+@export var extra_fast_speed : int = 2000
 var speed = 0
 
 var total_progress = 0
@@ -42,14 +44,28 @@ func _process(delta):
 			is_in_section = true
 			
 			if section[2] == "speed":
-				speed += delta * 500
-				if speed > fast_speed:
-					speed = fast_speed
+				if speed < fast_speed:
+					speed += delta * 500
+					if speed > fast_speed:
+						speed = fast_speed
 					
 			if section[2] == "slow":
-				speed -= delta * 500
-				if speed < slow_speed:
-					speed = slow_speed
+				if speed > slow_speed:
+					speed -= delta * 500
+					if speed < slow_speed:
+						speed = slow_speed
+					
+			if section[2] == "extraspeed":
+				if speed < extra_fast_speed:
+					speed += delta * 5000
+					if speed > extra_fast_speed:
+						speed = extra_fast_speed
+					
+			if section[2] == "extraslow":
+				if speed > extra_slow_speed:
+					speed -= delta * 5000
+					if speed < extra_slow_speed:
+						speed = extra_slow_speed
 	
 	# If the agent is not in a section, accelerate/decelerate to regular speed
 	if !is_in_section:
