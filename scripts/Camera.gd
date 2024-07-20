@@ -9,6 +9,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	# Gradually move camera back to relative zero on the x-axis
 	if position.x > 0:
 		print(position.x)
@@ -32,3 +33,6 @@ func _process(delta):
 		position.y += delta * transition_speed
 		if position.y > 0:
 			position.y = 0
+
+func transition_from_x(from_x):
+	position.x = from_x - global_position.x

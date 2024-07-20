@@ -94,14 +94,14 @@ func _process(delta):
 			current_lane -= 1
 			var last_global_x = camera.global_position.x
 			switch_lane(current_lane)
-			camera.position.x = last_global_x - global_position.x
+			camera.transition_from_x(last_global_x)
 			
 	if Input.is_action_just_pressed("ui_right") and branch_choice == null:
 		if current_lane < lane_count - 1:
 			current_lane += 1
 			var last_global_x = camera.global_position.x
 			switch_lane(current_lane)
-			camera.position.x = last_global_x - global_position.x
+			camera.transition_from_x(last_global_x)
 
 
 # Reparents the player to another lane
