@@ -1,6 +1,7 @@
 extends "res://scripts/PathAgent.gd"
 
 @onready var camera = $Camera2D
+@onready var controls = $ControlOverlay
 
 var zoom_fact = 0.001
 
@@ -21,7 +22,6 @@ func _process(delta):
 	super._process(delta)
 	
 	var vignette = camera.get_node("Vignette")
-	var controls = game_manager.get_node("ControlOverlay")
 	
 	# If progress nears the current path's end, slow down
 	if progress_ratio > 0.75 and branch_choice == null and total_progress >= game_manager.enemy.total_progress and branches.has("SChild"):

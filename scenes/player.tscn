@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=15 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://crf3x1a6mm6b5" path="res://assets/player.png" id="3_oj2jm"]
 [ext_resource type="Texture2D" uid="uid://clplopyknmamn" path="res://assets/trialsheet.png" id="4_gc2fj"]
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="5_3ppbk"]
+[ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/control_overlay.tscn" id="7_wphgy"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
@@ -87,3 +88,7 @@ scale = Vector2(0.565, 0.401)
 sprite_frames = SubResource("SpriteFrames_me1l3")
 frame_progress = 0.357305
 script = ExtResource("5_3ppbk")
+
+[node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
+
+[connection signal="choice_btn_pressed" from="." to="ControlOverlay" method="_on_choice_btn_pressed"]
