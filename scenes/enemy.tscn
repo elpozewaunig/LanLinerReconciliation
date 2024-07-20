@@ -10,7 +10,9 @@ material = SubResource("CanvasItemMaterial_lk7ji")
 rotates = false
 script = ExtResource("1_037od")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 self_modulate = Color(1, 0, 0, 1)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_mkgco")

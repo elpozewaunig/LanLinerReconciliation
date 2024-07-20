@@ -2,6 +2,7 @@ extends PathFollow2D
 
 @onready var game_manager = $"/root/GameManager"
 @onready var paths = game_manager.get_node("root")
+@onready var sprite_container = $Node2D
 
 @export var default_speed : int = 500
 @export var slow_speed : int = 200
@@ -15,6 +16,8 @@ var current_lane = 0
 
 var branches = {}
 var branch_choice = null
+
+var prev_x = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,6 +33,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	rotation_degrees = 0
+	# Agent is moving to the left
+	if position.x < prev_x:
+		rotation_degrees = -45
+	# Agent is moving to the right
+	elif prev_x > position.x:
+		rotation_degrees = 45
+		
+	prev_x = position.x
 	
 	# Obtain the speed information of the current path
 	var current_path_data = get_parent().tubele
