@@ -5,7 +5,7 @@ var pl = 150 # how long is a path-line in px
 var gap = 160 # how many px gap between the duplis 
 var dc = 4 # how many extra duplicates
 var ec = 5 # how many path elements (recursion!) careful with that
-var lpp = 4 # how many lines per path? (additional to asfo)
+var lpp = 24 # how many lines per path? (additional to asfo)
 var asfo = 10 # how many lines after a split to fade out into a normal path ,sideways "fork"
 var asfof = 5 # after asfo, straight "fork" (SChild is straight for asfo+asfof)
 var bsfo = 4 # how many lines before a split to fade into a a splitter
@@ -13,7 +13,10 @@ var rng = RandomNumberGenerator.new()
 var debuggap = 0
 var debugmove = 0#1500
 
+
+
 func createPath():
+	
 	var root = Node2D.new()
 	var lane = Node2D.new()
 	var neuepath = rec(ec, Vector2(0,0),"nofade")
@@ -31,6 +34,9 @@ func createPath():
 	return root
 
 func rec(recursionDepth: int, origin: Vector2, name:String):
+	
+	
+	
 	var path = getInstance()
 	
 
@@ -107,15 +113,9 @@ func rec(recursionDepth: int, origin: Vector2, name:String):
 		name = "SChild"
 	path.name = name
 	
-	path.tubele = genTubele(path)
 	return path
 
-func genTubele(path: Path2D):
-	var tubele = []
-	
-	tubele.append([path.curve.get_baked_length()/5,path.curve.get_baked_length()/3,"slow"])
-	tubele.append([path.curve.get_baked_length()/2,path.curve.get_baked_length()*0.75,"speed"])
-	return tubele
+
 
 	
 

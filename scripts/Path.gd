@@ -7,18 +7,71 @@ extends Path2D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if(fadeout):
+		pass ##todo & hide + set full wieder wenn fertig
 
 func _draw():
 	pass
+	
+var fadeout = false
+func _on_delete_branch(rec):
+	for child in self.get_children(false):
+		child._on_delete_branch(rec-1)
+	if(rec==0):
+		self.hide()
+		return
+	fadeout = true
+	
+var rng = RandomNumberGenerator.new()
+
+func splitter(start, end, rec):
+	var l = (end-start)/2
+	if(rec==0):
+		var r =	rng.randi_range(1,3)
+		if (r==1):
+			var r2 = rng.randi_range(1,3)
+			if(r2==3):
+				addtubele(start+l*0.8,end-l*0.8,"extraspeed")
+			else:
+				addtubele(start+l*0.6,end-l*0.6,"speed")
+			
+		elif (r==2):
+			var r2 = rng.randi_range(1,3)
+			if(r2==3):
+				addtubele(start+l+0.8,end-l*0.8,"extraslow")
+			else:
+				addtubele(start+l*0.6,end-l*0.6,"slow")
+		return
+		
+	var mid = start+l
+	splitter(start,mid,rec-1)
+	splitter(mid,end,rec-1)
+
+func addtubele(from,to,type):
+	self.tubele.append([from,to,type])
+
+
+func getBox():
+	var scene = preload("res://scenes/box.tscn") #preload geht aber load nit :huh:
+	var box = scene.instantiate()
+	return box
 
 func _ready():
+	self.tubele = []
+	var l = self.curve.get_baked_length()
+	var start = 0+l*0.25
+	var end = l-l*0.25
+
+	splitter(start,end,3)
+	
+	var box = getBox()
+	self.add_child(box)
 	
 	var newbc = getRegularLine()
 	for p in curve.get_baked_points():
 		
 		newbc.add_point(p)
-	newbc.width = 20
+	newbc.width = 15
 	self.add_child(newbc)
 
 	
@@ -31,7 +84,11 @@ func _ready():
 			newc = getSpeedLine()
 		elif(str(el[2])=="slow"):
 			newc = getSlowLine()				
-			
+		elif(str(el[2])=="extraspeed"):
+			newc = getExtraSpeedLine()
+		elif(str(el[2])=="extraslow"):
+			newc = getExtraSlowLine()	
+	
 		newc.add_point(curve.sample_baked(l1))
 		for pointInbetween in getPointsInBetween(l1,l2, curve):
 			newc.add_point(pointInbetween)
@@ -41,7 +98,14 @@ func _ready():
 		self.add_child(newc)
 			
 			
-
+func getExtraSpeedLine() -> Line2D:
+	var scene = preload("res://scenes/extraSpeedLine.tscn") #preload geht aber load nit :huh:
+	var line = scene.instantiate()
+	return line
+func getExtraSlowLine() -> Line2D:
+	var scene = preload("res://scenes/extraslowLine.tscn") #preload geht aber load nit :huh:
+	var line = scene.instantiate()
+	return line	
 func getSpeedLine() -> Line2D:
 	var scene = preload("res://scenes/speedLine.tscn") #preload geht aber load nit :huh:
 	var line = scene.instantiate()
