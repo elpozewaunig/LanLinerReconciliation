@@ -2,7 +2,7 @@ extends PathFollow2D
 
 @onready var game_manager = $"/root/GameManager"
 @onready var paths = game_manager.get_node("root")
-@onready var sprite_container = $Node2D
+@onready var sprite_container = $Sprites
 
 @export var default_speed : int = 500
 @export var slow_speed : int = 200

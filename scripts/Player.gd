@@ -1,6 +1,7 @@
 extends "res://scripts/PathAgent.gd"
 
 @onready var camera = $Camera2D
+@onready var controls
 
 var zoom_fact = 0.001
 
@@ -10,6 +11,8 @@ signal force_next_choice(branch)
 func _ready():
 	# Handle speed settings and path interactions in super class
 	super._ready()
+	
+	controls = game_manager.get_node("ControlOverlay")
 	
 	# Connect enemy's force_next_choice signal to own handler method
 	var enemy = game_manager.enemy
@@ -28,6 +31,21 @@ func _process(delta):
 		vignette.modulate.a += delta * 2
 		if vignette.modulate.a > 1:
 			vignette.modulate.a = 1
+			
+		# Show available choices
+		controls.show()
+		if branches.has("SChild"):
+			controls.up.show()
+		else:
+			controls.up.hide()
+		if branches.has("LChild"):
+			controls.left.show()
+		else:
+			controls.left.hide()
+		if branches.has("RChild"):
+			controls.right.show()
+		else:
+			controls.right.hide()
 		
 		game_manager.tick_speed -= delta
 		if game_manager.tick_speed < 0.3:
@@ -51,6 +69,9 @@ func _process(delta):
 		if vignette.modulate.a <= 0:
 			vignette.modulate.a = 0
 			camera.get_node("Vignette").hide()
+			
+		# Hide controls options
+		controls.hide()
 		
 		game_manager.tick_speed += delta
 		if  game_manager.tick_speed > 1:

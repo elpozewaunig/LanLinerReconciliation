@@ -55,22 +55,22 @@ material = SubResource("CanvasItemMaterial_lk7ji")
 rotates = false
 script = ExtResource("1_037od")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
 self_modulate = Color(1, 0, 0, 1)
 z_index = 5
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_mkgco")
 
-[node name="Trail" type="AnimatedSprite2D" parent="Node2D"]
+[node name="Trail" type="AnimatedSprite2D" parent="Sprites"]
 z_index = 3
 position = Vector2(2.08165e-12, 69.34)
 scale = Vector2(0.565, 0.401)
 sprite_frames = SubResource("SpriteFrames_be6dp")
 script = ExtResource("4_38np1")
 
-[node name="Trail2" type="AnimatedSprite2D" parent="Node2D"]
+[node name="Trail2" type="AnimatedSprite2D" parent="Sprites"]
 z_index = 3
 position = Vector2(2.08165e-12, 69.34)
 scale = Vector2(0.565, 0.401)
