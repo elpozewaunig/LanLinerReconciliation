@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqnq4mgqch21r"]
+
+[ext_resource type="Texture2D" uid="uid://cnqgitkp7dk43" path="res://assets/speeder.png" id="1_q6k5h"]
+
+[node name="SealTextLine" type="Line2D"]
+z_index = -5
+texture_repeat = 2
+width = 50.0
+texture = ExtResource("1_q6k5h")
+texture_mode = 1
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
