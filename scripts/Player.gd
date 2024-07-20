@@ -4,7 +4,11 @@ extends PathFollow2D
 @onready var camera = $Camera2D
 @onready var paths = game_manager.get_node("root")
 
-@export var speed : int = 500
+@export var default_speed : int = 500
+@export var slow_speed : int = 300
+@export var fast_speed : int = 700
+var speed = 0
+
 var zoom_fact = 0.001
 var tick_speed = 1
 
@@ -21,11 +25,44 @@ func _ready():
 		
 	# Set player to center lane, placing it on the lane's first path
 	current_lane = lane_count/2
-	reparent(paths.get_child(current_lane).get_child(0))
+	reparent(paths.get_child(current_lane).get_node("SChild"))
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# Obtain the speed information of the current path
+	var current_path_data = get_parent().tubele
+	var is_in_section = false
+	for section in current_path_data:
+		# If the player is in a specific section, change its speed accordingly
+		if progress >= section[0] and progress <= section[1]:
+			is_in_section = true
+			
+			if section[2] == "speed":
+				speed += delta * 500
+				if speed > fast_speed:
+					speed = fast_speed
+					
+			if section[2] == "slow":
+				speed -= delta * 500
+				if speed < slow_speed:
+					speed = slow_speed
+				
+	if !is_in_section:
+		
+		if speed < default_speed:
+			speed += delta * 500
+			if speed > default_speed:
+				speed = default_speed
+				
+		if speed > default_speed:
+			speed -= delta * 500
+			if speed < default_speed:
+				speed = default_speed
+				
+	else:
+		is_in_section = false
+	
 	# Calculate progress along path according to speed
 	var change = delta * speed * tick_speed
 	var change_ratio  = change / get_parent().curve.get_baked_length()
