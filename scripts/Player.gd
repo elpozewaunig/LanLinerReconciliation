@@ -108,3 +108,5 @@ func _process(delta):
 			switch_lane(current_lane)
 			camera.transition_from_x(last_global_x)
 			
+func _on_no_choice_made():
+	emit_signal("choice_btn_pressed", controls.up)

@@ -20,6 +20,7 @@ var branches = {}
 var branch_choice = null
 
 signal delete_branch
+signal no_choice_made
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,6 +33,7 @@ func _ready():
 	current_lane = lane_count/2
 	reparent(paths.get_child(current_lane).get_node("SChild"))
 	update_available_branches()
+	no_choice_made.connect(_on_no_choice_made)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -102,6 +104,7 @@ func apply_progress(delta):
 		elif branches.has("SChild"):
 			progress += change
 			reparent(branches["SChild"])
+			emit_signal("no_choice_made")
 			notify_abandoned_branches()
 			progress_ratio -= 1
 			
@@ -202,3 +205,6 @@ func _on_force_next_choice(forced_branch):
 	for branch_name in branches:
 		if branch_name == forced_branch.name:
 			branch_choice = branches[branch_name]
+
+func _on_no_choice_made():
+	pass
