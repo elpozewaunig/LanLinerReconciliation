@@ -92,12 +92,17 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_left") and branch_choice == null:
 		if current_lane > 0:
 			current_lane -= 1
+			var last_global_x = camera.global_position.x
 			switch_lane(current_lane)
+			camera.position.x = last_global_x - global_position.x
 			
 	if Input.is_action_just_pressed("ui_right") and branch_choice == null:
 		if current_lane < lane_count - 1:
 			current_lane += 1
+			var last_global_x = camera.global_position.x
 			switch_lane(current_lane)
+			camera.position.x = last_global_x - global_position.x
+
 
 # Reparents the player to another lane
 func switch_lane(index):
@@ -109,7 +114,7 @@ func switch_lane(index):
 	tree_location[0] = index
 	
 	# Finally, reparent to the node definded by the new tree location
-	reparent(get_child_from_tree_loc(paths, tree_location))
+	reparent(get_child_from_tree_loc(paths, tree_location), false)
 
 
 # Obtain an array of the indexes of the parents of this element 

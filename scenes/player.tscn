@@ -1,14 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=5 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Texture2D" uid="uid://fpt88tf7cjf3" path="res://assets/icon.svg" id="2_v374b"]
+[ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
 [node name="Player" type="PathFollow2D"]
 material = SubResource("CanvasItemMaterial_lk7ji")
-position = Vector2(153, 270)
-rotation = -1.0657
+rotates = false
 script = ExtResource("1_gyboe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,3 +16,4 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_v374b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_16twk")
