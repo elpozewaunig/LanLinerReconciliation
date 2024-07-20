@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmhaktjvtnwyh"]
+
+[ext_resource type="Texture2D" uid="uid://dfotr4t0son3j" path="res://assets/arrow_left.png" id="1_0cg6i"]
+[ext_resource type="Script" path="res://scripts/control_overlay.gd" id="1_6q0su"]
+[ext_resource type="Texture2D" uid="uid://cpdo8lqwql11w" path="res://assets/arrow_right.png" id="2_bhwc0"]
+[ext_resource type="Texture2D" uid="uid://ce0c0p1gkceto" path="res://assets/arrow_up.png" id="3_k1t7f"]
+
+[node name="ControlOverlay" type="Node2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_6q0su")
+
+[node name="Left" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-50, 2.08165e-12)
+scale = Vector2(2, 2)
+texture = ExtResource("1_0cg6i")
+
+[node name="Right" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(50, 2.08165e-12)
+scale = Vector2(2, 2)
+texture = ExtResource("2_bhwc0")
+
+[node name="Up" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(2.08165e-12, -50)
+scale = Vector2(2, 2)
+texture = ExtResource("3_k1t7f")

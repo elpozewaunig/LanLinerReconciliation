@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=14 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
+[ext_resource type="Texture2D" uid="uid://bv2en2yvl0kvo" path="res://assets/vignette.png" id="3_74b6m"]
 [ext_resource type="Texture2D" uid="uid://crf3x1a6mm6b5" path="res://assets/player.png" id="3_oj2jm"]
 [ext_resource type="Texture2D" uid="uid://clplopyknmamn" path="res://assets/trialsheet.png" id="4_gc2fj"]
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="5_3ppbk"]
@@ -59,16 +60,19 @@ script = ExtResource("1_gyboe")
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_16twk")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Vignette" type="Sprite2D" parent="Camera2D"]
+texture = ExtResource("3_74b6m")
 
-[node name="Triangle" type="Sprite2D" parent="Node2D"]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Triangle" type="Sprite2D" parent="Sprites"]
 z_index = 5
 texture_filter = 1
 texture_repeat = 1
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_oj2jm")
 
-[node name="Trail" type="AnimatedSprite2D" parent="Node2D"]
+[node name="Trail" type="AnimatedSprite2D" parent="Sprites"]
 z_index = 3
 position = Vector2(2.08165e-12, 69.34)
 scale = Vector2(0.565, 0.401)
@@ -76,7 +80,7 @@ sprite_frames = SubResource("SpriteFrames_me1l3")
 frame_progress = 0.357305
 script = ExtResource("5_3ppbk")
 
-[node name="Trail2" type="AnimatedSprite2D" parent="Node2D"]
+[node name="Trail2" type="AnimatedSprite2D" parent="Sprites"]
 z_index = 3
 position = Vector2(2.08165e-12, 69.34)
 scale = Vector2(0.565, 0.401)
