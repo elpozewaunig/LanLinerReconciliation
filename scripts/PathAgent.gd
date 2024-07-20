@@ -17,7 +17,6 @@ var current_lane = 0
 var branches = {}
 var branch_choice = null
 
-var prev_x = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,16 +32,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	rotation_degrees = 0
-	# Agent is moving to the left
-	if position.x < prev_x:
-		rotation_degrees = -45
-	# Agent is moving to the right
-	elif prev_x > position.x:
-		rotation_degrees = 45
-		
-	prev_x = position.x
 	
 	# Obtain the speed information of the current path
 	var current_path_data = get_parent().tubele
@@ -107,6 +96,24 @@ func apply_progress(delta):
 	else:
 		# Increase progress normally
 		progress += change
+	
+	# Find the next point that is ahead of the player in the current path
+	var points = get_parent().curve.get_baked_points()
+	var next_point = null
+	for point in points:
+		if point.y <= position.y:
+			next_point = point
+			break
+	
+	# If there is a point to rotate towards
+	if next_point != null:
+		# Get the global position of the next point
+		var global_point = get_parent().global_position + next_point
+		# Adjust rotation of sprites to turn towards next point
+		sprite_container.look_at(global_point)
+		# Make the sprite face upwards
+		sprite_container.rotation_degrees += 90
+	
 	
 # Get all currently available branches from the current path
 func update_available_branches():
