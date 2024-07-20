@@ -1,12 +1,11 @@
-extends Sprite2D
+extends AnimatedSprite2D
 
+var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$TrailAnim.play("anim1")
-	$TrailAnim2.play("anim1")
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	frame = rng.randi_range(0, 4)

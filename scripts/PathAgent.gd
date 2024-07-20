@@ -30,6 +30,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	# Obtain the speed information of the current path
 	var current_path_data = get_parent().tubele
 	var is_in_section = false
