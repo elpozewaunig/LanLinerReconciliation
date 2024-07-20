@@ -8,6 +8,7 @@
 
 [node name="ControlOverlay" type="Node2D"]
 visible = false
+z_index = 99
 scale = Vector2(10, 10)
 script = ExtResource("1_gv640")
 
