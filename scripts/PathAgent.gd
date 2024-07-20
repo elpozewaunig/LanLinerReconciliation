@@ -154,11 +154,13 @@ func notify_abandoned_branches():
 		# Get all the branches that could have been chosen on this layer
 		var branch_layer = get_child_from_tree_loc(tree_location).get_parent()
 		for branch in branch_layer.get_children():
-			
-			# If a branch doesn't match the branch that was chosen
-			if branch.name != get_parent().name:
-				# Connect signal delete_branch to _on_delete_branch method of unchosen branch
-				delete_branch.connect(branch._on_delete_branch)
+			# There may be other objects other than paths in the hierarchy
+			# Make sure we only connect the signal to paths
+			if branch is Path2D:
+				# If a branch doesn't match the branch that was chosen
+				if branch.name != get_parent().name:
+					# Connect signal delete_branch to _on_delete_branch method of unchosen branch
+					delete_branch.connect(branch._on_delete_branch)
 	
 	emit_signal("delete_branch")
 
@@ -179,7 +181,7 @@ func switch_lane(index):
 
 # Obtain an array of the indexes of the parents of this element 
 func get_tree_location():
-	var current = self.get_parent()
+	var current = get_parent()
 	var indexes = []
 	# Seek parents in hierarchy until root of path lanes is reached
 	while not current.name == "root":

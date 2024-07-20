@@ -3,19 +3,15 @@ extends Path2D
 
 @export var tubele = []
 
-
-var alpha = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(alpha-0.1*delta <= 0):
-		hide()
-		orderHiding = false
-		alpha = 1
-		modulate = alpha
 	if(orderHiding):
-		alpha -= 0.1 * delta
-	modulate = alpha
-	
+		modulate.a -= 0.1 * delta
+		
+	if(modulate.a <= 0):
+		hide()
+		modulate.a = 1
+		orderHiding = false
 
 func _draw():
 	pass
