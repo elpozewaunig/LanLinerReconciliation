@@ -4,23 +4,28 @@ extends Path2D
 @export var tubele = []
 
 
-
+var alpha = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(fadeout):
-		pass ##todo & hide + set full wieder wenn fertig
+	if(alpha-0.1*delta <= 0):
+		hide()
+		orderHiding = false
+		alpha = 1
+		modulate = alpha
+	if(orderHiding):
+		alpha -= 0.1 * delta
+	modulate = alpha
+	
 
 func _draw():
 	pass
 	
-var fadeout = false
-func _on_delete_branch(rec):
-	for child in self.get_children(false):
-		child._on_delete_branch(rec-1)
-	if(rec==0):
-		self.hide()
-		return
-	fadeout = true
+
+var orderHiding = false;
+
+func _on_delete_branch():
+	orderHiding = true;
+	
 	
 var rng = RandomNumberGenerator.new()
 
