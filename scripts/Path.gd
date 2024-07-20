@@ -29,15 +29,15 @@ func splitter(start, end, rec):
 	if(rec==0):
 		var r =	rng.randi_range(1,3)
 		if (r==1):
-			var r2 = rng.randi_range(1,3)
-			if(r2==3):
+			var r2 = rng.randi_range(1,8)
+			if(r2==1):
 				addtubele(start+l*0.8,end-l*0.8,"extraspeed")
 			else:
 				addtubele(start+l*0.6,end-l*0.6,"speed")
 			
 		elif (r==2):
-			var r2 = rng.randi_range(1,3)
-			if(r2==3):
+			var r2 = rng.randi_range(1,8)
+			if(r2==1):
 				addtubele(start+l+0.8,end-l*0.8,"extraslow")
 			else:
 				addtubele(start+l*0.6,end-l*0.6,"slow")
