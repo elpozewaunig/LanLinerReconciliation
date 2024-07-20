@@ -57,7 +57,7 @@ func _process(delta):
 					
 			if section[2] == "extraspeed":
 				if speed < extra_fast_speed:
-					speed += delta * 5000
+					speed += delta * 10000
 					if speed > extra_fast_speed:
 						speed = extra_fast_speed
 					
