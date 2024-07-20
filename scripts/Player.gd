@@ -4,6 +4,7 @@ extends "res://scripts/PathAgent.gd"
 @onready var controls = $ControlOverlay
 
 var zoom_fact = 0.001
+var lane_lock = false
 
 signal force_next_choice(branch)
 signal choice_btn_pressed(btn)
@@ -25,6 +26,12 @@ func _process(delta):
 	
 	# If progress nears the current path's end, slow down
 	if progress_ratio > 0.75 and branch_choice == null and total_progress >= game_manager.enemy.total_progress and branches.has("SChild"):
+		# From now on switching lanes is prohibited, until a choice is made
+		lane_lock = true
+		
+		# There is a brief period where no choices may be made to prevent accidental choices
+		var allow_choice = false
+		
 		# Show vignette
 		vignette.show()
 		vignette.modulate.a += delta * 2
@@ -33,7 +40,7 @@ func _process(delta):
 			
 		# Show available choices
 		controls.show()
-		controls.modulate.a += delta * 3
+		controls.modulate.a += delta * 2
 		if controls.modulate.a > 1:
 			controls.modulate.a = 1
 			
@@ -50,26 +57,31 @@ func _process(delta):
 		else:
 			controls.right.hide()
 		
-		game_manager.tick_speed -= delta
+		game_manager.tick_speed -= delta * 2
 		if game_manager.tick_speed < 0.3:
 			game_manager.tick_speed = 0.3
+			# When player has fully slowed down, allow choice
+			allow_choice = true
 		
 		# Set the branch to proceed to based on input
-		if Input.is_action_just_pressed("ui_up") and branches.has("SChild"):
-			branch_choice = branches["SChild"]
-			emit_signal("force_next_choice", branch_choice)
-			emit_signal("choice_btn_pressed", controls.up)
-		elif Input.is_action_just_pressed("ui_left") and branches.has("LChild"):
-			branch_choice = branches["LChild"]
-			emit_signal("force_next_choice", branch_choice)
-			emit_signal("choice_btn_pressed", controls.left)
-		elif Input.is_action_just_pressed("ui_right") and branches.has("RChild"):
-			branch_choice = branches["RChild"]
-			emit_signal("force_next_choice", branch_choice)
-			emit_signal("choice_btn_pressed", controls.right)
+		if allow_choice:
+			if Input.is_action_just_pressed("ui_up") and branches.has("SChild"):
+				branch_choice = branches["SChild"]
+				emit_signal("force_next_choice", branch_choice)
+				emit_signal("choice_btn_pressed", controls.up)
+			elif Input.is_action_just_pressed("ui_left") and branches.has("LChild"):
+				branch_choice = branches["LChild"]
+				emit_signal("force_next_choice", branch_choice)
+				emit_signal("choice_btn_pressed", controls.left)
+			elif Input.is_action_just_pressed("ui_right") and branches.has("RChild"):
+				branch_choice = branches["RChild"]
+				emit_signal("force_next_choice", branch_choice)
+				emit_signal("choice_btn_pressed", controls.right)
 		
 	# Speed back up
 	else:
+		lane_lock = false
+		
 		# Hide vignette 
 		vignette.modulate.a -= delta * 2
 		if vignette.modulate.a <= 0:
@@ -94,17 +106,19 @@ func _process(delta):
 	camera.zoom.y = 1 / (speed * zoom_fact + 0.5) * game_manager.tick_speed
 	
 	# Switch to left or right lane on input
-	if Input.is_action_just_pressed("ui_left") and branch_choice == null:
+	if Input.is_action_just_pressed("ui_left") and !lane_lock:
 		if current_lane > 0:
 			current_lane -= 1
 			var last_global_x = camera.global_position.x
 			switch_lane(current_lane)
 			camera.transition_from_x(last_global_x)
 			
-	if Input.is_action_just_pressed("ui_right") and branch_choice == null:
+	if Input.is_action_just_pressed("ui_right") and !lane_lock:
 		if current_lane < lane_count - 1:
 			current_lane += 1
 			var last_global_x = camera.global_position.x
 			switch_lane(current_lane)
 			camera.transition_from_x(last_global_x)
 			
+func _on_no_choice_made():
+	emit_signal("choice_btn_pressed", controls.up)
