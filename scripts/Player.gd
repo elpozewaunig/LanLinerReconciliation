@@ -20,7 +20,7 @@ func _process(delta):
 	super._process(delta)
 	
 	# If progress nears the current path's end, slow down
-	if progress_ratio > 0.75 and branch_choice == null and total_progress >= game_manager.enemy.total_progress:
+	if progress_ratio > 0.75 and branch_choice == null and total_progress >= game_manager.enemy.total_progress and branches.has("SChild"):
 		game_manager.tick_speed -= delta
 		if game_manager.tick_speed < 0.3:
 			game_manager.tick_speed = 0.3
