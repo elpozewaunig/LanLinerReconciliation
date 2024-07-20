@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://xtigw5ikvvyb" path="res://assets/tile_0110.png" id="1_gqsob"]
 
-[node name="SealTextLine" type="Line2D"]
+[node name="regularLine" type="Line2D"]
 z_index = -7
 texture_repeat = 2
 width = 15.0
