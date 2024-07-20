@@ -11,4 +11,3 @@ func _process(delta):
 
 func _draw():
 	draw_polyline(curve.get_baked_points(), Color.WHITE, 5, true)
-	

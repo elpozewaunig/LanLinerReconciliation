@@ -4,11 +4,14 @@ extends PathFollow2D
 @onready var camera = $Camera2D
 @onready var paths = game_manager.get_node("root")
 
-var speed = 500
+@export var speed : int = 500
 var zoom_fact = 0.001
-var current_lane = 1
+var tick_speed = 1
 
 var lane_count = 0
+var current_lane = 0
+
+var branch_choice = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,44 +20,84 @@ func _ready():
 		lane_count += 1
 		
 	# Set player to center lane, placing it on the lane's first path
-	reparent(paths.get_child(lane_count/2).get_child(0))
+	current_lane = lane_count/2
+	reparent(paths.get_child(current_lane).get_child(0))
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# Switch to left or right lane on input
-	if Input.is_action_just_pressed("ui_left"):
-		if current_lane > 0:
-			current_lane -= 1
-			switch_lane(current_lane)
-			
-	if Input.is_action_just_pressed("ui_right"):
-		if current_lane < lane_count - 1:
-			current_lane += 1
-			switch_lane(current_lane)
-	
 	# Calculate progress along path according to speed
-	var change = delta * speed * game_manager.tick_speed
+	var change = delta * speed * tick_speed
 	var change_ratio  = change / get_parent().curve.get_baked_length()
 	
-	# If progress would exceed current path, reparent to its child "SChild"
-	if progress_ratio + change_ratio >= 1:
-		var next_path = get_parent().get_node_or_null("SChild")
+	var branches = {}
+	
+	# If progress nears the current path's end, slow down
+	if progress_ratio > 0.75 and branch_choice == null:
+		tick_speed -= delta
+		if tick_speed < 0.3:
+			tick_speed = 0.3
 		
-		# If there is another path to continue to, reparent
-		if next_path:
+		# Get all currently available branches
+		var branch_layer = get_parent()
+		for branch in branch_layer.get_children():
+			if branch is Path2D:
+				branches[branch.name] = branch
+		
+		# Set the branch to proceed to based on input
+		if Input.is_action_just_pressed("ui_up") and branches.has("SChild"):
+			branch_choice = branches["SChild"]
+		elif Input.is_action_just_pressed("ui_left") and branches.has("LChild"):
+			branch_choice = branches["LChild"]
+		elif Input.is_action_just_pressed("ui_right") and branches.has("RChild"):
+			branch_choice = branches["RChild"]
+		
+	# Speed back up		
+	else:
+		tick_speed += delta
+		if  tick_speed > 1:
+			tick_speed = 1
+		
+	
+	# If progress would exceed current path, reparent to the chosen branch
+	if progress_ratio + change_ratio >= 1:
+		# If the player made a choice
+		if branch_choice != null:
 			progress += change
-			reparent(next_path)
+			reparent(branch_choice)
 			progress_ratio -= 1
+		
+		# If the player hasn't made a choice, but there is a straight path
+		elif branches.size() > 0:
+			progress += change
+			reparent(branches["SChild"])
+			progress_ratio -= 1
+			
+		# There are no further branches
 		else:
 			pass
+		
+		# Reset choice, game can resume normally
+		branch_choice = null
+		
 	else:
 		# Increase progress normally
 		progress += change
 		
 	# Adjust camera zoom according to speed
-	camera.zoom.x = 1 / (speed * game_manager.tick_speed * zoom_fact + 1)
-	camera.zoom.y = 1 / (speed * game_manager.tick_speed * zoom_fact + 1)
+	camera.zoom.x = 1 / (speed * zoom_fact + 0.5) * tick_speed
+	camera.zoom.y = 1 / (speed * zoom_fact + 0.5) * tick_speed
+	
+	# Switch to left or right lane on input
+	if Input.is_action_just_pressed("ui_left") and branch_choice == null:
+		if current_lane > 0:
+			current_lane -= 1
+			switch_lane(current_lane)
+			
+	if Input.is_action_just_pressed("ui_right") and branch_choice == null:
+		if current_lane < lane_count - 1:
+			current_lane += 1
+			switch_lane(current_lane)
 
 # Reparents the player to another lane
 func switch_lane(index):
