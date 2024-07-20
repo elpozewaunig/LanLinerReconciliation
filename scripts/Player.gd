@@ -19,8 +19,16 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 	
+	var vignette = camera.get_node("Vignette")
+	
 	# If progress nears the current path's end, slow down
 	if progress_ratio > 0.75 and branch_choice == null and total_progress >= game_manager.enemy.total_progress and branches.has("SChild"):
+		# Show vignette
+		vignette.show()
+		vignette.modulate.a += delta * 2
+		if vignette.modulate.a > 1:
+			vignette.modulate.a = 1
+		
 		game_manager.tick_speed -= delta
 		if game_manager.tick_speed < 0.3:
 			game_manager.tick_speed = 0.3
@@ -38,6 +46,12 @@ func _process(delta):
 		
 	# Speed back up		
 	else:
+		# Hide vignette 
+		vignette.modulate.a -= delta * 2
+		if vignette.modulate.a <= 0:
+			vignette.modulate.a = 0
+			camera.get_node("Vignette").hide()
+		
 		game_manager.tick_speed += delta
 		if  game_manager.tick_speed > 1:
 			game_manager.tick_speed = 1

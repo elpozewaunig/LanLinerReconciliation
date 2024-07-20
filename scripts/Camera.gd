@@ -1,5 +1,7 @@
 extends Camera2D
 
+@onready var vignette = $Vignette
+
 @export var transition_speed = 300
 
 # Called when the node enters the scene tree for the first time.
@@ -9,6 +11,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	vignette.scale.x = 1/zoom.x
+	vignette.scale.y = 1/zoom.y
 	
 	# Gradually move camera back to relative zero on the x-axis
 	if position.x > 0:
