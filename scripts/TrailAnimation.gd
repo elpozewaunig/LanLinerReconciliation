@@ -7,10 +7,9 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-var c = 0
-func _process(delta):
-	
-	if(c==10):
+var timeElapsed = 0 
+func _process(delta) :
+	timeElapsed+=delta
+	if(timeElapsed>0.01):
 		frame = rng.randi_range(0, 4)
-		c=0
-	c+=1
+		timeElapsed = 0
