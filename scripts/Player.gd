@@ -5,8 +5,8 @@ extends PathFollow2D
 @onready var paths = game_manager.get_node("root")
 
 @export var default_speed : int = 500
-@export var slow_speed : int = 300
-@export var fast_speed : int = 700
+@export var slow_speed : int = 200
+@export var fast_speed : int = 1000
 var speed = 0
 
 var zoom_fact = 0.001
@@ -47,7 +47,8 @@ func _process(delta):
 				speed -= delta * 500
 				if speed < slow_speed:
 					speed = slow_speed
-				
+	
+	# If the player is not in a section, accelerate/decelerate to regular speed
 	if !is_in_section:
 		
 		if speed < default_speed:
@@ -59,9 +60,6 @@ func _process(delta):
 			speed -= delta * 500
 			if speed < default_speed:
 				speed = default_speed
-				
-	else:
-		is_in_section = false
 	
 	# Calculate progress along path according to speed
 	var change = delta * speed * tick_speed
