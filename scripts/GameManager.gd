@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player = preload("res://scenes/player.tscn").instantiate()
 @onready var enemy = preload("res://scenes/enemy.tscn").instantiate()
+@onready var music = $MusicPlayer
 
 var tick_speed = 1
 var branch_choice = null
@@ -25,4 +26,5 @@ func _process(delta):
 		# If the timer exceeds a specified time, spawn the enemy
 		if time_elapsed > 1:
 			add_child(enemy)
+			music.play()
 			enemy_spawned = true
