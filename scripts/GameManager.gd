@@ -10,8 +10,6 @@ func _ready():
 	var player = player_scene.instantiate()
 	add_child(player)
 	
-	
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

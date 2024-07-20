@@ -12,13 +12,11 @@ func _process(delta):
 	
 	# Gradually move camera back to relative zero on the x-axis
 	if position.x > 0:
-		print(position.x)
 		position.x -= delta * transition_speed
 		if position.x < 0:
 			position.x = 0
 			
 	if position.x < 0:
-		print(position.x)
 		position.x += delta * transition_speed
 		if position.x > 0:
 			position.x = 0
@@ -35,4 +33,4 @@ func _process(delta):
 			position.y = 0
 
 func transition_from_x(from_x):
-	position.x = from_x - global_position.x
+	position.x = from_x - get_parent().global_position.x
