@@ -19,6 +19,8 @@ var current_lane = 0
 var branches = {}
 var branch_choice = null
 
+signal delete_branch
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -93,12 +95,14 @@ func apply_progress(delta):
 		if branch_choice != null:
 			progress += change
 			reparent(branch_choice)
+			notify_abandoned_branches()
 			progress_ratio -= 1
 		
 		# If the agent hasn't made a choice, but there is a straight path
 		elif branches.has("SChild"):
 			progress += change
 			reparent(branches["SChild"])
+			notify_abandoned_branches()
 			progress_ratio -= 1
 			
 		# There are no further branches
@@ -139,6 +143,25 @@ func update_available_branches():
 			if branch is Path2D:
 				branches[branch.name] = branch
 
+# Connect all unchosen branches to delete_branch signal, then emit
+func notify_abandoned_branches():
+	var tree_location = get_tree_location()
+	
+	# Iterate through all lanes
+	for lane_index in range(lane_count):
+		tree_location[0] = lane_index
+		
+		# Get all the branches that could have been chosen on this layer
+		var branch_layer = get_child_from_tree_loc(tree_location).get_parent()
+		for branch in branch_layer.get_children():
+			
+			# If a branch doesn't match the branch that was chosen
+			if branch.name != get_parent().name:
+				# Connect signal delete_branch to _on_delete_branch method of unchosen branch
+				delete_branch.connect(branch._on_delete_branch)
+	
+	emit_signal("delete_branch")
+
 # Reparents the player to another lane
 func switch_lane(index):
 	# Lanes have identical hierarchy
@@ -149,7 +172,7 @@ func switch_lane(index):
 	tree_location[0] = index
 	
 	# Finally, reparent to the node definded by the new tree location
-	reparent(get_child_from_tree_loc(paths, tree_location), false)
+	reparent(get_child_from_tree_loc(tree_location), false)
 	
 	# Update available branches for the next decision
 	update_available_branches()
@@ -165,9 +188,9 @@ func get_tree_location():
 	indexes.reverse()
 	return indexes
 
-# Returns a child in a scene by following a list of the indexes of its parents
-func get_child_from_tree_loc(start, indexes):
-	var current = start
+# Returns a child in a scene (starting at paths) by following a list of the indexes of its parents
+func get_child_from_tree_loc(indexes):
+	var current = paths
 	for i in indexes:
 		current = current.get_child(i)
 	return current
