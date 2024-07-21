@@ -28,14 +28,21 @@ func _process(delta):
 	# If progress nears the current path's end and the enemy is ahead of the player
 	if progress_ratio > 0.75 and branch_choice == null and total_progress > game_manager.player.total_progress:
 		# Set the branch to proceed to randomly
-		# Get keys, then get random index within the key array
+		# Get keys
 		var branches_keys = branches.keys()
-		var random_index = rng.randi_range(0, branches.size() - 1)
+		# Make sure that only candidates with no dead end are chosen
+		var candidate_branches = []
+		for key in branches_keys:
+			if !branches[key].isDeadEnd:
+				candidate_branches.append(branches[key])
 		
-		# If a branch to continue to exists
-		if branches.size() >= 1:
+		# Get random index of new candidate branches array
+		var random_index = rng.randi_range(0, candidate_branches.size() - 1)
+		
+		# If a branch to continue to (that is not a dead end) exists
+		if candidate_branches.size() >= 1:
 			# Choose the branch corresponding to the random index
-			branch_choice = branches[branches_keys[random_index]]
+			branch_choice = candidate_branches[random_index]
 			emit_signal("force_next_choice", branch_choice)
 
 	# Handle movement and advancing to the next path in super class
@@ -60,4 +67,8 @@ func _process(delta):
 
 
 func _on_end_reached(time):
+	sprite_container.hide()
 	emit_signal("enemy_end_reached", time)
+	
+func _on_dead_end_reached():
+	sprite_container.hide()

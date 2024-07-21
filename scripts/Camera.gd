@@ -1,6 +1,7 @@
 extends Camera2D
 
 @onready var vignette = $Vignette
+@onready var game_over = $GameOver
 
 @export var transition_speed = 300
 
@@ -14,6 +15,9 @@ func _process(delta):
 	
 	vignette.scale.x = 1/zoom.x
 	vignette.scale.y = 1/zoom.y
+	
+	game_over.scale.x = 1/zoom.x
+	game_over.scale.y = 1/zoom.y
 	
 	# Gradually move camera back to relative zero on the x-axis
 	if position.x > 0:

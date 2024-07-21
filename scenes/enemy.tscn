@@ -79,9 +79,9 @@ scale = Vector2(0.565, 0.401)
 sprite_frames = SubResource("SpriteFrames_be6dp")
 script = ExtResource("4_38np1")
 
-[node name="ParticleSysMoveLeft" type="Node2D" parent="."]
+[node name="ParticleSysMoveLeft" type="Node2D" parent="Sprites"]
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 1
 lifetime = 1.5
 speed_scale = 2.0
@@ -95,7 +95,7 @@ scale_amount_min = 0.45
 scale_amount_max = 0.45
 color = Color(0.443137, 0, 0.0117647, 1)
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 16
 lifetime = 10.0
 explosiveness = 0.12
@@ -107,10 +107,10 @@ scale_amount_min = 0.35
 scale_amount_max = 0.35
 color = Color(0.443137, 0, 0.0117647, 1)
 
-[node name="ParticleSysMoveRight" type="Node2D" parent="."]
+[node name="ParticleSysMoveRight" type="Node2D" parent="Sprites"]
 visible = false
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveRight"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 visible = false
 amount = 1
 lifetime = 39.0
@@ -125,7 +125,7 @@ scale_amount_min = 0.45
 scale_amount_max = 0.45
 color = Color(0.444371, 0, 0.0100586, 1)
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveRight"]
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 visible = false
 amount = 16
 lifetime = 10.0

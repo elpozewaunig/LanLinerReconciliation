@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
 [ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/x.png" id="6_6tsrf"]
 [ext_resource type="Texture2D" uid="uid://l8ne3jw87bwa" path="res://assets/startendblock.png" id="9_18xdr"]
-[ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="10_e6teq"]
-[ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="11_6y52x"]
+[ext_resource type="PackedScene" path="res://scenes/dummyplayerMAINMENU.tscn" id="10_e6teq"]
+[ext_resource type="PackedScene" path="res://scenes/dummyenemyMAINMENU.tscn" id="11_6y52x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
 size = Vector2(432, 95)

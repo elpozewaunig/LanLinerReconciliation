@@ -22,10 +22,12 @@ var branch_passed_count = 0
 
 var end = false
 var finish_time = 0
+var dead_end = false
 
 signal delete_branch
 signal no_choice_made
 signal end_reached(time)
+signal dead_end_reached
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,6 +41,7 @@ func _ready():
 	reparent(paths.get_child(current_lane).get_node("SChild"))
 	update_available_branches()
 	no_choice_made.connect(_on_no_choice_made)
+	dead_end_reached.connect(_on_dead_end_reached)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -109,6 +112,8 @@ func apply_progress(delta):
 			notify_abandoned_branches()
 			branch_passed_count += 1
 			progress_ratio -= 1
+			if get_parent().isDeadEnd:
+				dead_end = true
 		
 		# If the agent hasn't made a choice, but there is a straight path
 		elif branches.has("SChild"):
@@ -118,12 +123,18 @@ func apply_progress(delta):
 			notify_abandoned_branches()
 			branch_passed_count += 1
 			progress_ratio -= 1
+			if get_parent().isDeadEnd:
+				dead_end = true
 			
 		# There are no further branches
 		else:
-			if !end:
+			if !dead_end and !end:
 				emit_signal("end_reached", finish_time)
-				end = true			
+				end = true
+				
+			elif dead_end and !end:
+				emit_signal("dead_end_reached")
+				end = true
 		
 		# Reset choice, game can resume normally
 		branch_choice = null
@@ -228,4 +239,7 @@ func _on_force_next_choice(forced_branch):
 			branch_choice = branches[next_branch_name]
 
 func _on_no_choice_made():
+	pass
+	
+func _on_dead_end_reached():
 	pass
