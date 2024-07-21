@@ -16,6 +16,8 @@ var total_progress = 0
 var lane_count = 0
 var current_lane = 0
 
+var current_section = ""
+
 var branches = {}
 var branch_choice = null
 var branch_passed_count = 0
@@ -58,26 +60,27 @@ func _process(delta):
 		# If the agent is in a specific section, change its speed accordingly
 		if progress >= section[0] and progress <= section[1]:
 			is_in_section = true
+			current_section = section[2]
 			
-			if section[2] == "speed":
+			if current_section == "speed":
 				if speed < fast_speed:
 					speed += delta * game_manager.tick_speed * 500
 					if speed > fast_speed:
 						speed = fast_speed
 					
-			if section[2] == "slow":
+			if current_section == "slow":
 				if speed > slow_speed:
 					speed -= delta * game_manager.tick_speed * 500
 					if speed < slow_speed:
 						speed = slow_speed
 					
-			if section[2] == "extraspeed":
+			if current_section == "extraspeed":
 				if speed < extra_fast_speed:
 					speed += delta * game_manager.tick_speed * 10000
 					if speed > extra_fast_speed:
 						speed = extra_fast_speed
 					
-			if section[2] == "extraslow":
+			if current_section == "extraslow":
 				if speed > extra_slow_speed:
 					speed -= delta * game_manager.tick_speed * 5000
 					if speed < extra_slow_speed:
@@ -85,6 +88,8 @@ func _process(delta):
 	
 	# If the agent is not in a section, accelerate/decelerate to regular speed
 	if !is_in_section:
+		
+		current_section = "default"
 		
 		if speed < default_speed:
 			speed += delta * 500

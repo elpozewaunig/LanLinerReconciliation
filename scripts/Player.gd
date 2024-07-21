@@ -1,13 +1,17 @@
 extends "res://scripts/PathAgent.gd"
 
 @onready var camera = $Camera2D
+@onready var sound = $Sounds
 @onready var controls = $ControlOverlay
 @onready var game_over_screen = camera.get_node("GameOver")
+@onready var vignette = camera.get_node("Vignette")
 var enemy
 
 var zoom_fact = 0.001
 var lane_lock = false
 var game_over = false
+
+var last_section = ""
 
 signal force_next_choice(branch)
 signal choice_btn_pressed(btn)
@@ -26,7 +30,17 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 	
-	var vignette = camera.get_node("Vignette")
+	if last_section != current_section:
+		last_section = current_section
+		
+		if current_section == "speed":
+			sound.speed.play()
+		if current_section == "slow":
+			sound.slow.play()
+		if current_section == "extraspeed":
+			sound.extra_speed.play()
+		if current_section == "extraslow":
+			sound.extra_slow.play()
 	
 	# If progress nears the current path's end, slow down
 	if progress_ratio > 0.75 and branch_choice == null and total_progress >= game_manager.enemy.total_progress and branches.has("SChild"):
@@ -116,6 +130,7 @@ func _process(delta):
 			var last_global_x = camera.global_position.x
 			switch_lane(current_lane)
 			camera.transition_from_x(last_global_x)
+			sound.lane_switch_left.play()
 			
 	if Input.is_action_just_pressed("ui_right") and !lane_lock:
 		if current_lane < lane_count - 1:
@@ -123,6 +138,7 @@ func _process(delta):
 			var last_global_x = camera.global_position.x
 			switch_lane(current_lane)
 			camera.transition_from_x(last_global_x)
+			sound.lane_switch_right.play()
 			
 	if game_over:
 		# Show game over screen
@@ -142,4 +158,5 @@ func _on_enemy_end_reached(time):
 func _on_dead_end_reached():
 	game_over = true
 	game_over_screen.modulate.a = 0
+	sound.death.play()
 	sprite_container.hide()

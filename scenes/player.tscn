@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=32 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
@@ -12,6 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/control_overlay.tscn" id="7_wphgy"]
 [ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/twirl_03.png" id="8_15hpb"]
 [ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/spark_04.png" id="9_6d0nb"]
+[ext_resource type="AudioStream" uid="uid://calhdetumdsyc" path="res://assets/sounds/Lane_Switch_Left.mp3" id="12_g3o72"]
+[ext_resource type="Script" path="res://scenes/SoundManager.gd" id="12_pwoux"]
+[ext_resource type="AudioStream" uid="uid://wexbtml1h3pr" path="res://assets/sounds/Lane_Switch_Right.mp3" id="13_1hx18"]
+[ext_resource type="AudioStream" uid="uid://boh8uuifldn7" path="res://assets/sounds/Portal_A.mp3" id="15_qq2rn"]
+[ext_resource type="AudioStream" uid="uid://bbjpegiea3x8n" path="res://assets/sounds/Speed_Up.mp3" id="16_jqpko"]
+[ext_resource type="AudioStream" uid="uid://s4k68vs8rrjy" path="res://assets/sounds/Speed_Down.mp3" id="17_22nu5"]
+[ext_resource type="AudioStream" uid="uid://q2nlk3e4qmuy" path="res://assets/sounds/Super_Speed.mp3" id="18_um1a0"]
+[ext_resource type="AudioStream" uid="uid://16dt2wvxbswh" path="res://assets/sounds/Super_Slow.mp3" id="19_t1xbk"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
@@ -258,8 +266,35 @@ scale_amount_max = 0.35
 color = Color(0.693722, 0.855936, 0.902581, 1)
 
 [node name="Sounds" type="Node2D" parent="."]
+script = ExtResource("12_pwoux")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
+[node name="LaneSwitchLeft" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_g3o72")
+volume_db = -15.0
+
+[node name="LaneSwitchRight" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_1hx18")
+volume_db = -15.0
+
+[node name="Death" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("15_qq2rn")
+volume_db = -15.0
+
+[node name="Speed" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("16_jqpko")
+volume_db = -15.0
+
+[node name="Slow" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("17_22nu5")
+volume_db = -15.0
+
+[node name="ExtraSpeed" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("18_um1a0")
+volume_db = -15.0
+
+[node name="ExtraSlow" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("19_t1xbk")
+volume_db = -15.0
 
 [node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
 
