@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b7vjspmp3umjn"]
+[gd_scene load_steps=22 format=3 uid="uid://b7vjspmp3umjn"]
 
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="1_dgplp"]
 [ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="1_kisyv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/DancingTitle.gd" id="5_8w2s3"]
 [ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
 [ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/x.png" id="6_6tsrf"]
+[ext_resource type="Texture2D" uid="uid://cg3lsopj461w5" path="res://assets/pixelline.png" id="6_rr5uv"]
 [ext_resource type="Texture2D" uid="uid://d2ph7v6g7101q" path="res://assets/q1nonowlpixel.png" id="8_eu8wq"]
 [ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="10_e6teq"]
 [ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="11_6y52x"]
@@ -124,6 +125,12 @@ pivot_offset = Vector2(607, 63.5)
 text = "LanLiner: Reconciliation"
 label_settings = SubResource("LabelSettings_mib0b")
 script = ExtResource("5_8w2s3")
+
+[node name="Pixelline" type="Sprite2D" parent="UI/Label"]
+texture_filter = 1
+position = Vector2(367.085, 126.9)
+scale = Vector2(2.71, 2.71)
+texture = ExtResource("6_rr5uv")
 
 [node name="Credits" type="ColorRect" parent="UI"]
 visible = false
