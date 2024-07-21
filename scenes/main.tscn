@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://x46ieo2mb8a3"]
 
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_3rm6l"]
+[ext_resource type="Script" path="res://scripts/PathBuilderV2.gd" id="2_j6o4c"]
 [ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="3_8rj0j"]
-[ext_resource type="Script" path="res://scripts/PathBuilder.gd" id="5_ej3e2"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_3rm6l")
 
 [node name="PathBuilder" type="Node2D" parent="."]
-script = ExtResource("5_ej3e2")
+script = ExtResource("2_j6o4c")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8rj0j")
-volume_db = -5.0
+volume_db = -80.0

@@ -17,22 +17,7 @@ var debugmove = 0#1500
 
 func createPath():
 	
-	var root = Node2D.new()
-	var lane = Node2D.new()
-	var neuepath = rec(ec, Vector2(0,0),"nofade")
-	lane.add_child(neuepath)
-	lane.name = "lane0"
-	root.add_child(lane)
-	for i in dc:
-		var dupli = lane.duplicate()
-		dupli.position = Vector2(dupli.position.x+(gap*(i+1)), dupli.position.y)
-		dupli.name = "lane"+str(i+1)
-		root.add_child(dupli)
 	
-	root.name = "root"
-	root.position = Vector2(root.position.x,root.position.y+debugmove)
-	return root
-
 func rec(recursionDepth: int, origin: Vector2, name:String):
 	
 	
@@ -86,42 +71,5 @@ func rec(recursionDepth: int, origin: Vector2, name:String):
 		path.curve.add_point(Vector2(prevlr*pl, (-(pl*lpp)-fadedist)-((i+1)*pl)))
 	
 	var newOrigin = Vector2(prevlr*pl, -(pl*lpp)-fadedist-(bsfo*pl)-debuggap)
-	
-	if(recursionDepth!=1):
-		var rdmNum = rng.randi_range(1,3)
-		var neuepath
-		if rdmNum<3:
-			#links
-			neuepath = rec(recursionDepth-1,newOrigin, "LChild")
-			path.add_child(neuepath)
-			
-			#und rechts
-			if rdmNum==2:
-				neuepath = rec(recursionDepth-1,newOrigin, "RChild")
-				path.add_child(neuepath)
-				
-		else:
-			pass
-			# nur rechts
-			neuepath = rec(recursionDepth-1,newOrigin, "RChild")
-			path.add_child(neuepath)
-				
-		neuepath = rec(recursionDepth-1,newOrigin, "SChild")
-		path.add_child(neuepath)
-			
-	if name=="nofade":
-		name = "SChild"
-	path.name = name
-	
-	return path
 
-
-
-	
-
-func getInstance() -> Path2D:
-	var scene = preload("res://scenes/visible_path.tscn") #preload geht aber load nit :huh:
-	var path = scene.instantiate()
-	path.curve = Curve2D.new()
-	return path
 	
