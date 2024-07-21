@@ -16,7 +16,7 @@ var lineLength = 800 #(alles wird damit multiplied)
 
 var recursions = 3
 var extraDuplicates = 4
-var gapBetweenDuplicatesX = 60
+var gapBetweenDuplicatesX = 80
 var gapBetweenDuplicatesY = 0
 func createPath():
 	var root = Node2D.new()
@@ -56,13 +56,23 @@ func genSingleBranch(recursionDepth: int, origin: Vector2, name:String):
 		path.name = "SChild"
 		return path
 	if name=="LDeadEnd":
-		path.curve.add_point(Vector2(newOrigin.x-lineLength/2,newOrigin.y-lineLength*0.75))
+		if(rng.randi_range(1,2)==1):
+			path.curve.add_point(Vector2(newOrigin.x-lineLength*0.5,newOrigin.y-lineLength*0.5))
+			path.curve.add_point(Vector2(newOrigin.x-lineLength,newOrigin.y))
+		else:
+			path.curve.add_point(Vector2(newOrigin.x-lineLength/2,newOrigin.y-lineLength*0.75))
+		
 		path.wasIstDas = name
 		path.isDeadEnd = true
 		path.name = "LChild"
 		return path	
 	if name=="RDeadEnd":
-		path.curve.add_point(Vector2(newOrigin.x+lineLength/2,newOrigin.y-lineLength*0.75))
+		if(rng.randi_range(1,2)==1):
+			path.curve.add_point(Vector2(newOrigin.x+lineLength*0.5,newOrigin.y-lineLength*0.5))
+			path.curve.add_point(Vector2(newOrigin.x+lineLength,newOrigin.y))
+		else:
+			path.curve.add_point(Vector2(newOrigin.x+lineLength/2,newOrigin.y-lineLength*0.75))
+		
 		path.wasIstDas = name
 		path.isDeadEnd = true
 		path.name = "RChild"
@@ -128,7 +138,7 @@ func genSingleBranch(recursionDepth: int, origin: Vector2, name:String):
 	if blockSRandom==1: # oben wird keiner blockiert, es gibt garantiert L oder R
 		neuepath = genSingleBranch(recursionDepth-1,newOrigin, "SDeadEnd")
 		path.add_child(neuepath)
-	elif rdmNum<2 and blockSRandom==3: # wenns einen anderen gibt der frei ist, block den S dazu
+	elif rdmNum==2 and blockSRandom==3: # wenns einen anderen gibt der frei ist, block den S dazu
 		neuepath = genSingleBranch(recursionDepth-1,newOrigin, "SDeadEnd")
 		path.add_child(neuepath)
 	else:

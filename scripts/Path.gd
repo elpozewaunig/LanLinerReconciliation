@@ -32,7 +32,7 @@ func splitter(start, end, rec, marginfacSpeed, marginfacSlow, marginfacExtraSpee
 		return
 	var l = (end-start)/2
 	if(rec==0):
-		var r =	rng.randi_range(1,3)
+		var r =	rng.randi_range(1,5) ##wie viele
 		if (r==1):
 			var r2 = rng.randi_range(1,8)
 			if(r2==1):
