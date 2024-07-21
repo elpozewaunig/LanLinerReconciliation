@@ -94,6 +94,7 @@ script = ExtResource("5_3ppbk")
 [node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
 
 [node name="ParticleSysMoveLeft" type="Node2D" parent="."]
+visible = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
 amount = 1
@@ -115,6 +116,34 @@ lifetime = 10.0
 explosiveness = 0.12
 texture = ExtResource("9_6d0nb")
 gravity = Vector2(260.18, 0)
+initial_velocity_max = 36.9
+angular_velocity_max = 169.2
+scale_amount_min = 0.35
+scale_amount_max = 0.35
+color = Color(0.693722, 0.855936, 0.902581, 1)
+
+[node name="ParticleSysMoveRight" type="Node2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveRight"]
+amount = 1
+lifetime = 39.0
+speed_scale = 2.0
+texture = ExtResource("8_15hpb")
+emission_shape = 1
+emission_sphere_radius = 0.01
+gravity = Vector2(0, 0)
+angular_velocity_min = -150.0
+angular_velocity_max = -150.0
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+color = Color(0.519225, 0.764319, 0.7809, 1)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveRight"]
+amount = 16
+lifetime = 10.0
+explosiveness = 0.12
+texture = ExtResource("9_6d0nb")
+gravity = Vector2(-260.18, 0)
 initial_velocity_max = 36.9
 angular_velocity_max = 169.2
 scale_amount_min = 0.35
