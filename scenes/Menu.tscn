@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/CreditsButton.gd" id="4_s67s6"]
 [ext_resource type="Script" path="res://scenes/DancingTitle.gd" id="5_8w2s3"]
 [ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
-[ext_resource type="Texture2D" path="res://assets/x.png" id="6_6tsrf"]
+[ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/x.png" id="6_6tsrf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
 size = Vector2(432, 95)

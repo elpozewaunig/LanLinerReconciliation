@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=20 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
@@ -9,6 +9,8 @@
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="4_rq0y7"]
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="5_3ppbk"]
 [ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/control_overlay.tscn" id="7_wphgy"]
+[ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/twirl_03.png" id="8_15hpb"]
+[ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/spark_04.png" id="9_6d0nb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
@@ -142,6 +144,63 @@ frame_progress = 0.357305
 script = ExtResource("5_3ppbk")
 
 [node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
+
+[node name="ParticleSysMoveLeft" type="Node2D" parent="."]
+visible = false
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
+amount = 1
+lifetime = 1.5
+speed_scale = 2.0
+texture = ExtResource("8_15hpb")
+emission_shape = 1
+emission_sphere_radius = 0.01
+gravity = Vector2(0, 0)
+angular_velocity_min = 150.0
+angular_velocity_max = 150.0
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+color = Color(0.519225, 0.764319, 0.7809, 1)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
+amount = 16
+lifetime = 10.0
+explosiveness = 0.12
+texture = ExtResource("9_6d0nb")
+gravity = Vector2(260.18, 0)
+initial_velocity_max = 36.9
+angular_velocity_max = 169.2
+scale_amount_min = 0.35
+scale_amount_max = 0.35
+color = Color(0.693722, 0.855936, 0.902581, 1)
+
+[node name="ParticleSysMoveRight" type="Node2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveRight"]
+amount = 1
+lifetime = 39.0
+speed_scale = 2.0
+texture = ExtResource("8_15hpb")
+emission_shape = 1
+emission_sphere_radius = 0.01
+gravity = Vector2(0, 0)
+angular_velocity_min = -150.0
+angular_velocity_max = -150.0
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+color = Color(0.519225, 0.764319, 0.7809, 1)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveRight"]
+amount = 16
+lifetime = 10.0
+explosiveness = 0.12
+texture = ExtResource("9_6d0nb")
+gravity = Vector2(-260.18, 0)
+initial_velocity_max = 36.9
+angular_velocity_max = 169.2
+scale_amount_min = 0.35
+scale_amount_max = 0.35
+color = Color(0.693722, 0.855936, 0.902581, 1)
 
 [connection signal="choice_btn_pressed" from="." to="ControlOverlay" method="_on_choice_btn_pressed"]
 [connection signal="end_reached" from="." to="Camera2D/TimerDisplay" method="_on_player_end_reached"]
