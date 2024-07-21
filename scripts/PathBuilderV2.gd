@@ -12,10 +12,12 @@ func _process(delta):
 
 var rng = RandomNumberGenerator.new()
 
+var lineLength = 800 #(alles ist min. 1 unit und wird damit multiplied)
+
 var recursions = 3
 var extraDuplicates = 4
-var gapBetweenDuplicates = 80
-
+var gapBetweenDuplicatesX = 80
+var gapBetweenDuplicatesY = 0
 func createPath():
 	var root = Node2D.new()
 	var lane = Node2D.new()
@@ -25,7 +27,9 @@ func createPath():
 	root.add_child(lane)
 	for i in extraDuplicates:
 		var dupli = lane.duplicate()
-		dupli.position = Vector2(dupli.position.x+(gapBetweenDuplicates*(i+1)), dupli.position.y)
+		dupli.position = Vector2(
+			dupli.position.x+(gapBetweenDuplicatesX*(i+1)), 
+			dupli.position.y+(gapBetweenDuplicatesY*(i+1)))
 		dupli.name = "lane"+str(i+1)
 		root.add_child(dupli)
 	
@@ -92,54 +96,55 @@ func chooseRandomS(c, x, y):
 	if(rdmNum==3): ## todo
 		return pSWavey(c, x, y)
 func chooseRandomC(c, x,y, vorzeichen):
-	var rdmNum = rng.randi_range(1,1)
+	var rdmNum = rng.randi_range(2,2)
 	if(rdmNum==1):
 		return pCFork(c, x, y, vorzeichen)
 	elif(rdmNum==2):
 		return pC90Turn(c, x, y, vorzeichen)
-	elif(rdmNum==3):
-		return pCdoubleUTurn(c, x, y, vorzeichen)
-	
+
 func chooseStart(c,x,y):
 	return startPathPatch(c,x,y)
 	
 func startPathPatch(c,x,y):
-	var s = Vector2(x,y-500)
+	var s = Vector2(x,y-lineLength*1)
 	c.add_point(s)
 	return s
 	
 func pSVanilla(c,x,y):
-	var s = Vector2(x,y-2000)
+	var s = Vector2(x,y-lineLength*3)
 	c.add_point(s)
 	return s
 	
+
+
 func pSZigZag(c,x,y):
 	var a = paddingS(c,x,y)
 	x = a.x
 	y = a.y
-	var paddingstraightBefore = 0
-	var paddingStraightAfter = 0
 	var flip = getRandomSign()
-	var l = 2000
+	c.add_point(Vector2(x,y))
+	
+	var l = lineLength*3
 	var w = 120
 	var divisions = 8
 	var dfac = l/divisions
-	c.add_point(Vector2(x,y-paddingstraightBefore))
-	c.add_point(Vector2(x,y-dfac/2-paddingstraightBefore))
-	for i in divisions:
-		c.add_point(Vector2(x+90*flip,y-(dfac*(i+1))-paddingstraightBefore))
-		
+
+	var preflipX = x
+	for i in divisions-1:
+		x=w*flip
+		y-=dfac
+		c.add_point(Vector2(x,y))
 		flip*=-1
-	c.add_point(Vector2(x,y-l-(dfac/2)-paddingstraightBefore))
-	c.add_point(Vector2(x,y-l-(dfac/2)-paddingstraightBefore-paddingStraightAfter))
-	y = y-l-paddingstraightBefore-paddingStraightAfter
-	var b = paddingS(c,x,y)
-	x = b.x
-	y = b.y
-	return Vector2(x,y)
+	
+	x = preflipX
+	y-=dfac
+	c.add_point(Vector2(x,y))
+	return paddingS(c,x,y)
 
 func paddingS(c,x,y):
-	return Vector2(x,y-250)
+	var a = Vector2(x,y-lineLength)
+	c.add_point(a)
+	return a
 
 func pSWavey(c,x,y): ##todo
 	return Vector2(x,y-500)
@@ -147,38 +152,27 @@ func pSWavey(c,x,y): ##todo
 
 
 func pCFork(c, x, y, sign): # y -750
-	x+=500*sign
-	y-=500
+	x+=lineLength*sign
+	y-=lineLength
 	c.add_point(Vector2(x,y))
 	var a = paddingS(c,x,y)
-	return chooseRandomS(c,a.x,a.y)
-
-func pC90Turn(c,x,y,sign):
-	x+=500*sign
-	y-=500
-	c.add_point(Vector2(x,y))
-	x+=2500*sign
-	c.add_point(Vector2(x,y))
-	x+=500*sign
-	y-=500
-	c.add_point(Vector2(x,y))
+	x = a.x
+	y = a.y
 	return Vector2(x,y)
 
-func pCdoubleUTurn(c,x,y,sign):
-	x+=500*sign
-	y-=500
+func pC90Turn(c,x,y,sign):
+	x+=lineLength*sign
+	y-=lineLength
 	c.add_point(Vector2(x,y))
-	x+=1000*sign
+	x+=lineLength*sign
+	y+=lineLength
 	c.add_point(Vector2(x,y))
-	x+=500*sign
-	y+=500
+	x+=lineLength*sign
+	y-=lineLength
 	c.add_point(Vector2(x,y))
-	y+=500
-	c.add_point(Vector2(x,y))
-	x+=500*-sign
-	y+=500
-	c.add_point(Vector2(x,y))
-	y+=1500
+	var a = paddingS(c,x,y)
+	x = a.x
+	y = a.y
 	return Vector2(x,y)
 
 func getRandomSign():
