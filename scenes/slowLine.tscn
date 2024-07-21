@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://8b58vqkl0e3i"]
 
-[ext_resource type="Texture2D" uid="uid://deifjywux43na" path="res://assets/tile_0079_edit.png" id="1_4ifga"]
+[ext_resource type="Texture2D" uid="uid://d1yql77rhqnnq" path="res://assets/tile_0079.png" id="1_ax4iq"]
 
 [node name="SealTextLine" type="Line2D"]
 z_index = -6
 texture_repeat = 2
 width = 50.0
-texture = ExtResource("1_4ifga")
+texture = ExtResource("1_ax4iq")
 texture_mode = 1
 joint_mode = 1
 begin_cap_mode = 2

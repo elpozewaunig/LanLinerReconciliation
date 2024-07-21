@@ -199,6 +199,7 @@ scale_amount_max = 0.35
 color = Color(0.693722, 0.855936, 0.902581, 1)
 
 [node name="ParticleSysMoveRight" type="Node2D" parent="Sprites"]
+visible = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 amount = 1
