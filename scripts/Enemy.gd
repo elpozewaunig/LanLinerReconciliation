@@ -28,15 +28,15 @@ func _process(delta):
 	# If progress nears the current path's end, slow down
 	if progress_ratio > 0.75 and branch_choice == null and total_progress > game_manager.player.total_progress:
 	
-		# Set the branch to proceed to based on a set order [TODO: better decisions]
-		if branches.has("SChild"):
-			branch_choice = branches["SChild"]
-			emit_signal("force_next_choice", branch_choice)
-		elif branches.has("LChild"):
-			branch_choice = branches["LChild"]
-			emit_signal("force_next_choice", branch_choice)
-		elif branches.has("RChild"):
-			branch_choice = branches["RChild"]
+		# Set the branch to proceed to randomly
+		# Get keys, then get random index within the key array
+		var branches_keys = branches.keys()
+		var random_index = rng.randi_range(0, branches.size() - 1)
+		
+		# If a branch to continue to exists
+		if branches.size() >= 1:
+			# Choose the branch corresponding to the random index
+			branch_choice = branches[branches_keys[random_index]]
 			emit_signal("force_next_choice", branch_choice)
 
 	# Handle movement and advancing to the next path in super class
