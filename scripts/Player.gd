@@ -2,7 +2,6 @@ extends "res://scripts/PathAgent.gd"
 
 @onready var camera = $Camera2D
 @onready var controls = $ControlOverlay
-@onready var enemy_indicator = camera.get_node("EnemyIndicator")
 var enemy
 
 var zoom_fact = 0.001
@@ -124,6 +123,7 @@ func _process(delta):
 			camera.transition_from_x(last_global_x)
 			
 func _on_no_choice_made():
+	emit_signal("force_next_choice", branches["SChild"])
 	emit_signal("choice_btn_pressed", controls.up)
 
 func _on_enemy_end_reached(time):
