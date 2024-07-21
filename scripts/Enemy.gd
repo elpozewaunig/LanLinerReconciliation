@@ -67,4 +67,8 @@ func _process(delta):
 
 
 func _on_end_reached(time):
+	sprite_container.hide()
 	emit_signal("enemy_end_reached", time)
+	
+func _on_dead_end_reached():
+	sprite_container.hide()

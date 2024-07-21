@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=21 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/spark_04.png" id="9_6d0nb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nmd8s"]
+font = ExtResource("4_rq0y7")
+font_size = 200
 
 [sub_resource type="LabelSettings" id="LabelSettings_nx51t"]
 font = ExtResource("4_rq0y7")
@@ -71,6 +75,28 @@ script = ExtResource("3_16twk")
 
 [node name="Vignette" type="Sprite2D" parent="Camera2D"]
 texture = ExtResource("3_74b6m")
+
+[node name="GameOver" type="Sprite2D" parent="Camera2D"]
+visible = false
+z_index = 99
+texture = ExtResource("3_74b6m")
+
+[node name="Label" type="Label" parent="Camera2D/GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1510.0
+offset_top = -665.0
+offset_right = -410.0
+offset_bottom = -415.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_nmd8s")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TimerDisplay" type="Control" parent="Camera2D"]
 layout_mode = 3
@@ -143,12 +169,10 @@ sprite_frames = SubResource("SpriteFrames_me1l3")
 frame_progress = 0.357305
 script = ExtResource("5_3ppbk")
 
-[node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
-
-[node name="ParticleSysMoveLeft" type="Node2D" parent="."]
+[node name="ParticleSysMoveLeft" type="Node2D" parent="Sprites"]
 visible = false
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 1
 lifetime = 1.5
 speed_scale = 2.0
@@ -162,7 +186,7 @@ scale_amount_min = 0.45
 scale_amount_max = 0.45
 color = Color(0.519225, 0.764319, 0.7809, 1)
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 16
 lifetime = 10.0
 explosiveness = 0.12
@@ -174,9 +198,9 @@ scale_amount_min = 0.35
 scale_amount_max = 0.35
 color = Color(0.693722, 0.855936, 0.902581, 1)
 
-[node name="ParticleSysMoveRight" type="Node2D" parent="."]
+[node name="ParticleSysMoveRight" type="Node2D" parent="Sprites"]
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveRight"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 amount = 1
 lifetime = 39.0
 speed_scale = 2.0
@@ -190,7 +214,7 @@ scale_amount_min = 0.45
 scale_amount_max = 0.45
 color = Color(0.519225, 0.764319, 0.7809, 1)
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveRight"]
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 amount = 16
 lifetime = 10.0
 explosiveness = 0.12
@@ -201,6 +225,8 @@ angular_velocity_max = 169.2
 scale_amount_min = 0.35
 scale_amount_max = 0.35
 color = Color(0.693722, 0.855936, 0.902581, 1)
+
+[node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
 
 [connection signal="choice_btn_pressed" from="." to="ControlOverlay" method="_on_choice_btn_pressed"]
 [connection signal="end_reached" from="." to="Camera2D/TimerDisplay" method="_on_player_end_reached"]

@@ -2,10 +2,12 @@ extends "res://scripts/PathAgent.gd"
 
 @onready var camera = $Camera2D
 @onready var controls = $ControlOverlay
+@onready var game_over_screen = camera.get_node("GameOver")
 var enemy
 
 var zoom_fact = 0.001
 var lane_lock = false
+var game_over = false
 
 signal force_next_choice(branch)
 signal choice_btn_pressed(btn)
@@ -122,9 +124,22 @@ func _process(delta):
 			switch_lane(current_lane)
 			camera.transition_from_x(last_global_x)
 			
+	if game_over:
+		# Show game over screen
+		game_over_screen.show()
+		game_over_screen.modulate.a += delta * 2
+		if game_over_screen.modulate.a > 1:
+			game_over_screen.modulate.a = 1
+			
 func _on_no_choice_made():
 	emit_signal("force_next_choice", branches["SChild"])
 	emit_signal("choice_btn_pressed", controls.up)
 
 func _on_enemy_end_reached(time):
+	sprite_container.hide()
 	emit_signal("enemy_end_reached", time)
+	
+func _on_dead_end_reached():
+	game_over = true
+	game_over_screen.modulate.a = 0
+	sprite_container.hide()
