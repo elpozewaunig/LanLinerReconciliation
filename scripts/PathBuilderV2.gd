@@ -12,7 +12,7 @@ func _process(delta):
 
 var rng = RandomNumberGenerator.new()
 
-var lineLength = 800 #(alles ist min. 1 unit und wird damit multiplied)
+var lineLength = 800 #(alles wird damit multiplied)
 
 var recursions = 3
 var extraDuplicates = 4
@@ -96,17 +96,18 @@ func chooseRandomS(c, x, y):
 	if(rdmNum==3): ## todo
 		return pSWavey(c, x, y)
 func chooseRandomC(c, x,y, vorzeichen):
-	var rdmNum = rng.randi_range(2,2)
+	var rdmNum = rng.randi_range(1,3)
 	if(rdmNum==1):
 		return pCFork(c, x, y, vorzeichen)
 	elif(rdmNum==2):
-		return pC90Turn(c, x, y, vorzeichen)
-
+		return pCSideWaysZigZag(c, x, y, vorzeichen)
+	elif(rdmNum==3):
+		return pCKnotenTurn(c, x, y, vorzeichen)
 func chooseStart(c,x,y):
 	return startPathPatch(c,x,y)
 	
 func startPathPatch(c,x,y):
-	var s = Vector2(x,y-lineLength*1)
+	var s = Vector2(x,y-lineLength*3)
 	c.add_point(s)
 	return s
 	
@@ -160,14 +161,32 @@ func pCFork(c, x, y, sign): # y -750
 	y = a.y
 	return Vector2(x,y)
 
-func pC90Turn(c,x,y,sign):
+func pCSideWaysZigZag(c,x,y,sign):
 	x+=lineLength*sign
 	y-=lineLength
 	c.add_point(Vector2(x,y))
-	x+=lineLength*sign
-	y+=lineLength
+	x+=lineLength*0.5*sign
+	y+=lineLength*0.5
 	c.add_point(Vector2(x,y))
-	x+=lineLength*sign
+	x+=lineLength*0.5*sign
+	y-=lineLength*0.5
+	c.add_point(Vector2(x,y))
+	var a = paddingS(c,x,y)
+	x = a.x
+	y = a.y
+	return Vector2(x,y)
+
+func pCKnotenTurn(c,x,y,sign):
+	x+=lineLength*2*sign
+	y-=lineLength*2
+	c.add_point(Vector2(x,y))
+	x+=lineLength*0.5*sign
+	y+=lineLength*0.5
+	c.add_point(Vector2(x,y))
+	x+=lineLength*0.5*-sign
+	y+=lineLength*0.5
+	c.add_point(Vector2(x,y))
+	x+=lineLength*-sign
 	y-=lineLength
 	c.add_point(Vector2(x,y))
 	var a = paddingS(c,x,y)

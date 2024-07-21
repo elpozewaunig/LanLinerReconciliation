@@ -95,7 +95,7 @@ func _ready():
 			newc.add_point(pointInbetween)
 		newc.add_point(curve.sample_baked(l2))
 		#draw_polyline(newc.get_baked_points(),col,10,true)
-		newc.width = 50
+		newc.width = 25
 		self.add_child(newc)
 			
 			
