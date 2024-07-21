@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7vjspmp3umjn"]
+[gd_scene load_steps=21 format=3 uid="uid://b7vjspmp3umjn"]
 
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="1_dgplp"]
 [ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="1_kisyv"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://scenes/DancingTitle.gd" id="5_8w2s3"]
 [ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
 [ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/x.png" id="6_6tsrf"]
+[ext_resource type="Texture2D" uid="uid://l8ne3jw87bwa" path="res://assets/startendblock.png" id="9_18xdr"]
+[ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="10_e6teq"]
+[ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="11_6y52x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
 size = Vector2(432, 95)
@@ -48,7 +51,7 @@ font_color = Color(0.0534208, 0.0534209, 0.0534209, 1)
 script = ExtResource("1_rcym2")
 
 [node name="Singleplayer Start" type="Area2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(910.5, 540)
 script = ExtResource("2_7jl43")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Singleplayer Start"]
@@ -111,10 +114,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -610.0
-offset_top = -340.0
-offset_right = 610.0
-offset_bottom = -215.0
+offset_left = -294.0
+offset_top = -407.0
+offset_right = 926.0
+offset_bottom = -282.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(607, 63.5)
@@ -123,8 +126,9 @@ label_settings = SubResource("LabelSettings_mib0b")
 script = ExtResource("5_8w2s3")
 
 [node name="Credits" type="ColorRect" parent="UI"]
-visible = false
 layout_mode = 0
+offset_left = 285.0
+offset_top = 10.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
@@ -207,7 +211,8 @@ label_settings = SubResource("LabelSettings_lgtv1")
 horizontal_alignment = 1
 
 [node name="CreditsExitButton" type="Area2D" parent="UI/Credits"]
-position = Vector2(1700, 150)
+position = Vector2(1538.02, 77.04)
+scale = Vector2(0.67, 0.67)
 script = ExtResource("5_fkbxm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Credits/CreditsExitButton"]
@@ -225,6 +230,22 @@ texture = ExtResource("6_6tsrf")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_kisyv")
 volume_db = -5.0
+
+[node name="Player" parent="." instance=ExtResource("10_e6teq")]
+position = Vector2(569.61, 507.32)
+rotation = 1.87448
+scale = Vector2(3.32, 3.32)
+
+[node name="Enemy" parent="." instance=ExtResource("11_6y52x")]
+position = Vector2(617, 760)
+rotation = 2.12057
+scale = Vector2(3.32, 3.32)
+
+[node name="Startendblock" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(216.515, 946)
+scale = Vector2(10.735, 10.735)
+texture = ExtResource("9_18xdr")
 
 [connection signal="mouse_entered" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_exited"]

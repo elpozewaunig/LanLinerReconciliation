@@ -52,14 +52,20 @@ func genSingleBranch(recursionDepth: int, origin: Vector2, name:String):
 	if name=="SDeadEnd":
 		path.curve.add_point(Vector2(newOrigin.x,newOrigin.y-lineLength*0.75))
 		path.wasIstDas = name
+		path.isDeadEnd = true
+		path.name = "SChild"
 		return path
 	if name=="LDeadEnd":
 		path.curve.add_point(Vector2(newOrigin.x-lineLength/2,newOrigin.y-lineLength*0.75))
 		path.wasIstDas = name
+		path.isDeadEnd = true
+		path.name = "LChild"
 		return path	
 	if name=="RDeadEnd":
 		path.curve.add_point(Vector2(newOrigin.x+lineLength/2,newOrigin.y-lineLength*0.75))
 		path.wasIstDas = name
+		path.isDeadEnd = true
+		path.name = "RChild"
 		return path
 	# Choose aus random depending welche kind (Origin muss auch durchgegeben werden)
 	if(name=="LChild"):
