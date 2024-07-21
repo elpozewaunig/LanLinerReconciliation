@@ -110,6 +110,7 @@ offset_right = -410.0
 offset_bottom = -415.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 text = "Game Over"
 label_settings = SubResource("LabelSettings_nmd8s")
 horizontal_alignment = 1
@@ -147,6 +148,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("4_gy5f6")
 
 [node name="Time" type="Label" parent="Camera2D/TimerDisplay"]
@@ -163,6 +165,7 @@ offset_right = 127.5
 offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 text = "Time"
 label_settings = SubResource("LabelSettings_nx51t")
 
@@ -181,6 +184,7 @@ offset_right = 127.5
 offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 text = "Time"
 label_settings = SubResource("LabelSettings_nx51t")
 
