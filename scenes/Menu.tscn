@@ -126,6 +126,7 @@ label_settings = SubResource("LabelSettings_mib0b")
 script = ExtResource("5_8w2s3")
 
 [node name="Credits" type="ColorRect" parent="UI"]
+visible = false
 layout_mode = 0
 offset_left = 285.0
 offset_top = 10.0
@@ -243,7 +244,7 @@ scale = Vector2(3.32, 3.32)
 
 [node name="Startendblock" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(216.515, 946)
+position = Vector2(132, 946)
 scale = Vector2(10.735, 10.735)
 texture = ExtResource("9_18xdr")
 
