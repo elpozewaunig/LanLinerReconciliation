@@ -57,25 +57,25 @@ func _process(delta):
 			
 			if section[2] == "speed":
 				if speed < fast_speed:
-					speed += delta * 500
+					speed += delta * game_manager.tick_speed * 500
 					if speed > fast_speed:
 						speed = fast_speed
 					
 			if section[2] == "slow":
 				if speed > slow_speed:
-					speed -= delta * 500
+					speed -= delta * game_manager.tick_speed * 500
 					if speed < slow_speed:
 						speed = slow_speed
 					
 			if section[2] == "extraspeed":
 				if speed < extra_fast_speed:
-					speed += delta * 10000
+					speed += delta * game_manager.tick_speed * 10000
 					if speed > extra_fast_speed:
 						speed = extra_fast_speed
 					
 			if section[2] == "extraslow":
 				if speed > extra_slow_speed:
-					speed -= delta * 5000
+					speed -= delta * game_manager.tick_speed * 5000
 					if speed < extra_slow_speed:
 						speed = extra_slow_speed
 	
