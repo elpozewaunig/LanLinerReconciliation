@@ -5,6 +5,7 @@ var next_switch_delta = 0
 var time_elapsed = 0
 
 signal force_next_choice(branch)
+signal enemy_end_reached(time)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +15,8 @@ func _ready():
 	# Connect player's force_next_choice signal to own handler method
 	var player = game_manager.player
 	player.force_next_choice.connect(_on_force_next_choice)
+	
+	enemy_end_reached.connect(player._on_enemy_end_reached)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -55,3 +58,7 @@ func _process(delta):
 			if current_lane < lane_count - 1:
 				current_lane += 1
 				switch_lane(current_lane)
+
+
+func _on_end_reached(time):
+	emit_signal("enemy_end_reached", time)

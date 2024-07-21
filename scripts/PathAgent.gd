@@ -18,9 +18,14 @@ var current_lane = 0
 
 var branches = {}
 var branch_choice = null
+var branch_passed_count = 0
+
+var end = false
+var finish_time = 0
 
 signal delete_branch
 signal no_choice_made
+signal end_reached(time)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,6 +44,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	# Increase a timer, until the end is reached
+	if !end:
+		finish_time += delta
+	
 	# Obtain the speed information of the current path
 	var current_path_data = get_parent().tubele
 	var is_in_section = false
@@ -49,25 +58,25 @@ func _process(delta):
 			
 			if section[2] == "speed":
 				if speed < fast_speed:
-					speed += delta * 500
+					speed += delta * game_manager.tick_speed * 500
 					if speed > fast_speed:
 						speed = fast_speed
 					
 			if section[2] == "slow":
 				if speed > slow_speed:
-					speed -= delta * 500
+					speed -= delta * game_manager.tick_speed * 500
 					if speed < slow_speed:
 						speed = slow_speed
 					
 			if section[2] == "extraspeed":
 				if speed < extra_fast_speed:
-					speed += delta * 10000
+					speed += delta * game_manager.tick_speed * 10000
 					if speed > extra_fast_speed:
 						speed = extra_fast_speed
 					
 			if section[2] == "extraslow":
 				if speed > extra_slow_speed:
-					speed -= delta * 5000
+					speed -= delta * game_manager.tick_speed * 5000
 					if speed < extra_slow_speed:
 						speed = extra_slow_speed
 	
@@ -98,6 +107,7 @@ func apply_progress(delta):
 			progress += change
 			reparent(branch_choice)
 			notify_abandoned_branches()
+			branch_passed_count += 1
 			progress_ratio -= 1
 		
 		# If the agent hasn't made a choice, but there is a straight path
@@ -106,11 +116,14 @@ func apply_progress(delta):
 			reparent(branches["SChild"])
 			emit_signal("no_choice_made")
 			notify_abandoned_branches()
+			branch_passed_count += 1
 			progress_ratio -= 1
 			
 		# There are no further branches
 		else:
-			pass
+			if !end:
+				emit_signal("end_reached", finish_time)
+				end = true			
 		
 		# Reset choice, game can resume normally
 		branch_choice = null
@@ -123,9 +136,13 @@ func apply_progress(delta):
 	# Find the next point that is ahead of the player in the current path
 	var points = get_parent().curve.get_baked_points()
 	var next_point = null
-	for point in points:
-		if point.y <= position.y:
-			next_point = point
+	var progress_of_point = 0
+	for i in range(1, points.size()):
+		# Sum up distances between adjacent points to get the corresponding progress value
+		progress_of_point += points[i-1].distance_to(points[i])
+		# If the point corresponds to a bigger progress value than the agent's position
+		if progress <= progress_of_point:
+			next_point = points[i]
 			break
 	
 	# If there is a point to rotate towards
@@ -202,9 +219,13 @@ func get_child_from_tree_loc(indexes):
 
 # Sets the agents own choice, forcing it to move to the specified branch
 func _on_force_next_choice(forced_branch):
+	# Since we aren't necessarily immediately behind the other player, remember the choice
+	game_manager.branch_choices.append(forced_branch.name)
+	# Based on the branches we have already passed, get the next forced branch
+	var next_branch_name = game_manager.branch_choices[branch_passed_count]
 	for branch_name in branches:
-		if branch_name == forced_branch.name:
-			branch_choice = branches[branch_name]
+		if branch_name == next_branch_name:
+			branch_choice = branches[next_branch_name]
 
 func _on_no_choice_made():
 	pass

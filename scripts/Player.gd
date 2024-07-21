@@ -2,12 +2,15 @@ extends "res://scripts/PathAgent.gd"
 
 @onready var camera = $Camera2D
 @onready var controls = $ControlOverlay
+@onready var enemy_indicator = camera.get_node("EnemyIndicator")
+var enemy
 
 var zoom_fact = 0.001
 var lane_lock = false
 
 signal force_next_choice(branch)
 signal choice_btn_pressed(btn)
+signal enemy_end_reached(time)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +18,7 @@ func _ready():
 	super._ready()
 	
 	# Connect enemy's force_next_choice signal to own handler method
-	var enemy = game_manager.enemy
+	enemy = game_manager.enemy
 	enemy.force_next_choice.connect(_on_force_next_choice)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -100,7 +103,7 @@ func _process(delta):
 		
 	# Handle movement and advancing to the next path in super class
 	super.apply_progress(delta)
-		
+	
 	# Adjust camera zoom according to speed
 	camera.zoom.x = 1 / (speed * zoom_fact + 0.5) * game_manager.tick_speed
 	camera.zoom.y = 1 / (speed * zoom_fact + 0.5) * game_manager.tick_speed
@@ -122,3 +125,6 @@ func _process(delta):
 			
 func _on_no_choice_made():
 	emit_signal("choice_btn_pressed", controls.up)
+
+func _on_enemy_end_reached(time):
+	emit_signal("enemy_end_reached", time)

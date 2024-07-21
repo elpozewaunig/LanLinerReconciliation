@@ -5,7 +5,7 @@ extends Node2D
 @onready var music = $MusicPlayer
 
 var tick_speed = 1
-var branch_choice = null
+var branch_choices = []
 
 var time_elapsed = 0
 var enemy_spawned = false
