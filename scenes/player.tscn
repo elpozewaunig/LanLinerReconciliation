@@ -1,14 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=18 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
 [ext_resource type="Texture2D" uid="uid://bv2en2yvl0kvo" path="res://assets/vignette.png" id="3_74b6m"]
 [ext_resource type="Texture2D" uid="uid://crf3x1a6mm6b5" path="res://assets/player.png" id="3_oj2jm"]
 [ext_resource type="Texture2D" uid="uid://clplopyknmamn" path="res://assets/trialsheet.png" id="4_gc2fj"]
+[ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="4_rq0y7"]
+[ext_resource type="Script" path="res://scripts/TimeDisplay.gd" id="5_2prde"]
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="5_3ppbk"]
 [ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/control_overlay.tscn" id="7_wphgy"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nx51t"]
+font = ExtResource("4_rq0y7")
+font_size = 120
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c61c1"]
 atlas = ExtResource("4_gc2fj")
@@ -64,6 +70,34 @@ script = ExtResource("3_16twk")
 [node name="Vignette" type="Sprite2D" parent="Camera2D"]
 texture = ExtResource("3_74b6m")
 
+[node name="Control" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Time" type="Label" parent="Camera2D/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.5
+offset_top = -75.0
+offset_right = 127.5
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Time"
+label_settings = SubResource("LabelSettings_nx51t")
+script = ExtResource("5_2prde")
+
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Triangle" type="Sprite2D" parent="Sprites"]
@@ -92,3 +126,4 @@ script = ExtResource("5_3ppbk")
 [node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
 
 [connection signal="choice_btn_pressed" from="." to="ControlOverlay" method="_on_choice_btn_pressed"]
+[connection signal="end_reached" from="." to="Camera2D/Control/Time" method="_on_end_reached"]

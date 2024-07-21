@@ -19,8 +19,12 @@ var current_lane = 0
 var branches = {}
 var branch_choice = null
 
+var end = false
+var finish_time = 0
+
 signal delete_branch
 signal no_choice_made
+signal end_reached(time)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -38,6 +42,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	# Increase a timer, until the end is reached
+	if !end:
+		finish_time += delta
 	
 	# Obtain the speed information of the current path
 	var current_path_data = get_parent().tubele
@@ -110,7 +118,9 @@ func apply_progress(delta):
 			
 		# There are no further branches
 		else:
-			pass
+			if !end:
+				emit_signal("end_reached", finish_time)
+				end = true			
 		
 		# Reset choice, game can resume normally
 		branch_choice = null
