@@ -148,7 +148,7 @@ func _process(delta):
 			game_over_screen.modulate.a = 1
 			
 func _on_no_choice_made():
-	emit_signal("force_next_choice", branches["SChild"])
+	emit_signal("force_next_choice", branch_choice)
 	emit_signal("choice_btn_pressed", controls.up)
 
 func _on_end_reached(time):

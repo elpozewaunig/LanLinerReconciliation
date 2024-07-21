@@ -110,21 +110,16 @@ func apply_progress(delta):
 	
 	# If progress would exceed current path, reparent to the chosen branch
 	if progress_ratio + change_ratio >= 1:
-		# If the agent made a choice
+		# If the agent hasn't made a choice, but there is a straight path
+		if branch_choice == null and branches.has("SChild"):
+			# Set the choice to the straight branch forcibly
+			branch_choice = branches["SChild"]
+			emit_signal("no_choice_made")
+		
+		# Reparent to the choice
 		if branch_choice != null:
 			progress += change
-			reparent(branch_choice)
-			notify_abandoned_branches()
-			branch_passed_count += 1
-			progress_ratio -= 1
-			if get_parent().isDeadEnd:
-				dead_end = true
-		
-		# If the agent hasn't made a choice, but there is a straight path
-		elif branches.has("SChild"):
-			progress += change
-			emit_signal("no_choice_made")
-			reparent(branches["SChild"])
+			reparent(branches[branch_choice.name])
 			notify_abandoned_branches()
 			branch_passed_count += 1
 			progress_ratio -= 1
