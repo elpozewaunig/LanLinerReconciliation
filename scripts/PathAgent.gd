@@ -113,8 +113,8 @@ func apply_progress(delta):
 		# If the agent hasn't made a choice, but there is a straight path
 		elif branches.has("SChild"):
 			progress += change
-			reparent(branches["SChild"])
 			emit_signal("no_choice_made")
+			reparent(branches["SChild"])
 			notify_abandoned_branches()
 			branch_passed_count += 1
 			progress_ratio -= 1

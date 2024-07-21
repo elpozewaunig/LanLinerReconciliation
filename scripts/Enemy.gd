@@ -25,9 +25,8 @@ func _process(delta):
 	
 	time_elapsed += delta
 	
-	# If progress nears the current path's end, slow down
+	# If progress nears the current path's end and the enemy is ahead of the player
 	if progress_ratio > 0.75 and branch_choice == null and total_progress > game_manager.player.total_progress:
-	
 		# Set the branch to proceed to randomly
 		# Get keys, then get random index within the key array
 		var branches_keys = branches.keys()
