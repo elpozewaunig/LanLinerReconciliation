@@ -6,6 +6,7 @@ var time_elapsed = 0
 
 signal force_next_choice(branch)
 signal enemy_end_reached(time)
+signal enemy_dead_end_reached()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +18,7 @@ func _ready():
 	player.force_next_choice.connect(_on_force_next_choice)
 	
 	enemy_end_reached.connect(player._on_enemy_end_reached)
+	enemy_dead_end_reached.connect(player._on_enemy_dead_end_reached)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,8 +69,8 @@ func _process(delta):
 
 
 func _on_end_reached(time):
-	sprite_container.hide()
 	emit_signal("enemy_end_reached", time)
 	
 func _on_dead_end_reached():
 	sprite_container.hide()
+	emit_signal("enemy_dead_end_reached")
