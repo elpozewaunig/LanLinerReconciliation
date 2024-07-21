@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3quwpomtjty3"]
+[gd_scene load_steps=17 format=3 uid="uid://b7vjspmp3umjn"]
 
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="1_dgplp"]
 [ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="1_kisyv"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/CreditsButton.gd" id="4_s67s6"]
 [ext_resource type="Script" path="res://scenes/DancingTitle.gd" id="5_8w2s3"]
 [ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
-[ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/x.png" id="6_6tsrf"]
+[ext_resource type="Texture2D" path="res://assets/x.png" id="6_6tsrf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
 size = Vector2(432, 95)
@@ -183,6 +183,7 @@ label_settings = SubResource("LabelSettings_n3wgl")
 horizontal_alignment = 1
 
 [node name="Tech" type="Label" parent="UI/Credits"]
+layout_mode = 0
 offset_top = 862.0
 offset_right = 1911.0
 offset_bottom = 1003.0

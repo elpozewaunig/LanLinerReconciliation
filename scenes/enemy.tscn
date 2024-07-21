@@ -1,11 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://4cpqid7g3o70"]
+[gd_scene load_steps=12 format=3 uid="uid://4cpqid7g3o70"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_037od"]
 [ext_resource type="Texture2D" uid="uid://qn5wy2v6josb" path="res://assets/enemy.png" id="2_mkgco"]
 [ext_resource type="Texture2D" uid="uid://dy3v7b64edpb6" path="res://assets/trialsheetenemy.png" id="3_l8ft8"]
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="4_38np1"]
-[ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/twirl_03.png" id="5_kle1l"]
-[ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/spark_04.png" id="6_av215"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
@@ -79,61 +77,4 @@ scale = Vector2(0.565, 0.401)
 sprite_frames = SubResource("SpriteFrames_be6dp")
 script = ExtResource("4_38np1")
 
-[node name="ParticleSysMoveLeft" type="Node2D" parent="."]
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
-amount = 1
-lifetime = 1.5
-speed_scale = 2.0
-texture = ExtResource("5_kle1l")
-emission_shape = 1
-emission_sphere_radius = 0.01
-gravity = Vector2(0, 0)
-angular_velocity_min = 150.0
-angular_velocity_max = 150.0
-scale_amount_min = 0.45
-scale_amount_max = 0.45
-color = Color(0.443137, 0, 0.0117647, 1)
-
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveLeft"]
-amount = 16
-lifetime = 10.0
-explosiveness = 0.12
-texture = ExtResource("6_av215")
-gravity = Vector2(260.18, 0)
-initial_velocity_max = 36.9
-angular_velocity_max = 169.2
-scale_amount_min = 0.35
-scale_amount_max = 0.35
-color = Color(0.443137, 0, 0.0117647, 1)
-
-[node name="ParticleSysMoveRight" type="Node2D" parent="."]
-visible = false
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ParticleSysMoveRight"]
-visible = false
-amount = 1
-lifetime = 39.0
-speed_scale = 2.0
-texture = ExtResource("5_kle1l")
-emission_shape = 1
-emission_sphere_radius = 0.01
-gravity = Vector2(0, 0)
-angular_velocity_min = -150.0
-angular_velocity_max = -150.0
-scale_amount_min = 0.45
-scale_amount_max = 0.45
-color = Color(0.444371, 0, 0.0100586, 1)
-
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="ParticleSysMoveRight"]
-visible = false
-amount = 16
-lifetime = 10.0
-explosiveness = 0.12
-texture = ExtResource("6_av215")
-gravity = Vector2(-260.18, 0)
-initial_velocity_max = 36.9
-angular_velocity_max = 169.2
-scale_amount_min = 0.35
-scale_amount_max = 0.35
-color = Color(0.443137, 0, 0.0117647, 1)
+[connection signal="end_reached" from="." to="." method="_on_end_reached"]

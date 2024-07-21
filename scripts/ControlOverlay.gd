@@ -1,8 +1,5 @@
 extends Node2D
 
-@onready var game_manager = $"/root/GameManager"
-@onready var player = game_manager.player
-
 @onready var left = $Left
 @onready var right = $Right
 @onready var up = $Up
