@@ -16,7 +16,7 @@ var lineLength = 800 #(alles wird damit multiplied)
 
 var recursions = 3
 var extraDuplicates = 4
-var gapBetweenDuplicatesX = 80
+var gapBetweenDuplicatesX = 60
 var gapBetweenDuplicatesY = 0
 func createPath():
 	var root = Node2D.new()
@@ -74,6 +74,9 @@ func genSingleBranch(recursionDepth: int, origin: Vector2, name:String):
 	
 	# Rekursion terminieren
 	if(recursionDepth==0):
+		var a = getStartEndBlock()
+		a.position = Vector2(newOrigin.x,newOrigin.y)
+		path.add_child(a)
 		return path
 	
 	# (Ende vom Pfad, "Weggabelung" = Children Appenden, Entweder LS, SR oder LSR) 
@@ -151,6 +154,13 @@ func startPathPatch(c,x,y):
 	var s = Vector2(x,y-lineLength*3)
 	c.curve.add_point(s)
 	c.wasIstDas = "startPatch"
+	
+	var a = getStartEndBlock()
+	a.scale.x = 2.5
+	a.scale.y = 2.5
+	a.position.y -=12
+	c.add_child(a)
+	
 	return s
 	
 func pSVanilla(c,x,y):
@@ -250,3 +260,7 @@ func getInstance() -> Path2D:
 	path.curve = Curve2D.new()
 	return path
 
+func getStartEndBlock() -> Sprite2D:
+	var scene = preload("res://scenes/levelstartend.tscn") #preload geht aber load nit :huh:
+	var b = scene.instantiate()
+	return b	

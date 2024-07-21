@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnnh3bicpysgw"]
+
+[ext_resource type="Texture2D" uid="uid://br4jxrbgh5t7v" path="res://assets/tile_0110DARKER.png" id="1_ercj7"]
+
+[node name="backgroundLine" type="Line2D"]
+z_index = -12
+texture_repeat = 2
+width = 15.0
+texture = ExtResource("1_ercj7")
+texture_mode = 1
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2

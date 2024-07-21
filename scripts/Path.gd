@@ -71,6 +71,7 @@ func _ready():
 		start = 0
 		end = 0
 		splitrec = -1	
+		
 	if(self.wasIstDas=="LDeadEnd"
 		or self.wasIstDas=="SDeadEnd"
 		or self.wasIstDas=="RDeadEnd"):
@@ -103,16 +104,27 @@ func _ready():
 		end = l-l*0.25
 		splitrec = 3
 	
-	splitter(start,end,splitrec, 0.2,0.2,0.5,0.5) ##!!
+	splitter(start,end,splitrec, 0.2,0.2,0.4,0.4) ##!!#!!#!!#!!#!!#!!#!!#!!
 	
 	var box = getBox()
+	box.scale.x=3
+	box.scale.y=3
+	if(self.wasIstDas=="startPatch"):
+		box.position.y+=65
 	self.add_child(box)
+
+	var bg = getBackgroundLine()
+	for p in curve.get_baked_points():
+		
+		bg.add_point(p)
+	bg.width = 85
+	self.add_child(bg)
 	
 	var newbc = getRegularLine()
 	for p in curve.get_baked_points():
 		
 		newbc.add_point(p)
-	newbc.width = 15
+	newbc.width = 20
 	self.add_child(newbc)
 
 	
@@ -157,6 +169,10 @@ func getSlowLine() -> Line2D:
 	return line	
 func getRegularLine() -> Line2D:
 	var scene = preload("res://scenes/regularLine.tscn") #preload geht aber load nit :huh:
+	var line = scene.instantiate()
+	return line	
+func getBackgroundLine() -> Line2D:
+	var scene = preload("res://scenes/backgroundLine.tscn") #preload geht aber load nit :huh:
 	var line = scene.instantiate()
 	return line	
 func getPointsInBetween(l1, l2, c):
