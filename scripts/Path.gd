@@ -2,6 +2,7 @@ extends Path2D
 
 
 @export var tubele = []
+@export var wasIstDas = "default"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -25,28 +26,30 @@ func _on_delete_branch():
 	
 var rng = RandomNumberGenerator.new()
 
-func splitter(start, end, rec):
+func splitter(start, end, rec, marginfacSpeed, marginfacSlow, marginfacExtraSpeed, marginfacExtraSlow):
+	if(rec==-1):
+		return
 	var l = (end-start)/2
 	if(rec==0):
 		var r =	rng.randi_range(1,3)
 		if (r==1):
 			var r2 = rng.randi_range(1,8)
 			if(r2==1):
-				addtubele(start+l*0.8,end-l*0.8,"extraspeed")
+				addtubele(start+l*marginfacExtraSpeed,end-l*marginfacExtraSpeed,"extraspeed")
 			else:
-				addtubele(start+l*0.6,end-l*0.6,"speed")
+				addtubele(start+l*marginfacSpeed,end-l*marginfacSpeed,"speed")
 			
 		elif (r==2):
 			var r2 = rng.randi_range(1,8)
 			if(r2==1):
-				addtubele(start+l+0.8,end-l*0.8,"extraslow")
+				addtubele(start+l+marginfacExtraSlow,end-l*marginfacExtraSlow,"extraslow")
 			else:
-				addtubele(start+l*0.6,end-l*0.6,"slow")
+				addtubele(start+l*marginfacSlow,end-l*marginfacSlow,"slow")
 		return
 		
 	var mid = start+l
-	splitter(start,mid,rec-1)
-	splitter(mid,end,rec-1)
+	splitter(start,mid,rec-1, marginfacSpeed, marginfacSlow, marginfacExtraSpeed, marginfacExtraSlow)
+	splitter(mid,end,rec-1, marginfacSpeed, marginfacSlow, marginfacExtraSpeed, marginfacExtraSlow)
 
 func addtubele(from,to,type):
 	self.tubele.append([from,to,type])
@@ -60,10 +63,47 @@ func getBox():
 func _ready():
 	self.tubele = []
 	var l = self.curve.get_baked_length()
-	var start = 0+l*0.25
-	var end = l-l*0.25
-
-	splitter(start,end,3)
+	var start
+	var end
+	var splitrec
+	
+	if(self.wasIstDas=="startPatch"):
+		start = 0
+		end = 0
+		splitrec = -1	
+	if(self.wasIstDas=="LDeadEnd"
+		or self.wasIstDas=="SDeadEnd"
+		or self.wasIstDas=="RDeadEnd"):
+		start = 0
+		end = 0
+		splitrec = -1
+		var a = getDeadEndBlock()
+		self.add_child(a)
+		var lastpoint = self.curve.get_baked_points()[-1]
+		a.position = Vector2(lastpoint.x,lastpoint.y)
+		
+	elif(self.wasIstDas=="straight"):
+		start = 0+l*0.25
+		end = l-l*0.25
+		splitrec = 3
+	elif(self.wasIstDas=="fork"):
+		start = 0+l*0.25
+		end = l-l*0.25
+		splitrec = 3
+	elif(self.wasIstDas=="sideZigZag"):
+		start = 0+l*0.25
+		end = l-l*0.25
+		splitrec = 3
+	elif(self.wasIstDas=="knotenTurn"):
+		start = 0+l*0.25
+		end = l-l*0.25
+		splitrec = 3
+	else: #"default"
+		start = 0+l*0.25
+		end = l-l*0.25
+		splitrec = 3
+	
+	splitter(start,end,splitrec, 0.2,0.2,0.5,0.5) ##!!
 	
 	var box = getBox()
 	self.add_child(box)
@@ -127,5 +167,9 @@ func getPointsInBetween(l1, l2, c):
 		if(dist>l1 and dist<l2):
 			arr.append(curve.get_baked_points()[i])
 	return arr
-		
+
+func getDeadEndBlock() -> Sprite2D:
+	var scene = preload("res://scenes/deadend.tscn") #preload geht aber load nit :huh:
+	var b = scene.instantiate()
+	return b	
 		

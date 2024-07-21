@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b7vjspmp3umjn"]
+[gd_scene load_steps=18 format=3 uid="uid://b7vjspmp3umjn"]
 
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="1_dgplp"]
 [ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="1_kisyv"]
@@ -38,6 +38,11 @@ font_size = 50
 [sub_resource type="LabelSettings" id="LabelSettings_n3wgl"]
 font = ExtResource("1_dgplp")
 font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_lgtv1"]
+font = ExtResource("1_dgplp")
+font_size = 15
+font_color = Color(0.0534208, 0.0534209, 0.0534209, 1)
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_rcym2")
@@ -178,7 +183,7 @@ layout_mode = 0
 offset_top = 748.0
 offset_right = 1911.0
 offset_bottom = 798.0
-text = "???"
+text = "near_beats"
 label_settings = SubResource("LabelSettings_n3wgl")
 horizontal_alignment = 1
 
@@ -190,6 +195,15 @@ offset_bottom = 1003.0
 text = "All assets made by Kenney (CC0)
 Developed in Godot 4"
 label_settings = SubResource("LabelSettings_850s7")
+horizontal_alignment = 1
+
+[node name="Tech2" type="Label" parent="UI/Credits"]
+layout_mode = 0
+offset_top = 1054.0
+offset_right = 1911.0
+offset_bottom = 1195.0
+text = "count tubele;"
+label_settings = SubResource("LabelSettings_lgtv1")
 horizontal_alignment = 1
 
 [node name="CreditsExitButton" type="Area2D" parent="UI/Credits"]
