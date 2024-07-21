@@ -151,6 +151,9 @@ func _on_no_choice_made():
 	emit_signal("force_next_choice", branches["SChild"])
 	emit_signal("choice_btn_pressed", controls.up)
 
+func _on_end_reached(time):
+	sound.win.play()
+
 func _on_enemy_end_reached(time):
 	sprite_container.hide()
 	emit_signal("enemy_end_reached", time)
@@ -158,5 +161,5 @@ func _on_enemy_end_reached(time):
 func _on_dead_end_reached():
 	game_over = true
 	game_over_screen.modulate.a = 0
-	sound.death.play()
+	sound.lose.play()
 	sprite_container.hide()

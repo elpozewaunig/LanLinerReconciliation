@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=33 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://wexbtml1h3pr" path="res://assets/sounds/Lane_Switch_Right.mp3" id="13_1hx18"]
 [ext_resource type="AudioStream" uid="uid://boh8uuifldn7" path="res://assets/sounds/Portal_A.mp3" id="15_qq2rn"]
 [ext_resource type="AudioStream" uid="uid://bbjpegiea3x8n" path="res://assets/sounds/Speed_Up.mp3" id="16_jqpko"]
+[ext_resource type="AudioStream" uid="uid://ks8noe1w2nv0" path="res://assets/sounds/Portal_B.mp3" id="16_se6lp"]
 [ext_resource type="AudioStream" uid="uid://s4k68vs8rrjy" path="res://assets/sounds/Speed_Down.mp3" id="17_22nu5"]
 [ext_resource type="AudioStream" uid="uid://q2nlk3e4qmuy" path="res://assets/sounds/Super_Speed.mp3" id="18_um1a0"]
 [ext_resource type="AudioStream" uid="uid://16dt2wvxbswh" path="res://assets/sounds/Super_Slow.mp3" id="19_t1xbk"]
@@ -276,8 +277,12 @@ volume_db = -15.0
 stream = ExtResource("13_1hx18")
 volume_db = -15.0
 
-[node name="Death" type="AudioStreamPlayer" parent="Sounds"]
+[node name="Win" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("15_qq2rn")
+volume_db = -15.0
+
+[node name="Lose" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("16_se6lp")
 volume_db = -15.0
 
 [node name="Speed" type="AudioStreamPlayer" parent="Sounds"]
@@ -299,6 +304,7 @@ volume_db = -15.0
 [node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
 
 [connection signal="choice_btn_pressed" from="." to="ControlOverlay" method="_on_choice_btn_pressed"]
+[connection signal="end_reached" from="." to="." method="_on_end_reached"]
 [connection signal="end_reached" from="." to="Camera2D/TimerDisplay" method="_on_player_end_reached"]
 [connection signal="enemy_end_reached" from="." to="Camera2D/TimerDisplay" method="_on_enemy_end_reached"]
 [connection signal="mouse_entered" from="Camera2D/GameOver/RetryButton" to="Camera2D/GameOver/RetryButton" method="_on_mouse_entered"]

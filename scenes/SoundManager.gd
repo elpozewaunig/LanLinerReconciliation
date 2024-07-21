@@ -2,7 +2,8 @@ extends Node2D
 
 @onready var lane_switch_left = $LaneSwitchLeft
 @onready var lane_switch_right = $LaneSwitchRight
-@onready var death = $Death
+@onready var win = $Win
+@onready var lose = $Lose
 @onready var speed = $Speed
 @onready var slow = $Slow
 @onready var extra_speed = $ExtraSpeed
