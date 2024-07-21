@@ -76,3 +76,5 @@ position = Vector2(2.08165e-12, 69.34)
 scale = Vector2(0.565, 0.401)
 sprite_frames = SubResource("SpriteFrames_be6dp")
 script = ExtResource("4_38np1")
+
+[connection signal="end_reached" from="." to="." method="_on_end_reached"]
