@@ -155,11 +155,9 @@ func _on_end_reached(time):
 	sound.win.play()
 
 func _on_enemy_end_reached(time):
-	sprite_container.hide()
 	emit_signal("enemy_end_reached", time)
 	
 func _on_dead_end_reached():
 	game_over = true
 	game_over_screen.modulate.a = 0
 	sound.lose.play()
-	sprite_container.hide()
