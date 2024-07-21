@@ -135,16 +135,21 @@ func apply_progress(delta):
 			elif dead_end and !end:
 				emit_signal("dead_end_reached")
 				end = true
-		
-		# Reset choice, game can resume normally
-		branch_choice = null
+			
 		update_available_branches()
+		
+		# If the agent is not a branch behind, the next choice can be made freely
+		if branch_passed_count == game_manager.branch_choices.size():
+			branch_choice = null
+		# If the agent is a branch behind, the next choice is forced
+		else:
+			branch_choice = branches[game_manager.branch_choices[branch_passed_count]]
 		
 	else:
 		# Increase progress normally
 		progress += change
 	
-	# Find the next point that is ahead of the player in the current path
+	# Find the next point that is ahead of the agent in the current path
 	var points = get_parent().curve.get_baked_points()
 	var next_point = null
 	var progress_of_point = 0

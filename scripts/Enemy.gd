@@ -57,12 +57,12 @@ func _process(delta):
 		
 		var choice = rng.randf()
 		
-		if choice <= 0.5 and branch_choice == null:
+		if choice <= 0.5:
 			if current_lane > 0:
 				current_lane -= 1
 				switch_lane(current_lane)
 				
-		if choice > 0.5 and branch_choice == null:
+		if choice > 0.5:
 			if current_lane < lane_count - 1:
 				current_lane += 1
 				switch_lane(current_lane)
