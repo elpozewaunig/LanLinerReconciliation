@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bmoeflkpo7hri"]
 
-[ext_resource type="Texture2D" uid="uid://xtigw5ikvvyb" path="res://assets/tile_0110.png" id="1_gqsob"]
+[ext_resource type="Texture2D" uid="uid://xtigw5ikvvyb" path="res://assets/sprites/tile_0110.png" id="1_gqsob"]
 
 [node name="regularLine" type="Line2D"]
 z_index = -7

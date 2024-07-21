@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8ap6owkqnqla"
-path="res://.godot/imported/tile_0110WHITE.png-e21927942fa8080cd37c936602c66715.ctex"
+uid="uid://l8ne3jw87bwa"
+path="res://.godot/imported/startendblock.png-57c20a075086dfe7c2a72d4a33e79fa5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tile_0110WHITE.png"
-dest_files=["res://.godot/imported/tile_0110WHITE.png-e21927942fa8080cd37c936602c66715.ctex"]
+source_file="res://assets/sprites/startendblock.png"
+dest_files=["res://.godot/imported/startendblock.png-57c20a075086dfe7c2a72d4a33e79fa5.ctex"]
 
 [params]
 

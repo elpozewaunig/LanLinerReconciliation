@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bh31ua7otlkev"]
 
-[ext_resource type="Texture2D" uid="uid://d2ix0etgbvxnt" path="res://assets/box.png" id="1_755qa"]
+[ext_resource type="Texture2D" uid="uid://d2ix0etgbvxnt" path="res://assets/sprites/box.png" id="1_755qa"]
 
 [node name="Box" type="Sprite2D"]
 z_index = 10

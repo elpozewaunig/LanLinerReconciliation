@@ -15,8 +15,8 @@ config/tags=PackedStringArray("game", "jam")
 run/main_scene="res://scenes/Menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="res://assets/q1_pixel.png"
-config/icon="res://assets/player.png"
+boot_splash/image="res://assets/sprites/q1_pixel.png"
+config/icon="res://assets/sprites/player.png"
 
 [display]
 

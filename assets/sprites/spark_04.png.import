@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy3v7b64edpb6"
-path="res://.godot/imported/trialsheetenemy.png-25c25c146e88e0bb23585d6647e86fb2.ctex"
+uid="uid://b868fu7vn0f6e"
+path="res://.godot/imported/spark_04.png-74236cc01dc56cb4b7f8fa1544ee2c1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/trialsheetenemy.png"
-dest_files=["res://.godot/imported/trialsheetenemy.png-25c25c146e88e0bb23585d6647e86fb2.ctex"]
+source_file="res://assets/sprites/spark_04.png"
+dest_files=["res://.godot/imported/spark_04.png-74236cc01dc56cb4b7f8fa1544ee2c1e.ctex"]
 
 [params]
 

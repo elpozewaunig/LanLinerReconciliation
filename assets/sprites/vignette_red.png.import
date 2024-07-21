@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br4jxrbgh5t7v"
-path="res://.godot/imported/tile_0110DARKER.png-72af3b7bb3fd5c90fccb035546e84177.ctex"
+uid="uid://chumx1s1psh8x"
+path="res://.godot/imported/vignette_red.png-7238fce4da806b25fac53cff83336082.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tile_0110DARKER.png"
-dest_files=["res://.godot/imported/tile_0110DARKER.png-72af3b7bb3fd5c90fccb035546e84177.ctex"]
+source_file="res://assets/sprites/vignette_red.png"
+dest_files=["res://.godot/imported/vignette_red.png-7238fce4da806b25fac53cff83336082.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bx7vpo0wa7iyy"]
 
-[ext_resource type="Texture2D" uid="uid://deifjywux43na" path="res://assets/tile_0079_edit.png" id="1_euuwg"]
+[ext_resource type="Texture2D" uid="uid://deifjywux43na" path="res://assets/sprites/tile_0079_edit.png" id="1_euuwg"]
 
 [node name="SealTextLine" type="Line2D"]
 z_index = -5

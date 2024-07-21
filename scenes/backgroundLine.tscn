@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dnnh3bicpysgw"]
 
-[ext_resource type="Texture2D" uid="uid://br4jxrbgh5t7v" path="res://assets/tile_0110DARKER.png" id="1_ercj7"]
+[ext_resource type="Texture2D" uid="uid://br4jxrbgh5t7v" path="res://assets/sprites/tile_0110DARKER.png" id="1_ercj7"]
 
 [node name="backgroundLine" type="Line2D"]
 z_index = -12

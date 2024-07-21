@@ -1,32 +1,32 @@
 [gd_scene load_steps=14 format=3 uid="uid://4cpqid7g3o70"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_037od"]
-[ext_resource type="Texture2D" uid="uid://qn5wy2v6josb" path="res://assets/enemy.png" id="2_mkgco"]
-[ext_resource type="Texture2D" uid="uid://dy3v7b64edpb6" path="res://assets/trialsheetenemy.png" id="3_l8ft8"]
+[ext_resource type="Texture2D" uid="uid://qn5wy2v6josb" path="res://assets/sprites/enemy.png" id="2_i4ste"]
+[ext_resource type="Texture2D" uid="uid://dy3v7b64edpb6" path="res://assets/sprites/trialsheetenemy.png" id="3_h0mle"]
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="4_38np1"]
-[ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/twirl_03.png" id="5_kle1l"]
-[ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/spark_04.png" id="6_av215"]
+[ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/sprites/twirl_03.png" id="5_8w5pd"]
+[ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/sprites/spark_04.png" id="6_uik23"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pbhno"]
-atlas = ExtResource("3_l8ft8")
+atlas = ExtResource("3_h0mle")
 region = Rect2(0, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yavp8"]
-atlas = ExtResource("3_l8ft8")
+atlas = ExtResource("3_h0mle")
 region = Rect2(512, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vcgvj"]
-atlas = ExtResource("3_l8ft8")
+atlas = ExtResource("3_h0mle")
 region = Rect2(1024, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sclqv"]
-atlas = ExtResource("3_l8ft8")
+atlas = ExtResource("3_h0mle")
 region = Rect2(1536, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_umx7y"]
-atlas = ExtResource("3_l8ft8")
+atlas = ExtResource("3_h0mle")
 region = Rect2(2048, 0, 512, 512)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_be6dp"]
@@ -63,7 +63,7 @@ script = ExtResource("1_037od")
 self_modulate = Color(1, 0, 0, 1)
 z_index = 5
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_mkgco")
+texture = ExtResource("2_i4ste")
 
 [node name="Trail" type="AnimatedSprite2D" parent="Sprites"]
 z_index = 3
@@ -86,7 +86,7 @@ visible = false
 amount = 1
 lifetime = 1.5
 speed_scale = 2.0
-texture = ExtResource("5_kle1l")
+texture = ExtResource("5_8w5pd")
 emission_shape = 1
 emission_sphere_radius = 0.01
 gravity = Vector2(0, 0)
@@ -100,7 +100,7 @@ color = Color(0.443137, 0, 0.0117647, 1)
 amount = 16
 lifetime = 10.0
 explosiveness = 0.12
-texture = ExtResource("6_av215")
+texture = ExtResource("6_uik23")
 gravity = Vector2(260.18, 0)
 initial_velocity_max = 36.9
 angular_velocity_max = 169.2
@@ -115,7 +115,7 @@ visible = false
 amount = 1
 lifetime = 39.0
 speed_scale = 2.0
-texture = ExtResource("5_kle1l")
+texture = ExtResource("5_8w5pd")
 emission_shape = 1
 emission_sphere_radius = 0.01
 gravity = Vector2(0, 0)
@@ -129,7 +129,7 @@ color = Color(0.444371, 0, 0.0100586, 1)
 amount = 16
 lifetime = 10.0
 explosiveness = 0.12
-texture = ExtResource("6_av215")
+texture = ExtResource("6_uik23")
 gravity = Vector2(-260.18, 0)
 initial_velocity_max = 36.9
 angular_velocity_max = 169.2

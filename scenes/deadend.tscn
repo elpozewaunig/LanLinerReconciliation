@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b024f0tq7ri2t"]
 
-[ext_resource type="Texture2D" uid="uid://b4x4rt7kmw21q" path="res://assets/block.png" id="1_fj3q5"]
+[ext_resource type="Texture2D" uid="uid://b4x4rt7kmw21q" path="res://assets/sprites/block.png" id="1_fj3q5"]
 
 [node name="Block" type="Sprite2D"]
 texture_filter = 1

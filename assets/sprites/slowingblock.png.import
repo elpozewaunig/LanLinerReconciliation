@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp0oaawxqu400"
-path="res://.godot/imported/twirl_03.png-6c4d8e7b9c7df81dd55609ee74301e72.ctex"
+uid="uid://6nod3k27frny"
+path="res://.godot/imported/slowingblock.png-2ff3214d47ef41f480fcc07ccb597b77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/twirl_03.png"
-dest_files=["res://.godot/imported/twirl_03.png-6c4d8e7b9c7df81dd55609ee74301e72.ctex"]
+source_file="res://assets/sprites/slowingblock.png"
+dest_files=["res://.godot/imported/slowingblock.png-2ff3214d47ef41f480fcc07ccb597b77.ctex"]
 
 [params]
 

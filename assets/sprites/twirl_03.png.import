@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b868fu7vn0f6e"
-path="res://.godot/imported/spark_04.png-b1d642840a6928567382cf8d41351569.ctex"
+uid="uid://cp0oaawxqu400"
+path="res://.godot/imported/twirl_03.png-1560122edc2d63f4707c0935d9455762.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spark_04.png"
-dest_files=["res://.godot/imported/spark_04.png-b1d642840a6928567382cf8d41351569.ctex"]
+source_file="res://assets/sprites/twirl_03.png"
+dest_files=["res://.godot/imported/twirl_03.png-1560122edc2d63f4707c0935d9455762.ctex"]
 
 [params]
 

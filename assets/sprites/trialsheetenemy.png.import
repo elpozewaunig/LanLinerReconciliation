@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2ix0etgbvxnt"
-path="res://.godot/imported/box.png-52cc4e41fddadef836f9ad4dbe7936fa.ctex"
+uid="uid://dy3v7b64edpb6"
+path="res://.godot/imported/trialsheetenemy.png-f2493a81053adeace3c3e01a77c3d18a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/box.png"
-dest_files=["res://.godot/imported/box.png-52cc4e41fddadef836f9ad4dbe7936fa.ctex"]
+source_file="res://assets/sprites/trialsheetenemy.png"
+dest_files=["res://.godot/imported/trialsheetenemy.png-f2493a81053adeace3c3e01a77c3d18a.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cn66nqh0xl87y"]
 
-[ext_resource type="Texture2D" uid="uid://qn5wy2v6josb" path="res://assets/enemy.png" id="2_xr8h8"]
-[ext_resource type="Texture2D" uid="uid://dy3v7b64edpb6" path="res://assets/trialsheetenemy.png" id="3_keihl"]
+[ext_resource type="Texture2D" uid="uid://qn5wy2v6josb" path="res://assets/sprites/enemy.png" id="2_xr8h8"]
+[ext_resource type="Texture2D" uid="uid://dy3v7b64edpb6" path="res://assets/sprites/trialsheetenemy.png" id="3_keihl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://boy2qix2cxcob"]
 
-[ext_resource type="Texture2D" uid="uid://cnqgitkp7dk43" path="res://assets/speeder.png" id="1_usqcb"]
+[ext_resource type="Texture2D" uid="uid://cnqgitkp7dk43" path="res://assets/sprites/speeder.png" id="1_usqcb"]
 
 [node name="SealTextLine" type="Line2D"]
 modulate = Color(1, 1, 0.996078, 1)

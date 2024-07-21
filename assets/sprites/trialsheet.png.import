@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv2en2yvl0kvo"
-path="res://.godot/imported/vignette.png-616bd0f74b406d55d24cc11a1e977d54.ctex"
+uid="uid://clplopyknmamn"
+path="res://.godot/imported/trialsheet.png-1f9c8ef7ca474bbb07a29238c0ca1f1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/vignette.png"
-dest_files=["res://.godot/imported/vignette.png-616bd0f74b406d55d24cc11a1e977d54.ctex"]
+source_file="res://assets/sprites/trialsheet.png"
+dest_files=["res://.godot/imported/trialsheet.png-1f9c8ef7ca474bbb07a29238c0ca1f1a.ctex"]
 
 [params]
 
