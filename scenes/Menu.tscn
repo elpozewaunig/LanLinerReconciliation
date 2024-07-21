@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="1_dgplp"]
 [ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="1_kisyv"]
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="1_rcym2"]
-[ext_resource type="PackedScene" uid="uid://buddsltmrmynu" path="res://scenes/playbutton.tscn" id="2_ayibh"]
+[ext_resource type="Script" path="res://scripts/ButtonStart.gd" id="2_7jl43"]
 [ext_resource type="Script" path="res://scripts/CreditsButton.gd" id="4_s67s6"]
 [ext_resource type="Script" path="res://scripts/DancingTitle.gd" id="5_8w2s3"]
 [ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
@@ -13,12 +13,15 @@
 [ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="10_e6teq"]
 [ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="11_6y52x"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mff1d"]
-size = Vector2(143, 127)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
+size = Vector2(432, 95)
 
 [sub_resource type="LabelSettings" id="LabelSettings_v67xe"]
 font = ExtResource("1_dgplp")
 font_size = 60
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mff1d"]
+size = Vector2(143, 127)
 
 [sub_resource type="LabelSettings" id="LabelSettings_mib0b"]
 font = ExtResource("1_dgplp")
@@ -50,7 +53,7 @@ script = ExtResource("1_rcym2")
 
 [node name="Singleplayer Start" type="Area2D" parent="."]
 position = Vector2(872.575, 525.575)
-script = ExtResource("2_ayibh")
+script = ExtResource("2_7jl43")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Singleplayer Start"]
 visible = false
@@ -257,12 +260,6 @@ z_index = -7
 position = Vector2(590, 739)
 rotation = 2.12057
 scale = Vector2(3.32, 3.32)
-
-[node name="Startendblock" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(132, 946)
-scale = Vector2(10.735, 10.735)
-texture = ExtResource("9_18xdr")
 
 [connection signal="mouse_entered" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_exited"]
