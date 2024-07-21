@@ -184,6 +184,30 @@ grow_vertical = 2
 text = "Time"
 label_settings = SubResource("LabelSettings_nx51t")
 
+[node name="RetryButton" type="Area2D" parent="Camera2D/TimerDisplay"]
+visible = false
+position = Vector2(2.08165e-12, 300)
+script = ExtResource("5_cblie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/TimerDisplay/RetryButton"]
+shape = SubResource("RectangleShape2D_d2hi4")
+
+[node name="Label" type="Label" parent="Camera2D/TimerDisplay/RetryButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -37.5
+offset_right = 91.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Retry"
+label_settings = SubResource("LabelSettings_7sh5l")
+
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Triangle" type="Sprite2D" parent="Sprites"]
@@ -309,3 +333,5 @@ volume_db = -15.0
 [connection signal="enemy_end_reached" from="." to="Camera2D/TimerDisplay" method="_on_enemy_end_reached"]
 [connection signal="mouse_entered" from="Camera2D/GameOver/RetryButton" to="Camera2D/GameOver/RetryButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Camera2D/GameOver/RetryButton" to="Camera2D/GameOver/RetryButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Camera2D/TimerDisplay/RetryButton" to="Camera2D/TimerDisplay/RetryButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Camera2D/TimerDisplay/RetryButton" to="Camera2D/TimerDisplay/RetryButton" method="_on_mouse_exited"]

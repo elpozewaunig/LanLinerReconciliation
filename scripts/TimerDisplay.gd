@@ -4,6 +4,7 @@ extends Control
 
 @onready var player_label = $Time
 @onready var enemy_label = $EnemyTime
+@onready var retry = $RetryButton
 
 var player_end_reached = false
 var enemy_end_reached = false
@@ -37,6 +38,7 @@ func _on_player_end_reached(time):
 		player_label.position.y -= 300
 	var time_rounded = round(time * pow(10, decimal_places)) / pow(10, decimal_places)
 	player_label.text = str(time_rounded)
+	retry.show()
 
 
 func _on_enemy_end_reached(time):
