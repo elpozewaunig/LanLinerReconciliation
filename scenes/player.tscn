@@ -257,6 +257,10 @@ scale_amount_min = 0.35
 scale_amount_max = 0.35
 color = Color(0.693722, 0.855936, 0.902581, 1)
 
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
+
 [node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
 
 [connection signal="choice_btn_pressed" from="." to="ControlOverlay" method="_on_choice_btn_pressed"]

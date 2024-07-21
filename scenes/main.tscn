@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_3rm6l"]
 [ext_resource type="Script" path="res://scripts/PathBuilderV2.gd" id="2_j6o4c"]
-[ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="3_8rj0j"]
+[ext_resource type="AudioStream" uid="uid://livqmy2k31ol" path="res://assets/music/full.ogg" id="3_fp346"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_3rm6l")
@@ -11,5 +11,5 @@ script = ExtResource("1_3rm6l")
 script = ExtResource("2_j6o4c")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_8rj0j")
-volume_db = -80.0
+stream = ExtResource("3_fp346")
+volume_db = -5.0

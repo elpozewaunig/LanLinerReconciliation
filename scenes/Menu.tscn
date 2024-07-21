@@ -1,7 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://b7vjspmp3umjn"]
 
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="1_dgplp"]
-[ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="1_kisyv"]
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="1_rcym2"]
 [ext_resource type="Script" path="res://scripts/ButtonStart.gd" id="2_7jl43"]
 [ext_resource type="Script" path="res://scripts/CreditsButton.gd" id="4_s67s6"]
@@ -11,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cg3lsopj461w5" path="res://assets/pixelline.png" id="6_rr5uv"]
 [ext_resource type="Texture2D" uid="uid://d2ph7v6g7101q" path="res://assets/q1nonowlpixel.png" id="8_eu8wq"]
 [ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="10_e6teq"]
+[ext_resource type="AudioStream" uid="uid://dcobyr31ghr62" path="res://assets/music/menu_theme.ogg" id="10_r1v8f"]
 [ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="11_6y52x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
@@ -246,7 +246,7 @@ texture = ExtResource("8_eu8wq")
 [node name="Node2D" type="Node2D" parent="UI"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_kisyv")
+stream = ExtResource("10_r1v8f")
 volume_db = -5.0
 
 [node name="Player" parent="." instance=ExtResource("10_e6teq")]
