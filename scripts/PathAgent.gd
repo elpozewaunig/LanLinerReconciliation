@@ -136,9 +136,13 @@ func apply_progress(delta):
 	# Find the next point that is ahead of the player in the current path
 	var points = get_parent().curve.get_baked_points()
 	var next_point = null
-	for point in points:
-		if point.y <= position.y:
-			next_point = point
+	var progress_of_point = 0
+	for i in range(1, points.size()):
+		# Sum up distances between adjacent points to get the corresponding progress value
+		progress_of_point += points[i-1].distance_to(points[i])
+		# If the point corresponds to a bigger progress value than the agent's position
+		if progress <= progress_of_point:
+			next_point = points[i]
 			break
 	
 	# If there is a point to rotate towards
