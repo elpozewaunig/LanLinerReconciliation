@@ -1,0 +1,219 @@
+[gd_scene load_steps=17 format=3 uid="uid://b3quwpomtjty3"]
+
+[ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="1_dgplp"]
+[ext_resource type="AudioStream" uid="uid://ddg7hgj0pltor" path="res://assets/sounds/blueprint_melody.ogg" id="1_kisyv"]
+[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_rcym2"]
+[ext_resource type="Script" path="res://scripts/MenuButton.gd" id="2_7jl43"]
+[ext_resource type="Script" path="res://scripts/CreditsButton.gd" id="4_s67s6"]
+[ext_resource type="Script" path="res://scenes/DancingTitle.gd" id="5_8w2s3"]
+[ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
+[ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/x.png" id="6_6tsrf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
+size = Vector2(432, 95)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v67xe"]
+font = ExtResource("1_dgplp")
+font_size = 60
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mff1d"]
+size = Vector2(143, 127)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mib0b"]
+font = ExtResource("1_dgplp")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_mtqq1"]
+font = ExtResource("1_dgplp")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_850s7"]
+font = ExtResource("1_dgplp")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_3fhsp"]
+font = ExtResource("1_dgplp")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_n3wgl"]
+font = ExtResource("1_dgplp")
+font_size = 40
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_rcym2")
+
+[node name="Singleplayer Start" type="Area2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("2_7jl43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Singleplayer Start"]
+visible = false
+z_index = 10
+position = Vector2(6, 6.5)
+shape = SubResource("RectangleShape2D_m3eyg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Singleplayer Start"]
+
+[node name="Label" type="Label" parent="Singleplayer Start"]
+offset_left = -288.0
+offset_top = -80.0
+offset_right = 305.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+mouse_filter = 1
+text = "Singleplayer"
+label_settings = SubResource("LabelSettings_v67xe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsButton" type="Area2D" parent="."]
+position = Vector2(960, 750)
+script = ExtResource("4_s67s6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CreditsButton"]
+visible = false
+z_index = 10
+position = Vector2(5.5, 1)
+shape = SubResource("RectangleShape2D_mff1d")
+
+[node name="Sprite2D" type="Sprite2D" parent="CreditsButton"]
+
+[node name="Label" type="Label" parent="CreditsButton"]
+offset_left = -288.0
+offset_top = -80.0
+offset_right = 305.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+mouse_filter = 1
+text = "Credits"
+label_settings = SubResource("LabelSettings_v67xe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -610.0
+offset_top = -340.0
+offset_right = 610.0
+offset_bottom = -215.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(607, 63.5)
+text = "LanLiner: Reconciliation"
+label_settings = SubResource("LabelSettings_mib0b")
+script = ExtResource("5_8w2s3")
+
+[node name="Credits" type="ColorRect" parent="UI"]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="UI/Credits"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 1911.0
+offset_bottom = 181.0
+text = "Credits"
+label_settings = SubResource("LabelSettings_mtqq1")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Subtitle" type="Label" parent="UI/Credits"]
+layout_mode = 0
+offset_top = 240.0
+offset_right = 1911.0
+offset_bottom = 392.0
+text = "Created for Kenney Jam 2024
+\"Connection\""
+label_settings = SubResource("LabelSettings_850s7")
+horizontal_alignment = 1
+
+[node name="ConceptProgramming" type="Label" parent="UI/Credits"]
+layout_mode = 0
+offset_top = 430.0
+offset_right = 1911.0
+offset_bottom = 510.0
+text = "Concept & Programming"
+label_settings = SubResource("LabelSettings_3fhsp")
+horizontal_alignment = 1
+
+[node name="People" type="Label" parent="UI/Credits"]
+layout_mode = 0
+offset_top = 511.0
+offset_right = 1911.0
+offset_bottom = 614.0
+text = "Markus Müllauer
+Elias Pozewaunig"
+label_settings = SubResource("LabelSettings_n3wgl")
+horizontal_alignment = 1
+
+[node name="Music" type="Label" parent="UI/Credits"]
+layout_mode = 0
+offset_top = 665.0
+offset_right = 1911.0
+offset_bottom = 758.0
+text = "Music & Sound"
+label_settings = SubResource("LabelSettings_3fhsp")
+horizontal_alignment = 1
+
+[node name="People2" type="Label" parent="UI/Credits"]
+layout_mode = 0
+offset_top = 748.0
+offset_right = 1911.0
+offset_bottom = 798.0
+text = "???"
+label_settings = SubResource("LabelSettings_n3wgl")
+horizontal_alignment = 1
+
+[node name="Tech" type="Label" parent="UI/Credits"]
+offset_top = 862.0
+offset_right = 1911.0
+offset_bottom = 1003.0
+text = "All assets made by Kenney (CC0)
+Developed in Godot 4"
+label_settings = SubResource("LabelSettings_850s7")
+horizontal_alignment = 1
+
+[node name="CreditsExitButton" type="Area2D" parent="UI/Credits"]
+position = Vector2(1700, 150)
+script = ExtResource("5_fkbxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Credits/CreditsExitButton"]
+z_index = 10
+position = Vector2(0.5, 2.5)
+shape = SubResource("RectangleShape2D_mff1d")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Credits/CreditsExitButton"]
+texture_filter = 1
+scale = Vector2(10, 10)
+texture = ExtResource("6_6tsrf")
+
+[node name="Node2D" type="Node2D" parent="UI"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_kisyv")
+volume_db = -5.0
+
+[connection signal="mouse_entered" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="CreditsButton" to="CreditsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CreditsButton" to="CreditsButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Credits/CreditsExitButton" to="UI/Credits/CreditsExitButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Credits/CreditsExitButton" to="UI/Credits/CreditsExitButton" method="_on_mouse_exited"]
