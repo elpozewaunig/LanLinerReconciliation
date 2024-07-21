@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/DancingTitle.gd" id="5_8w2s3"]
 [ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
 [ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/x.png" id="6_6tsrf"]
-[ext_resource type="Texture2D" uid="uid://l8ne3jw87bwa" path="res://assets/startendblock.png" id="9_18xdr"]
+[ext_resource type="Texture2D" uid="uid://d2ph7v6g7101q" path="res://assets/q1nonowlpixel.png" id="8_eu8wq"]
 [ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="10_e6teq"]
 [ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="11_6y52x"]
 
@@ -47,10 +47,33 @@ font_color = Color(0.0534208, 0.0534209, 0.0534209, 1)
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_rcym2")
 
-[node name="Singleplayer Start" parent="." instance=ExtResource("2_ayibh")]
+[node name="Singleplayer Start" type="Area2D" parent="."]
+position = Vector2(872.575, 525.575)
+script = ExtResource("2_ayibh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Singleplayer Start"]
+visible = false
+z_index = 10
+position = Vector2(6, 6.5)
+shape = SubResource("RectangleShape2D_m3eyg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Singleplayer Start"]
+
+[node name="Label" type="Label" parent="Singleplayer Start"]
+offset_left = -288.0
+offset_top = -80.0
+offset_right = 305.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+mouse_filter = 1
+text = "Singleplayer"
+label_settings = SubResource("LabelSettings_v67xe")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CreditsButton" type="Area2D" parent="."]
-position = Vector2(960, 750)
+position = Vector2(923.36, 737.11)
 script = ExtResource("4_s67s6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CreditsButton"]
@@ -101,11 +124,13 @@ script = ExtResource("5_8w2s3")
 
 [node name="Credits" type="ColorRect" parent="UI"]
 visible = false
-layout_mode = 0
-offset_left = 285.0
-offset_top = 10.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.009
+anchor_bottom = 0.009
+offset_top = 8.28
 offset_right = 1920.0
-offset_bottom = 1080.0
+offset_bottom = 1070.28
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
@@ -171,22 +196,23 @@ layout_mode = 0
 offset_top = 862.0
 offset_right = 1911.0
 offset_bottom = 1003.0
-text = "All assets made by Kenney (CC0)
+text = "All edited visual assets made by Kenney (CC0)
 Developed in Godot 4"
 label_settings = SubResource("LabelSettings_850s7")
 horizontal_alignment = 1
 
 [node name="Tech2" type="Label" parent="UI/Credits"]
 layout_mode = 0
-offset_top = 1054.0
-offset_right = 1911.0
-offset_bottom = 1195.0
+offset_left = 891.0
+offset_top = 1033.0
+offset_right = 2802.0
+offset_bottom = 1174.0
 text = "count tubele;"
 label_settings = SubResource("LabelSettings_lgtv1")
 horizontal_alignment = 1
 
 [node name="CreditsExitButton" type="Area2D" parent="UI/Credits"]
-position = Vector2(1538.02, 77.04)
+position = Vector2(1828.81, 65.7)
 scale = Vector2(0.67, 0.67)
 script = ExtResource("5_fkbxm")
 
@@ -200,6 +226,13 @@ texture_filter = 1
 scale = Vector2(10, 10)
 texture = ExtResource("6_6tsrf")
 
+[node name="Q1Nonowlpixel" type="Sprite2D" parent="UI/Credits"]
+texture_filter = 1
+position = Vector2(186.765, 181.905)
+rotation = -0.441568
+scale = Vector2(4.465, 4.465)
+texture = ExtResource("8_eu8wq")
+
 [node name="Node2D" type="Node2D" parent="UI"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
@@ -207,12 +240,14 @@ stream = ExtResource("1_kisyv")
 volume_db = -5.0
 
 [node name="Player" parent="." instance=ExtResource("10_e6teq")]
-position = Vector2(569.61, 507.32)
+z_index = -6
+position = Vector2(519, 485)
 rotation = 1.87448
 scale = Vector2(3.32, 3.32)
 
 [node name="Enemy" parent="." instance=ExtResource("11_6y52x")]
-position = Vector2(617, 760)
+z_index = -7
+position = Vector2(590, 739)
 rotation = 2.12057
 scale = Vector2(3.32, 3.32)
 
@@ -222,6 +257,8 @@ position = Vector2(132, 946)
 scale = Vector2(10.735, 10.735)
 texture = ExtResource("9_18xdr")
 
+[connection signal="mouse_entered" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CreditsButton" to="CreditsButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CreditsButton" to="CreditsButton" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="UI/Credits/CreditsExitButton" to="UI/Credits/CreditsExitButton" method="_on_mouse_entered"]

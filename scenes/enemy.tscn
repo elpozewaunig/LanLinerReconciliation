@@ -80,6 +80,7 @@ sprite_frames = SubResource("SpriteFrames_be6dp")
 script = ExtResource("4_38np1")
 
 [node name="ParticleSysMoveLeft" type="Node2D" parent="Sprites"]
+visible = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 1
