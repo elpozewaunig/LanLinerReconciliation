@@ -260,13 +260,3 @@ z_index = -7
 position = Vector2(590, 739)
 rotation = 2.12057
 scale = Vector2(3.32, 3.32)
-
-[connection signal="clicked" from="Singleplayer Start" to="Singleplayer Start" method="_on_clicked"]
-[connection signal="mouse_entered" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Singleplayer Start" to="Singleplayer Start" method="_on_mouse_exited"]
-[connection signal="clicked" from="CreditsButton" to="CreditsButton" method="_on_clicked"]
-[connection signal="mouse_entered" from="CreditsButton" to="CreditsButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="CreditsButton" to="CreditsButton" method="_on_mouse_exited"]
-[connection signal="clicked" from="UI/Credits/CreditsExitButton" to="UI/Credits/CreditsExitButton" method="_on_clicked"]
-[connection signal="mouse_entered" from="UI/Credits/CreditsExitButton" to="UI/Credits/CreditsExitButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Credits/CreditsExitButton" to="UI/Credits/CreditsExitButton" method="_on_mouse_exited"]

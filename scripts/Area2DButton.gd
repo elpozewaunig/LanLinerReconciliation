@@ -5,7 +5,9 @@ signal clicked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	clicked.connect(_on_clicked)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -22,3 +24,7 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	mouse_inside = false
+
+func _on_clicked():
+	# This method should be implemented by subclasses
+	pass
