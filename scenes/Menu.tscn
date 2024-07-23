@@ -201,6 +201,21 @@ text = "near_beats"
 label_settings = SubResource("LabelSettings_n3wgl")
 horizontal_alignment = 1
 
+[node name="LinkButton" type="LinkButton" parent="UI/Credits/People2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.5
+offset_top = -27.5
+offset_right = 127.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+uri = "https://www.youtube.com/@near_beats/videos"
+
 [node name="Tech" type="Label" parent="UI/Credits"]
 layout_mode = 0
 offset_top = 862.0

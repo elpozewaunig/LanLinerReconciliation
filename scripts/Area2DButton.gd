@@ -10,8 +10,11 @@ signal clicked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Set up audio player nodes for UI sounds
 	add_child(hover_sfx)
 	add_child(click_sfx)
+	hover_sfx.name = "HoverSFX"
+	click_sfx.name = "ClickSFX"
 	hover_sfx.stream = preload("res://assets/sounds/tick_002.ogg")
 	click_sfx.stream = preload("res://assets/sounds/select_005.ogg")
 	
