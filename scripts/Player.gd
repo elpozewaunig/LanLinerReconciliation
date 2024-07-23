@@ -151,7 +151,7 @@ func _on_no_choice_made():
 	emit_signal("force_next_choice", branch_choice)
 	emit_signal("choice_btn_pressed", controls.up)
 
-func _on_end_reached(time):
+func _on_end_reached(_time):
 	sound.win.play()
 
 func _on_enemy_end_reached(time):

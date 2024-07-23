@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/sprites/twirl_03.png" id="8_15hpb"]
 [ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/sprites/spark_04.png" id="9_6d0nb"]
 [ext_resource type="AudioStream" uid="uid://calhdetumdsyc" path="res://assets/sounds/Lane_Switch_Left.mp3" id="12_g3o72"]
-[ext_resource type="Script" path="res://scenes/SoundManager.gd" id="12_pwoux"]
+[ext_resource type="Script" path="res://scripts/SoundManager.gd" id="12_pwoux"]
 [ext_resource type="AudioStream" uid="uid://wexbtml1h3pr" path="res://assets/sounds/Lane_Switch_Right.mp3" id="13_1hx18"]
 [ext_resource type="AudioStream" uid="uid://boh8uuifldn7" path="res://assets/sounds/Portal_A.mp3" id="15_qq2rn"]
 [ext_resource type="AudioStream" uid="uid://bbjpegiea3x8n" path="res://assets/sounds/Speed_Up.mp3" id="16_jqpko"]
