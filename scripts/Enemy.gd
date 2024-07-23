@@ -33,18 +33,18 @@ func _process(delta):
 		# Get keys
 		var branches_keys = branches.keys()
 		# Make sure that only candidates with no dead end are chosen
-		var candidate_branches = []
+		var candidate_branch_names = []
 		for key in branches_keys:
 			if !branches[key].isDeadEnd:
-				candidate_branches.append(branches[key])
+				candidate_branch_names.append(branches[key].name)
 		
 		# Get random index of new candidate branches array
-		var random_index = rng.randi_range(0, candidate_branches.size() - 1)
+		var random_index = rng.randi_range(0, candidate_branch_names.size() - 1)
 		
 		# If a branch to continue to (that is not a dead end) exists
-		if candidate_branches.size() >= 1:
+		if candidate_branch_names.size() >= 1:
 			# Choose the branch corresponding to the random index
-			branch_choice = candidate_branches[random_index]
+			branch_choice = candidate_branch_names[random_index]
 			emit_signal("force_next_choice", branch_choice)
 
 	# Handle movement and advancing to the next path in super class

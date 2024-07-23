@@ -84,15 +84,15 @@ func _process(delta):
 		# Set the branch to proceed to based on input
 		if allow_choice:
 			if Input.is_action_just_pressed("ui_up") and branches.has("SChild"):
-				branch_choice = branches["SChild"]
+				branch_choice = "SChild"
 				emit_signal("force_next_choice", branch_choice)
 				emit_signal("choice_btn_pressed", controls.up)
 			elif Input.is_action_just_pressed("ui_left") and branches.has("LChild"):
-				branch_choice = branches["LChild"]
+				branch_choice = "LChild"
 				emit_signal("force_next_choice", branch_choice)
 				emit_signal("choice_btn_pressed", controls.left)
 			elif Input.is_action_just_pressed("ui_right") and branches.has("RChild"):
-				branch_choice = branches["RChild"]
+				branch_choice = "RChild"
 				emit_signal("force_next_choice", branch_choice)
 				emit_signal("choice_btn_pressed", controls.right)
 		

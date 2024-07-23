@@ -113,13 +113,13 @@ func apply_progress(delta):
 		# If the agent hasn't made a choice, but there is a straight path
 		if branch_choice == null and branches.has("SChild"):
 			# Set the choice to the straight branch forcibly
-			branch_choice = branches["SChild"]
+			branch_choice = "SChild"
 			emit_signal("no_choice_made")
 		
 		# Reparent to the choice
 		if branch_choice != null:
 			progress += change
-			reparent(branches[branch_choice.name])
+			reparent(branches[branch_choice])
 			notify_abandoned_branches()
 			branch_passed_count += 1
 			progress_ratio -= 1
@@ -143,7 +143,7 @@ func apply_progress(delta):
 			branch_choice = null
 		# If the agent is a branch behind, the next choice is forced
 		else:
-			branch_choice = branches[game_manager.branch_choices[branch_passed_count]]
+			branch_choice = game_manager.branch_choices[branch_passed_count]
 		
 	else:
 		# Increase progress normally
@@ -236,12 +236,12 @@ func get_child_from_tree_loc(indexes):
 # Sets the agents own choice, forcing it to move to the specified branch
 func _on_force_next_choice(forced_branch):
 	# Since we aren't necessarily immediately behind the other player, remember the choice
-	game_manager.branch_choices.append(forced_branch.name)
+	game_manager.branch_choices.append(forced_branch)
 	# Based on the branches we have already passed, get the next forced branch
 	var next_branch_name = game_manager.branch_choices[branch_passed_count]
 	for branch_name in branches:
 		if branch_name == next_branch_name:
-			branch_choice = branches[next_branch_name]
+			branch_choice = next_branch_name
 
 func _on_no_choice_made():
 	pass
