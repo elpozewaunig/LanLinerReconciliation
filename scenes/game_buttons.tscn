@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://h5y2b18uksyl"]
+
+[ext_resource type="Script" path="res://scripts/RetryButton.gd" id="1_vo7gb"]
+[ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="2_ympaj"]
+[ext_resource type="Script" path="res://scripts/ExitToMenuButton.gd" id="3_cbdgr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2hi4"]
+size = Vector2(200, 80)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7sh5l"]
+font = ExtResource("2_ympaj")
+font_size = 60
+
+[node name="GameButtons" type="Node2D"]
+
+[node name="RetryButton" type="Area2D" parent="."]
+position = Vector2(2.08165e-12, 300)
+script = ExtResource("1_vo7gb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RetryButton"]
+shape = SubResource("RectangleShape2D_d2hi4")
+
+[node name="Label" type="Label" parent="RetryButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -37.5
+offset_right = 91.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Retry"
+label_settings = SubResource("LabelSettings_7sh5l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Area2D" parent="."]
+position = Vector2(2.08165e-12, 400)
+script = ExtResource("3_cbdgr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitButton"]
+shape = SubResource("RectangleShape2D_d2hi4")
+
+[node name="Label" type="Label" parent="ExitButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -37.5
+offset_right = 91.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Exit"
+label_settings = SubResource("LabelSettings_7sh5l")
+horizontal_alignment = 1
+vertical_alignment = 1

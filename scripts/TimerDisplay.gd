@@ -4,7 +4,6 @@ extends Control
 
 @onready var player_label = $Time
 @onready var enemy_label = $EnemyTime
-@onready var retry = $RetryButton
 
 var player_end_reached = false
 var enemy_end_reached = false
@@ -18,6 +17,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if player_end_reached:
+		show()
 		player_label.show()
 		player_label.modulate.a += delta
 		if player_label.modulate.a > 1:
@@ -38,7 +38,6 @@ func _on_player_end_reached(time):
 		player_label.position.y -= 300
 	var time_rounded = round(time * pow(10, decimal_places)) / pow(10, decimal_places)
 	player_label.text = str(time_rounded)
-	retry.show()
 
 
 func _on_enemy_end_reached(time):

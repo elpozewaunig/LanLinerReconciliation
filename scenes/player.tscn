@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=31 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/TimerDisplay.gd" id="4_gy5f6"]
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="4_rq0y7"]
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="5_3ppbk"]
-[ext_resource type="Script" path="res://scripts/RetryButton.gd" id="5_cblie"]
+[ext_resource type="PackedScene" uid="uid://h5y2b18uksyl" path="res://scenes/game_buttons.tscn" id="5_mc4f4"]
 [ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/choice_overlay.tscn" id="7_wphgy"]
 [ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/sprites/twirl_03.png" id="8_15hpb"]
 [ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/sprites/spark_04.png" id="9_6d0nb"]
@@ -27,13 +27,6 @@
 [sub_resource type="LabelSettings" id="LabelSettings_nmd8s"]
 font = ExtResource("4_rq0y7")
 font_size = 200
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2hi4"]
-size = Vector2(200, 80)
-
-[sub_resource type="LabelSettings" id="LabelSettings_7sh5l"]
-font = ExtResource("4_rq0y7")
-font_size = 60
 
 [sub_resource type="LabelSettings" id="LabelSettings_nx51t"]
 font = ExtResource("4_rq0y7")
@@ -116,30 +109,10 @@ label_settings = SubResource("LabelSettings_nmd8s")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RetryButton" type="Area2D" parent="Camera2D/GameOver"]
-position = Vector2(2.08165e-12, 300)
-script = ExtResource("5_cblie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/GameOver/RetryButton"]
-shape = SubResource("RectangleShape2D_d2hi4")
-
-[node name="Label" type="Label" parent="Camera2D/GameOver/RetryButton"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -91.0
-offset_top = -37.5
-offset_right = 91.0
-offset_bottom = 37.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-text = "Retry"
-label_settings = SubResource("LabelSettings_7sh5l")
+[node name="GameButtons" parent="Camera2D/GameOver" instance=ExtResource("5_mc4f4")]
 
 [node name="TimerDisplay" type="Control" parent="Camera2D"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -188,29 +161,7 @@ mouse_filter = 1
 text = "Time"
 label_settings = SubResource("LabelSettings_nx51t")
 
-[node name="RetryButton" type="Area2D" parent="Camera2D/TimerDisplay"]
-visible = false
-position = Vector2(2.08165e-12, 300)
-script = ExtResource("5_cblie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/TimerDisplay/RetryButton"]
-shape = SubResource("RectangleShape2D_d2hi4")
-
-[node name="Label" type="Label" parent="Camera2D/TimerDisplay/RetryButton"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -91.0
-offset_top = -37.5
-offset_right = 91.0
-offset_bottom = 37.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-text = "Retry"
-label_settings = SubResource("LabelSettings_7sh5l")
+[node name="GameButtons" parent="Camera2D/TimerDisplay" instance=ExtResource("5_mc4f4")]
 
 [node name="Sprites" type="Node2D" parent="."]
 

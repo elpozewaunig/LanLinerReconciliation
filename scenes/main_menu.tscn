@@ -1,69 +1,69 @@
 [gd_scene load_steps=22 format=3 uid="uid://b7vjspmp3umjn"]
 
-[ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="1_dgplp"]
-[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_rcym2"]
-[ext_resource type="Script" path="res://scripts/ButtonStart.gd" id="2_7jl43"]
-[ext_resource type="Script" path="res://scripts/CreditsButton.gd" id="4_s67s6"]
-[ext_resource type="Script" path="res://scripts/DancingTitle.gd" id="5_8w2s3"]
-[ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="5_fkbxm"]
-[ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/sprites/x.png" id="6_6tsrf"]
-[ext_resource type="Texture2D" uid="uid://cg3lsopj461w5" path="res://assets/sprites/pixelline.png" id="6_rr5uv"]
-[ext_resource type="Texture2D" uid="uid://d2ph7v6g7101q" path="res://assets/sprites/q1nonowlpixel.png" id="8_eu8wq"]
-[ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="10_e6teq"]
-[ext_resource type="AudioStream" uid="uid://dcobyr31ghr62" path="res://assets/music/menu_theme.ogg" id="10_r1v8f"]
-[ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="11_6y52x"]
+[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_1hjup"]
+[ext_resource type="Script" path="res://scripts/StartButton.gd" id="2_t2tbx"]
+[ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="3_byn6r"]
+[ext_resource type="Script" path="res://scripts/CreditsButton.gd" id="4_7ads6"]
+[ext_resource type="Script" path="res://scripts/DancingTitle.gd" id="5_qn76m"]
+[ext_resource type="Texture2D" uid="uid://cg3lsopj461w5" path="res://assets/sprites/pixelline.png" id="6_dn8c2"]
+[ext_resource type="Script" path="res://scripts/CreditsExitButton.gd" id="7_fk0jd"]
+[ext_resource type="Texture2D" uid="uid://05l885rvsqsd" path="res://assets/sprites/x.png" id="8_1w1yt"]
+[ext_resource type="Texture2D" uid="uid://d2ph7v6g7101q" path="res://assets/sprites/q1nonowlpixel.png" id="9_dyp3k"]
+[ext_resource type="AudioStream" uid="uid://dcobyr31ghr62" path="res://assets/music/menu_theme.ogg" id="10_jtrpv"]
+[ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="11_hqdx0"]
+[ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="12_p03xb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
 size = Vector2(432, 95)
 
 [sub_resource type="LabelSettings" id="LabelSettings_v67xe"]
-font = ExtResource("1_dgplp")
+font = ExtResource("3_byn6r")
 font_size = 60
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mff1d"]
 size = Vector2(143, 127)
 
 [sub_resource type="LabelSettings" id="LabelSettings_mib0b"]
-font = ExtResource("1_dgplp")
+font = ExtResource("3_byn6r")
 font_size = 100
 
 [sub_resource type="LabelSettings" id="LabelSettings_mtqq1"]
-font = ExtResource("1_dgplp")
+font = ExtResource("3_byn6r")
 font_size = 100
 
 [sub_resource type="LabelSettings" id="LabelSettings_850s7"]
-font = ExtResource("1_dgplp")
+font = ExtResource("3_byn6r")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_3fhsp"]
-font = ExtResource("1_dgplp")
+font = ExtResource("3_byn6r")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_n3wgl"]
-font = ExtResource("1_dgplp")
+font = ExtResource("3_byn6r")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_lgtv1"]
-font = ExtResource("1_dgplp")
+font = ExtResource("3_byn6r")
 font_size = 15
 font_color = Color(0.0534208, 0.0534209, 0.0534209, 1)
 
 [node name="Menu" type="Node2D"]
-script = ExtResource("1_rcym2")
+script = ExtResource("1_1hjup")
 
-[node name="Singleplayer Start" type="Area2D" parent="."]
+[node name="StartButton" type="Area2D" parent="."]
 position = Vector2(872.575, 525.575)
-script = ExtResource("2_7jl43")
+script = ExtResource("2_t2tbx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Singleplayer Start"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartButton"]
 visible = false
 z_index = 10
 position = Vector2(6, 6.5)
 shape = SubResource("RectangleShape2D_m3eyg")
 
-[node name="Sprite2D" type="Sprite2D" parent="Singleplayer Start"]
+[node name="Sprite2D" type="Sprite2D" parent="StartButton"]
 
-[node name="Label" type="Label" parent="Singleplayer Start"]
+[node name="Label" type="Label" parent="StartButton"]
 offset_left = -288.0
 offset_top = -80.0
 offset_right = 305.0
@@ -78,7 +78,7 @@ vertical_alignment = 1
 
 [node name="CreditsButton" type="Area2D" parent="."]
 position = Vector2(923.36, 737.11)
-script = ExtResource("4_s67s6")
+script = ExtResource("4_7ads6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CreditsButton"]
 visible = false
@@ -124,13 +124,13 @@ grow_vertical = 2
 pivot_offset = Vector2(607, 63.5)
 text = "LanLiner: Reconciliation"
 label_settings = SubResource("LabelSettings_mib0b")
-script = ExtResource("5_8w2s3")
+script = ExtResource("5_qn76m")
 
 [node name="Pixelline" type="Sprite2D" parent="UI/Label"]
 texture_filter = 1
 position = Vector2(367.085, 126.9)
 scale = Vector2(2.71, 2.71)
-texture = ExtResource("6_rr5uv")
+texture = ExtResource("6_dn8c2")
 
 [node name="Credits" type="ColorRect" parent="UI"]
 visible = false
@@ -239,7 +239,7 @@ horizontal_alignment = 1
 [node name="CreditsExitButton" type="Area2D" parent="UI/Credits"]
 position = Vector2(1828.81, 65.7)
 scale = Vector2(0.67, 0.67)
-script = ExtResource("5_fkbxm")
+script = ExtResource("7_fk0jd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Credits/CreditsExitButton"]
 z_index = 10
@@ -249,33 +249,33 @@ shape = SubResource("RectangleShape2D_mff1d")
 [node name="Sprite2D" type="Sprite2D" parent="UI/Credits/CreditsExitButton"]
 texture_filter = 1
 scale = Vector2(10, 10)
-texture = ExtResource("6_6tsrf")
+texture = ExtResource("8_1w1yt")
 
 [node name="Q1Nonowlpixel" type="Sprite2D" parent="UI/Credits"]
 texture_filter = 1
 position = Vector2(186.765, 181.905)
 rotation = -0.441568
 scale = Vector2(4.465, 4.465)
-texture = ExtResource("8_eu8wq")
+texture = ExtResource("9_dyp3k")
 
 [node name="Node2D" type="Node2D" parent="UI"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_r1v8f")
+stream = ExtResource("10_jtrpv")
 volume_db = -5.0
 
-[node name="Player" parent="." instance=ExtResource("10_e6teq")]
+[node name="Player" parent="." instance=ExtResource("11_hqdx0")]
 z_index = -6
 position = Vector2(519, 485)
 rotation = 1.87448
 scale = Vector2(3.32, 3.32)
 
-[node name="Enemy" parent="." instance=ExtResource("11_6y52x")]
+[node name="Enemy" parent="." instance=ExtResource("12_p03xb")]
 z_index = -7
 position = Vector2(590, 739)
 rotation = 2.12057
 scale = Vector2(3.32, 3.32)
 
-[connection signal="clicked" from="CreditsButton" to="Singleplayer Start" method="_on_credits_button_clicked"]
-[connection signal="clicked" from="UI/Credits/CreditsExitButton" to="Singleplayer Start" method="_on_credits_exit_button_clicked"]
+[connection signal="clicked" from="CreditsButton" to="StartButton" method="_on_credits_button_clicked"]
+[connection signal="clicked" from="UI/Credits/CreditsExitButton" to="StartButton" method="_on_credits_exit_button_clicked"]
 [connection signal="clicked" from="UI/Credits/CreditsExitButton" to="CreditsButton" method="_on_credits_exit_button_clicked"]

@@ -12,11 +12,15 @@ config_version=5
 
 config/name="LanLiner: Reconciliation"
 config/tags=PackedStringArray("game", "jam")
-run/main_scene="res://scenes/Menu.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://assets/sprites/q1_pixel.png"
 config/icon="res://assets/sprites/player.png"
+
+[autoload]
+
+SceneManager="*res://scripts/SceneManager.gd"
 
 [display]
 
