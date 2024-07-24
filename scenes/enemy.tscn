@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://4cpqid7g3o70"]
+[gd_scene load_steps=15 format=3 uid="uid://4cpqid7g3o70"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_037od"]
 [ext_resource type="Texture2D" uid="uid://qn5wy2v6josb" path="res://assets/sprites/enemy.png" id="2_i4ste"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="4_38np1"]
 [ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/sprites/twirl_03.png" id="5_8w5pd"]
 [ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/sprites/spark_04.png" id="6_uik23"]
+[ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/choice_overlay.tscn" id="7_w7lhp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
@@ -136,5 +137,8 @@ angular_velocity_max = 169.2
 scale_amount_min = 0.35
 scale_amount_max = 0.35
 color = Color(0.443137, 0, 0.0117647, 1)
+
+[node name="ChoiceOverlay" parent="." instance=ExtResource("7_w7lhp")]
+scale = Vector2(5, 5)
 
 [connection signal="end_reached" from="." to="." method="_on_end_reached"]

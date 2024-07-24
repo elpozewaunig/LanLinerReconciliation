@@ -9,7 +9,7 @@
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="4_rq0y7"]
 [ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="5_3ppbk"]
 [ext_resource type="Script" path="res://scripts/RetryButton.gd" id="5_cblie"]
-[ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/control_overlay.tscn" id="7_wphgy"]
+[ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/choice_overlay.tscn" id="7_wphgy"]
 [ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/sprites/twirl_03.png" id="8_15hpb"]
 [ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/sprites/spark_04.png" id="9_6d0nb"]
 [ext_resource type="AudioStream" uid="uid://calhdetumdsyc" path="res://assets/sounds/Lane_Switch_Left.mp3" id="12_g3o72"]
@@ -330,9 +330,9 @@ volume_db = -15.0
 stream = ExtResource("19_t1xbk")
 volume_db = -15.0
 
-[node name="ControlOverlay" parent="." instance=ExtResource("7_wphgy")]
+[node name="ChoiceOverlay" parent="." instance=ExtResource("7_wphgy")]
 
-[connection signal="choice_btn_pressed" from="." to="ControlOverlay" method="_on_choice_btn_pressed"]
+[connection signal="choice_btn_pressed" from="." to="ChoiceOverlay" method="_on_choice_btn_pressed"]
 [connection signal="end_reached" from="." to="." method="_on_end_reached"]
 [connection signal="end_reached" from="." to="Camera2D/TimerDisplay" method="_on_player_end_reached"]
 [connection signal="enemy_end_reached" from="." to="Camera2D/TimerDisplay" method="_on_enemy_end_reached"]

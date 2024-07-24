@@ -1,8 +1,12 @@
 extends "res://scripts/PathAgent.gd"
 
+@onready var overlay = $ChoiceOverlay
+
 var rng = RandomNumberGenerator.new()
 var next_switch_delta = 0
 var time_elapsed = 0
+
+var overlay_shown_timer = 0
 
 signal force_next_choice(branch)
 signal enemy_end_reached(time)
@@ -46,6 +50,32 @@ func _process(delta):
 			# Choose the branch corresponding to the random index
 			branch_choice = candidate_branch_names[random_index]
 			emit_signal("force_next_choice", branch_choice)
+			
+			# Reset all choice overlay options to be hidden
+			var choice_btn
+			overlay.up.hide()
+			overlay.left.hide()
+			overlay.right.hide()
+			
+			# Show button according to made choice
+			if(branch_choice == "SChild"):
+				choice_btn = overlay.up
+			elif(branch_choice == "LChild"):
+				choice_btn = overlay.left
+			elif(branch_choice == "RChild"):
+				choice_btn = overlay.right
+			choice_btn.show()
+			
+			# Show overlay and reset overlay timer
+			overlay.appearing = true
+			overlay_shown_timer = 0
+	
+	# When the overlay is fully visible
+	if overlay.modulate.a >= 1:
+				overlay_shown_timer += delta
+				# Wait until timer exceeds value to make it disappear again
+				if overlay_shown_timer > 1:
+					overlay.appearing = false
 
 	# Handle movement and advancing to the next path in super class
 	super.apply_progress(delta)

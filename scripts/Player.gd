@@ -2,7 +2,7 @@ extends "res://scripts/PathAgent.gd"
 
 @onready var camera = $Camera2D
 @onready var sound = $Sounds
-@onready var controls = $ControlOverlay
+@onready var overlay = $ChoiceOverlay
 @onready var game_over_screen = camera.get_node("GameOver")
 @onready var vignette = camera.get_node("Vignette")
 var enemy
@@ -57,23 +57,20 @@ func _process(delta):
 			vignette.modulate.a = 1
 			
 		# Show available choices
-		controls.show()
-		controls.modulate.a += delta * 2
-		if controls.modulate.a > 1:
-			controls.modulate.a = 1
+		overlay.appearing = true
 			
 		if branches.has("SChild"):
-			controls.up.show()
+			overlay.up.show()
 		else:
-			controls.up.hide()
+			overlay.up.hide()
 		if branches.has("LChild"):
-			controls.left.show()
+			overlay.left.show()
 		else:
-			controls.left.hide()
+			overlay.left.hide()
 		if branches.has("RChild"):
-			controls.right.show()
+			overlay.right.show()
 		else:
-			controls.right.hide()
+			overlay.right.hide()
 		
 		game_manager.tick_speed -= delta * 2
 		if game_manager.tick_speed < 0.3:
@@ -86,15 +83,15 @@ func _process(delta):
 			if Input.is_action_just_pressed("ui_up") and branches.has("SChild"):
 				branch_choice = "SChild"
 				emit_signal("force_next_choice", branch_choice)
-				emit_signal("choice_btn_pressed", controls.up)
+				emit_signal("choice_btn_pressed", overlay.up)
 			elif Input.is_action_just_pressed("ui_left") and branches.has("LChild"):
 				branch_choice = "LChild"
 				emit_signal("force_next_choice", branch_choice)
-				emit_signal("choice_btn_pressed", controls.left)
+				emit_signal("choice_btn_pressed", overlay.left)
 			elif Input.is_action_just_pressed("ui_right") and branches.has("RChild"):
 				branch_choice = "RChild"
 				emit_signal("force_next_choice", branch_choice)
-				emit_signal("choice_btn_pressed", controls.right)
+				emit_signal("choice_btn_pressed", overlay.right)
 		
 	# Speed back up
 	else:
@@ -107,10 +104,7 @@ func _process(delta):
 			camera.get_node("Vignette").hide()
 			
 		# Hide control options
-		controls.modulate.a -= delta * 3
-		if controls.modulate.a <= 0:
-			controls.modulate.a = 0
-			controls.hide()
+		overlay.appearing = false
 		
 		game_manager.tick_speed += delta
 		if  game_manager.tick_speed > 1:
@@ -149,7 +143,7 @@ func _process(delta):
 			
 func _on_no_choice_made():
 	emit_signal("force_next_choice", branch_choice)
-	emit_signal("choice_btn_pressed", controls.up)
+	emit_signal("choice_btn_pressed", overlay.up)
 
 func _on_end_reached(_time):
 	sound.win.play()
