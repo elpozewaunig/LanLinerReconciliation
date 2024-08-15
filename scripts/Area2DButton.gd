@@ -1,4 +1,5 @@
 extends Area2D
+class_name Area2DButton
 
 @export var sfx_enabled = true
 

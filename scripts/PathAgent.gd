@@ -1,4 +1,5 @@
 extends PathFollow2D
+class_name PathAgent
 
 @onready var game_manager = $"/root/GameManager"
 @onready var paths = game_manager.get_node("root")

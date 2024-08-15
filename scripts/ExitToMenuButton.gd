@@ -1,4 +1,4 @@
-extends "res://scripts/Area2DButton.gd"
+extends Area2DButton
 
 var menu_scene = SceneManager.menu_scene
 

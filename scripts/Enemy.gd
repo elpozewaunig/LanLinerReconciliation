@@ -1,4 +1,4 @@
-extends "res://scripts/PathAgent.gd"
+extends PathAgent
 
 @onready var overlay = $ChoiceOverlay
 

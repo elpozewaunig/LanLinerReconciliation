@@ -1,4 +1,4 @@
-extends "res://scripts/PathAgent.gd"
+extends PathAgent
 
 @onready var camera = $Camera2D
 @onready var sound = $Sounds

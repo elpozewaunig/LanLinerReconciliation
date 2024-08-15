@@ -1,4 +1,4 @@
-extends "res://scripts/Area2DButton.gd"
+extends Area2DButton
 
 @onready var credits = $"/root/Menu/UI/Credits"
 
