@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dc7aktr1f5opg"]
+[gd_scene load_steps=35 format=3 uid="uid://dc7aktr1f5opg"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://s4k68vs8rrjy" path="res://assets/sounds/Speed_Down.mp3" id="17_22nu5"]
 [ext_resource type="AudioStream" uid="uid://q2nlk3e4qmuy" path="res://assets/sounds/Super_Speed.mp3" id="18_um1a0"]
 [ext_resource type="AudioStream" uid="uid://16dt2wvxbswh" path="res://assets/sounds/Super_Slow.mp3" id="19_t1xbk"]
+[ext_resource type="Script" path="res://scripts/SwipeInputHandler.gd" id="23_3bid3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
@@ -339,9 +340,15 @@ volume_db = -15.0
 
 [node name="ChoiceOverlay" parent="." instance=ExtResource("7_wphgy")]
 
+[node name="SwipeInputHandler" type="Node2D" parent="."]
+script = ExtResource("23_3bid3")
+
 [connection signal="choice_btn_pressed" from="." to="ChoiceOverlay" method="_on_choice_btn_pressed"]
 [connection signal="dead_end_reached" from="." to="Camera2D/Pause" method="_on_player_dead_end_reached"]
 [connection signal="end_reached" from="." to="." method="_on_end_reached"]
 [connection signal="end_reached" from="." to="Camera2D/TimerDisplay" method="_on_player_end_reached"]
 [connection signal="end_reached" from="." to="Camera2D/Pause" method="_on_player_end_reached"]
 [connection signal="enemy_end_reached" from="." to="Camera2D/TimerDisplay" method="_on_enemy_end_reached"]
+[connection signal="swipe_left" from="SwipeInputHandler" to="." method="_on_swipe_left"]
+[connection signal="swipe_right" from="SwipeInputHandler" to="." method="_on_swipe_right"]
+[connection signal="swipe_up" from="SwipeInputHandler" to="." method="_on_swipe_up"]
