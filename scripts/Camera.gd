@@ -2,6 +2,7 @@ extends Camera2D
 
 @onready var vignette = $Vignette
 @onready var game_over = $GameOver
+@onready var pause = $Pause
 
 @export var transition_speed = 300
 
@@ -13,11 +14,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	# Adjust scale of camera overlays where necessary
 	vignette.scale.x = 1/zoom.x
 	vignette.scale.y = 1/zoom.y
 	
 	game_over.scale.x = 1/zoom.x
 	game_over.scale.y = 1/zoom.y
+	
+	pause.scale.x = 1/zoom.x
+	pause.scale.y = 1/zoom.y
 	
 	# Gradually move camera back to relative zero on the x-axis
 	if position.x > 0:
