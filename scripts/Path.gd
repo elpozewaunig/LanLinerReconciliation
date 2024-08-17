@@ -53,7 +53,12 @@ func splitter(start, end, rec, marginfacSpeed, marginfacSlow, marginfacExtraSpee
 	splitter(mid,end,rec-1, marginfacSpeed, marginfacSlow, marginfacExtraSpeed, marginfacExtraSlow)
 
 func addtubele(from,to,type):
-	self.tubele.append([from,to,type])
+	var section = {}
+	section["from"] = from
+	section["to"] = to
+	section["type"] = type
+	
+	self.tubele.append(section)
 
 
 func getBox():
@@ -131,16 +136,16 @@ func _ready():
 	
 	for el in tubele:
 		var newc
-		var l1 = float(el[0])
-		var l2 = float(el[1])
+		var l1 = float(el["from"])
+		var l2 = float(el["to"])
 		var col = Color.DEEP_PINK
-		if(str(el[2])=="speed"):
+		if(str(el["type"])=="speed"):
 			newc = getSpeedLine()
-		elif(str(el[2])=="slow"):
+		elif(str(el["type"])=="slow"):
 			newc = getSlowLine()				
-		elif(str(el[2])=="extraspeed"):
+		elif(str(el["type"])=="extraspeed"):
 			newc = getExtraSpeedLine()
-		elif(str(el[2])=="extraslow"):
+		elif(str(el["type"])=="extraslow"):
 			newc = getExtraSlowLine()	
 	
 		newc.add_point(curve.sample_baked(l1))

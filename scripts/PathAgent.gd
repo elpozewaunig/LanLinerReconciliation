@@ -43,6 +43,7 @@ func _ready():
 	current_lane = lane_count/2
 	reparent(paths.get_child(current_lane).get_node("SChild"))
 	update_available_branches()
+	
 	no_choice_made.connect(_on_no_choice_made)
 	dead_end_reached.connect(_on_dead_end_reached)
 
@@ -59,9 +60,9 @@ func _process(delta):
 	var is_in_section = false
 	for section in current_path_data:
 		# If the agent is in a specific section, change its speed accordingly
-		if progress >= section[0] and progress <= section[1]:
+		if progress >= section["from"] and progress <= section["to"]:
 			is_in_section = true
-			current_section = section[2]
+			current_section = section["type"]
 			
 			if current_section == "speed":
 				if speed < fast_speed:
