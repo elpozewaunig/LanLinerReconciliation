@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqnq4mgqch21r"]
 
-[ext_resource type="Texture2D" uid="uid://6nod3k27frny" path="res://assets/slowingblock.png" id="1_pygeo"]
+[ext_resource type="Texture2D" uid="uid://6nod3k27frny" path="res://assets/sprites/slowingblock.png" id="1_pygeo"]
 
 [node name="SealTextLine" type="Line2D"]
 z_index = -5
