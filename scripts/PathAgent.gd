@@ -22,6 +22,7 @@ var lane_count = 0
 var current_lane = 0
 
 var alt_lanes = []
+var lanes_section_data = []
 var current_section = ""
 
 var branches = {}
@@ -230,6 +231,11 @@ func update_alt_lanes():
 		tree_loc[0] = lane.get_index()
 		# Follow the indexes to get the respective parallel lane node
 		alt_lanes.append(get_child_from_tree_loc(tree_loc))
+		
+	# Iterate through all lanes and obtain enhanced section data
+	lanes_section_data = []
+	for lane in alt_lanes:
+		lanes_section_data.append(ai_preprocess_sections(lane))
 
 # Obtain an array of the indexes of the parents of this element 
 func get_tree_location():
@@ -248,6 +254,63 @@ func get_child_from_tree_loc(indexes):
 	for i in indexes:
 		current = current.get_child(i)
 	return current
+
+# Obtain section data from lane and pad it with default sections
+# This allows the AI to easily compare its options
+func ai_preprocess_sections(lane):
+	var lane_section_data = []
+	var path_length = lane.curve.get_baked_length()
+	
+	# Iterate through all sections, pad the section data with default sections
+	for i in range(0, lane.tubele.size()):
+		# Examining the first section
+		if i == 0:
+			# If the section doesn't start right at the start of the path
+			var section_from = lane.tubele[0]["from"]
+			if section_from != 0:
+				lane_section_data.append({
+					"from": 0,
+					"to": section_from,
+					"type": "default"
+				})
+		
+		# Append the currently examined section
+		lane_section_data.append(lane.tubele[i])
+		
+		# If not examining the last section
+		if i != lane.tubele.size() - 1:
+			# If there is space between sections, add a default section in it
+			var section1_to = lane.tubele[i]["to"]
+			var section2_from = lane.tubele[i+1]["from"]
+			if section1_to + 1 != section2_from:
+				lane_section_data.append({
+					"from": section1_to,
+					"to": section2_from,
+					"type": "default"
+				})
+					
+		# Examining the last section
+		else:
+			# If there is space between the last section and the path's end
+			var section_to = lane.tubele[i]["to"]
+			if section_to != path_length:
+				# Add a default section to the space
+				lane_section_data.append({
+					"from": section_to,
+					"to": path_length,
+					"type": "default"
+				})
+	
+	# If the current lane has no sections, fill it with a default section
+	if lane_section_data.is_empty():
+		lane_section_data.append({
+			"from": 0,
+			"to": path_length,
+			"type": "default"
+		})
+	
+	return lane_section_data
+
 
 # Sets the agents own choice, forcing it to move to the specified branch
 func _on_force_next_choice(forced_branch):

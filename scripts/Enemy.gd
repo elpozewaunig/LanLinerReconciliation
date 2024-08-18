@@ -188,76 +188,18 @@ func get_best_neighbour():
 	
 	return choice
 
-# Preprocesses the section data for all lanes, then returns all currently accesible sections
+# Returns all currently accesible sections, based on data pre-processed by PathAgent
 func get_current_sections():
 	var current_sections = []
-	# Iterate through all lanes and obtain enhanced section data
-	for lane in alt_lanes:
-		var lane_section_data = ai_preprocess_sections(lane)
 		
-		# Iterate through all pre-processed sections
+	# Iterate through all pre-processed sections
+	for lane_section_data in lanes_section_data:
 		for section in lane_section_data:
 			# Store section that the enemy can currently switch to
 			if progress >= section["from"] and progress <= section["to"]:
 				current_sections.append(section)
 	
 	return current_sections
-
-# Obtain section data from lane and pad it with default sections
-# This allows the AI to easily compare its options
-func ai_preprocess_sections(lane):
-	var lane_section_data = []
-	var path_length = lane.curve.get_baked_length()
-	
-	# Iterate through all sections, pad the section data with default sections
-	for i in range(0, lane.tubele.size()):
-		# Examining the first section
-		if i == 0:
-			# If the section doesn't start right at the start of the path
-			var section_from = lane.tubele[0]["from"]
-			if section_from != 0:
-				lane_section_data.append({
-					"from": 0,
-					"to": section_from,
-					"type": "default"
-				})
-		
-		# Append the currently examined section
-		lane_section_data.append(lane.tubele[i])
-		
-		# If not examining the last section
-		if i != lane.tubele.size() - 1:
-			# If there is space between sections, add a default section in it
-			var section1_to = lane.tubele[i]["to"]
-			var section2_from = lane.tubele[i+1]["from"]
-			if section1_to + 1 != section2_from:
-				lane_section_data.append({
-					"from": section1_to,
-					"to": section2_from,
-					"type": "default"
-				})
-					
-		# Examining the last section
-		else:
-			# If there is space between the last section and the path's end
-			var section_to = lane.tubele[i]["to"]
-			if section_to != path_length:
-				# Add a default section to the space
-				lane_section_data.append({
-					"from": section_to,
-					"to": path_length,
-					"type": "default"
-				})
-	
-	# If the current lane has no sections, fill it with a default section
-	if lane_section_data.is_empty():
-		lane_section_data.append({
-			"from": 0,
-			"to": path_length,
-			"type": "default"
-		})
-	
-	return lane_section_data
 
 func _on_end_reached(time):
 	emit_signal("enemy_end_reached", time)
