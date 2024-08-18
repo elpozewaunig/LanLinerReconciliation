@@ -5,11 +5,15 @@ class_name PathAgent
 @onready var paths = game_manager.get_node("root")
 @onready var sprite_container = $Sprites
 
-@export var default_speed : int = 500
-@export var slow_speed : int = 200
-@export var fast_speed : int = 1000
-@export var extra_slow_speed : int = 100
-@export var extra_fast_speed : int = 2000
+# Maps values in section data to enum
+var speeds = {
+	"extraslow": {"value": 100, "accel": -5000},
+	"slow": {"value": 200, "accel": -500},
+	"default": {"value": 500, "accel": 500}, 
+	"speed": {"value": 1000, "accel": 500},
+	"extraspeed": {"value": 2000, "accel": 10000}
+}
+
 var speed = 0
 
 var total_progress = 0
@@ -17,6 +21,7 @@ var total_progress = 0
 var lane_count = 0
 var current_lane = 0
 
+var alt_lanes = []
 var current_section = ""
 
 var branches = {}
@@ -43,6 +48,7 @@ func _ready():
 	current_lane = lane_count/2
 	reparent(paths.get_child(current_lane).get_node("SChild"))
 	update_available_branches()
+	update_alt_lanes()
 	
 	no_choice_made.connect(_on_no_choice_made)
 	dead_end_reached.connect(_on_dead_end_reached)
@@ -64,42 +70,33 @@ func _process(delta):
 			is_in_section = true
 			current_section = section["type"]
 			
-			if current_section == "speed":
-				if speed < fast_speed:
-					speed += delta * game_manager.tick_speed * 500
-					if speed > fast_speed:
-						speed = fast_speed
-					
-			if current_section == "slow":
-				if speed > slow_speed:
-					speed -= delta * game_manager.tick_speed * 500
-					if speed < slow_speed:
-						speed = slow_speed
-					
-			if current_section == "extraspeed":
-				if speed < extra_fast_speed:
-					speed += delta * game_manager.tick_speed * 10000
-					if speed > extra_fast_speed:
-						speed = extra_fast_speed
-					
-			if current_section == "extraslow":
-				if speed > extra_slow_speed:
-					speed -= delta * game_manager.tick_speed * 5000
-					if speed < extra_slow_speed:
-						speed = extra_slow_speed
-	
+			var target_speed = speeds[current_section]["value"]
+			var accel = speeds[current_section]["accel"]
+			
+			speed += delta * game_manager.tick_speed * accel
+			
+			# If the player is accelerating the speed must not exceeded the target speed
+			if accel >= 0 and speed > target_speed:
+				speed = target_speed
+			# If the player is decelerating the speed must not be fall below the target speed
+			elif accel < 0 and speed < target_speed:
+				if speed < target_speed:
+					speed = target_speed
+						
 	# If the agent is not in a section, accelerate/decelerate to regular speed
 	if !is_in_section:
 		
 		current_section = "default"
+		var default_speed = speeds["default"]["value"]
+		var default_accel = speeds["default"]["accel"]
 		
 		if speed < default_speed:
-			speed += delta * 500
+			speed += delta * default_accel
 			if speed > default_speed:
 				speed = default_speed
 				
 		if speed > default_speed:
-			speed -= delta * 500
+			speed -= delta * default_accel
 			if speed < default_speed:
 				speed = default_speed
 	
@@ -139,6 +136,9 @@ func apply_progress(delta):
 				end = true
 			
 		update_available_branches()
+		
+		# Update lanes and section data (useful for enemy AI)
+		update_alt_lanes()
 		
 		# If the agent is not a branch behind, the next choice can be made freely
 		if branch_passed_count == game_manager.branch_choices.size():
@@ -216,6 +216,19 @@ func switch_lane(index):
 	
 	# Update available branches for the next decision
 	update_available_branches()
+
+# Gets all lane nodes that the agent can currently switch to
+func update_alt_lanes():
+	# Gets location of agent's parent in the tree as array of indexes
+	var tree_loc = get_tree_location()
+	
+	# Store the currently available lane nodes
+	alt_lanes = []
+	for lane in paths.get_children():
+		# Change the first index to examine another lane
+		tree_loc[0] = lane.get_index()
+		# Follow the indexes to get the respective parallel lane node
+		alt_lanes.append(get_child_from_tree_loc(tree_loc))
 
 # Obtain an array of the indexes of the parents of this element 
 func get_tree_location():
