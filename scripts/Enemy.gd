@@ -2,7 +2,7 @@ extends PathAgent
 
 @onready var overlay = $ChoiceOverlay
 
-@export_enum("Random Neighbour", "Best Neighbour", "Move Towards Best Lane", "Best Lane") var strategy: int = 2
+@export_enum("Random Neighbour", "Best Neighbour", "Move Towards Best Lane", "Best Lane") var strategy: int = 3
 
 var rng = RandomNumberGenerator.new()
 var next_switch_delta = 0
