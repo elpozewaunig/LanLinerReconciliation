@@ -82,7 +82,7 @@ func _process(delta):
 	# Handle movement and advancing to the next path in super class
 	super.apply_progress(delta)
 	
-	# Switch to left or right lane when time elapsed exceeds next_switch_delta
+	# Switch lanes when the elapsed time exceeds next_switch_delta
 	if time_elapsed > next_switch_delta:
 		time_elapsed = 0
 		
@@ -118,31 +118,22 @@ func get_best_lane(teleport):
 	var current_sections = get_current_sections()
 	
 	var target_lane = current_lane
-	var examine_section = current_sections[current_lane]["type"]
-	var current_speed = speeds[examine_section]["value"]
+	var examine_lane = 0
+	var best_speed = 0
 	
-	# Look for better options, starting at the current branch and checking neighbours first
-	var offset = 0
-	while offset < lane_count:
-		var examine_lane = current_lane + offset
+	# Iterate through all currently available sections
+	for section in current_sections:
+		var examine_section = current_sections[examine_lane]["type"]
+		var current_speed = speeds[examine_section]["value"]
+		# If the section provides better speed than the ones examined before
+		if current_speed > best_speed:
+			best_speed = current_speed
+			target_lane = examine_lane
+		# If the section is the same as the best option but is closer to the current lane
+		elif current_speed == best_speed and abs(current_lane - examine_lane) < abs(current_lane - target_lane):
+			target_lane = examine_lane
 		
-		# If offset is still within bounds
-		if examine_lane < current_sections.size():
-			examine_section = current_sections[examine_lane]["type"]
-			if speeds[examine_section]["value"] > current_speed:
-				current_speed = speeds[examine_section]["value"]
-				target_lane = examine_lane
-				
-		examine_lane = current_lane - offset
-		
-		# If offset is still within bounds
-		if examine_lane >= 0:
-			examine_section = current_sections[examine_lane]["type"]
-			if speeds[examine_section]["value"] > current_speed:
-				current_speed = speeds[examine_section]["value"]
-				target_lane = examine_lane
-		
-		offset += 1
+		examine_lane += 1
 	
 	# If teleport is enabled, jump to the target lane
 	if teleport:
