@@ -124,17 +124,17 @@ func _process(delta):
 	# Switch to left or right lane on input
 	if (Input.is_action_just_pressed("ui_left") or swipe_left) and !lane_lock:
 		if current_lane > 0:
-			current_lane -= 1
+			var target_lane = current_lane - 1
 			var last_global_x = camera.global_position.x
-			switch_lane(current_lane)
+			switch_lane(target_lane)
 			camera.transition_from_x(last_global_x)
 			sound.lane_switch_left.play()
 			
 	if (Input.is_action_just_pressed("ui_right") or swipe_right) and !lane_lock:
 		if current_lane < lane_count - 1:
-			current_lane += 1
+			var target_lane = current_lane + 1
 			var last_global_x = camera.global_position.x
-			switch_lane(current_lane)
+			switch_lane(target_lane)
 			camera.transition_from_x(last_global_x)
 			sound.lane_switch_right.play()
 	

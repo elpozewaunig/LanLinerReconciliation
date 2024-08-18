@@ -2,7 +2,7 @@ extends PathAgent
 
 @onready var overlay = $ChoiceOverlay
 
-@export_enum("Random Neighbour", "Best Neighbour") var strategy: int = 1
+@export_enum("Random Neighbour", "Best Neighbour", "Move Towards Best Lane", "Best Lane") var strategy: int = 2
 
 var rng = RandomNumberGenerator.new()
 var next_switch_delta = 0
@@ -91,8 +91,15 @@ func _process(delta):
 			next_switch_delta = rng.randf_range(0.5, 2.0)
 		elif strategy == 1:
 			switch_lane(get_best_neighbour())
-			next_switch_delta = 0.1
+			next_switch_delta = 0.05
+		elif strategy == 2:
+			switch_lane(get_best_lane(false))
+			next_switch_delta = 0.05
+		elif strategy == 3:
+			switch_lane(get_best_lane(true))
+			next_switch_delta = 0
 
+# Randomly returns left or right lane index
 func get_random_neighbour():
 	var choice = rng.randf()
 		
@@ -104,18 +111,54 @@ func get_random_neighbour():
 		if current_lane < lane_count - 1:
 			return current_lane + 1
 
-# Simple AI for switching to best left or right lane
-func get_best_neighbour():
-	var current_sections = []
-	# Iterate through all lanes
-	for lane in alt_lanes:
-		var lane_section_data = ai_preprocess_sections(lane)
+# Returns the best lane to move to
+# If teleport is on, it will immediately return the best lane
+# Otherwise, it will return the next closer lane to the best lane
+func get_best_lane(teleport):
+	var current_sections = get_current_sections()
+	
+	var target_lane = current_lane
+	var examine_section = current_sections[current_lane]["type"]
+	var current_speed = speeds[examine_section]["value"]
+	
+	# Look for better options, starting at the current branch and checking neighbours first
+	var offset = 0
+	while offset < lane_count:
+		var examine_lane = current_lane + offset
 		
-		# Iterate through all pre-processed sections
-		for section in lane_section_data:
-			# Store section that the enemy can currently switch to
-			if progress >= section["from"] and progress <= section["to"]:
-				current_sections.append(section)
+		# If offset is still within bounds
+		if examine_lane < current_sections.size():
+			examine_section = current_sections[examine_lane]["type"]
+			if speeds[examine_section]["value"] > current_speed:
+				current_speed = speeds[examine_section]["value"]
+				target_lane = examine_lane
+				
+		examine_lane = current_lane - offset
+		
+		# If offset is still within bounds
+		if examine_lane >= 0:
+			examine_section = current_sections[examine_lane]["type"]
+			if speeds[examine_section]["value"] > current_speed:
+				current_speed = speeds[examine_section]["value"]
+				target_lane = examine_lane
+		
+		offset += 1
+	
+	# If teleport is enabled, jump to the target lane
+	if teleport:
+		return target_lane
+	
+	# Else, only move one lane closer to the target lane
+	if target_lane < current_lane:
+		return current_lane - 1
+	elif target_lane > current_lane:
+		return current_lane + 1
+	else:
+		return current_lane
+
+# Returns index of best neighbouring lane
+func get_best_neighbour():
+	var current_sections = get_current_sections()
 	
 	var origin_lane_int = current_lane
 	var left_lane_int = origin_lane_int
@@ -144,6 +187,21 @@ func get_best_neighbour():
 			choice = option
 	
 	return choice
+
+# Preprocesses the section data for all lanes, then returns all currently accesible sections
+func get_current_sections():
+	var current_sections = []
+	# Iterate through all lanes and obtain enhanced section data
+	for lane in alt_lanes:
+		var lane_section_data = ai_preprocess_sections(lane)
+		
+		# Iterate through all pre-processed sections
+		for section in lane_section_data:
+			# Store section that the enemy can currently switch to
+			if progress >= section["from"] and progress <= section["to"]:
+				current_sections.append(section)
+	
+	return current_sections
 
 # Obtain section data from lane and pad it with default sections
 # This allows the AI to easily compare its options

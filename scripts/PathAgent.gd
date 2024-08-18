@@ -213,6 +213,7 @@ func switch_lane(index):
 	
 	# Finally, reparent to the node definded by the new tree location
 	reparent(get_child_from_tree_loc(tree_location), false)
+	current_lane = index
 	
 	# Update available branches for the next decision
 	update_available_branches()
