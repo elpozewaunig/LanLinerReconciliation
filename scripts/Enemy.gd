@@ -115,26 +115,30 @@ func get_random_neighbour():
 # If teleport is on, it will immediately return the best lane
 # Otherwise, it will return the next closer lane to the best lane
 func get_best_lane(teleport):
-	var current_sections = get_current_sections()
+	var current_sections = get_sections_at(progress)
 	
-	var target_lane = current_lane
-	var examine_lane = 0
-	var best_speed = 0
-	
-	# Iterate through all currently available sections
+	# Find the lane that currently provides the best speed
+	var target_lane = find_best_section(current_sections)
+
+	# Find the end of the current section ending soonest
+	var next_dist = get_parent().curve.get_baked_length()
 	for section in current_sections:
-		var examine_section = current_sections[examine_lane]["type"]
-		var current_speed = speeds[examine_section]["value"]
-		# If the section provides better speed than the ones examined before
-		if current_speed > best_speed:
-			best_speed = current_speed
-			target_lane = examine_lane
-		# If the section is the same as the best option but is closer to the current lane
-		elif current_speed == best_speed and abs(current_lane - examine_lane) < abs(current_lane - target_lane):
-			target_lane = examine_lane
-		
-		examine_lane += 1
+		if section["to"] < next_dist:
+			next_dist = section["to"]
 	
+	# Get the sections after the first end of a current section
+	var sections_at_point = get_sections_at(next_dist)
+	# Find the best lane at this future point
+	var next_target_lane = find_best_section(sections_at_point)
+	
+	var target_type = current_sections[target_lane]["type"]
+	var pre_next_type = current_sections[next_target_lane]["type"]
+	
+	# If changing to this next lane offers the same speed as the target lane
+	if speeds[pre_next_type]["value"] == speeds[target_type]["value"]:
+		# Switch to it ahead of time
+		target_lane = next_target_lane
+
 	# If teleport is enabled, jump to the target lane
 	if teleport:
 		return target_lane
@@ -147,9 +151,33 @@ func get_best_lane(teleport):
 	else:
 		return current_lane
 
+# Returns index of section with best speed given an array with sections
+# Prefers sections closer to the current_lane
+func find_best_section(sections):
+	var target_lane = current_lane
+	var examine_lane = 0
+	var best_speed = 0
+	
+	# Iterate through all currently available sections
+	for section in sections:
+		var examine_section = sections[examine_lane]
+		var current_speed = speeds[examine_section["type"]]["value"]
+		
+		# If the section provides better speed than the ones examined before
+		if current_speed > best_speed:
+			best_speed = current_speed
+			target_lane = examine_lane
+		# If the section is the same as the best option but is closer to the current lane
+		elif current_speed == best_speed and abs(current_lane - examine_lane) < abs(current_lane - target_lane):
+			target_lane = examine_lane
+		
+		examine_lane += 1
+		
+	return target_lane
+
 # Returns index of best neighbouring lane
 func get_best_neighbour():
-	var current_sections = get_current_sections()
+	var current_sections = get_sections_at(progress)
 	
 	var origin_lane_int = current_lane
 	var left_lane_int = origin_lane_int
@@ -179,15 +207,15 @@ func get_best_neighbour():
 	
 	return choice
 
-# Returns all currently accesible sections, based on data pre-processed by PathAgent
-func get_current_sections():
+# Returns all sections available at a given position, based on data pre-processed by PathAgent
+func get_sections_at(at_pos):
 	var current_sections = []
 		
 	# Iterate through all pre-processed sections
 	for lane_section_data in lanes_section_data:
 		for section in lane_section_data:
 			# Store section that the enemy can currently switch to
-			if progress >= section["from"] and progress <= section["to"]:
+			if at_pos >= section["from"] and at_pos < section["to"]:
 				current_sections.append(section)
 	
 	return current_sections
