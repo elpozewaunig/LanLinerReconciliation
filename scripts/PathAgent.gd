@@ -7,8 +7,8 @@ class_name PathAgent
 
 # Maps values in section data to enum
 var speeds = {
-	"extraslow": {"value": 100, "accel": -5000},
-	"slow": {"value": 200, "accel": -500},
+	"extraslow": {"value": 100, "accel": 5000},
+	"slow": {"value": 200, "accel": 500},
 	"default": {"value": 500, "accel": 500}, 
 	"speed": {"value": 1000, "accel": 500},
 	"extraspeed": {"value": 2000, "accel": 10000}
@@ -63,43 +63,27 @@ func _process(delta):
 		finish_time += delta
 	
 	# Obtain the speed information of the current path
-	var current_path_data = get_parent().tubele
-	var is_in_section = false
+	var current_path_data = lanes_section_data[current_lane]
 	for section in current_path_data:
 		# If the agent is in a specific section, change its speed accordingly
-		if progress >= section["from"] and progress <= section["to"]:
-			is_in_section = true
+		# Also works outside of sections since the preprocessing generates "default" sections
+		if progress >= section["from"] and progress < section["to"]:
 			current_section = section["type"]
-			
 			var target_speed = speeds[current_section]["value"]
 			var accel = speeds[current_section]["accel"]
 			
-			speed += delta * game_manager.tick_speed * accel
-			
-			# If the player is accelerating the speed must not exceeded the target speed
-			if accel >= 0 and speed > target_speed:
-				speed = target_speed
-			# If the player is decelerating the speed must not be fall below the target speed
-			elif accel < 0 and speed < target_speed:
+			# If the agent is above the target speed, slow it down
+			if speed > target_speed:
+				speed -= delta * game_manager.tick_speed * accel
+				# If the player then falls below the target speed, set the speed to target
 				if speed < target_speed:
 					speed = target_speed
-						
-	# If the agent is not in a section, accelerate/decelerate to regular speed
-	if !is_in_section:
-		
-		current_section = "default"
-		var default_speed = speeds["default"]["value"]
-		var default_accel = speeds["default"]["accel"]
-		
-		if speed < default_speed:
-			speed += delta * default_accel
-			if speed > default_speed:
-				speed = default_speed
-				
-		if speed > default_speed:
-			speed -= delta * default_accel
-			if speed < default_speed:
-				speed = default_speed
+			# If the agent is below the target speed, speed it up
+			elif speed < target_speed:
+				speed += delta * game_manager.tick_speed * accel
+				# If the player then exceeds the target speed, set the speed to target
+				if speed > target_speed:
+					speed = target_speed
 	
 # Move PathFollow2D along Path2D, reparent to child if the end is reached
 func apply_progress(delta):
@@ -235,7 +219,7 @@ func update_alt_lanes():
 	# Iterate through all lanes and obtain enhanced section data
 	lanes_section_data = []
 	for lane in alt_lanes:
-		lanes_section_data.append(ai_preprocess_sections(lane))
+		lanes_section_data.append(preprocess_sections(lane))
 
 # Obtain an array of the indexes of the parents of this element 
 func get_tree_location():
@@ -257,7 +241,7 @@ func get_child_from_tree_loc(indexes):
 
 # Obtain section data from lane and pad it with default sections
 # This allows the AI to easily compare its options
-func ai_preprocess_sections(lane):
+func preprocess_sections(lane):
 	var lane_section_data = []
 	var path_length = lane.curve.get_baked_length()
 	
