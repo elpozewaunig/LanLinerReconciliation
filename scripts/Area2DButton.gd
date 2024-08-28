@@ -22,6 +22,7 @@ func _ready():
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	clicked.connect(_on_clicked)
+	clicked.connect(_on_super_clicked)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -29,8 +30,7 @@ func _process(_delta):
 		modulate = Color(255, 0, 0)
 		if Input.is_action_just_pressed("ui_click"):
 			emit_signal("clicked")
-			if sfx_enabled and is_inside_tree():
-				click_sfx.play()
+			
 	else:
 		modulate = Color(255, 255, 255)
 
@@ -42,6 +42,12 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	mouse_inside = false
+
+# Stuff that should always happen when the clicked signal is received
+# Useful when a "click" is triggered through a controller
+func _on_super_clicked():
+	if sfx_enabled and is_inside_tree():
+		click_sfx.play()
 
 func _on_clicked():
 	# This method should be implemented by subclasses
