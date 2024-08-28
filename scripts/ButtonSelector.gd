@@ -10,10 +10,13 @@ signal ext_cleared
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Connect all buttons to the external selection signals
 	for button in buttons:
+		# Connect all buttons to the external selection signals
 		ext_selected.connect(button._on_ext_selected)
 		ext_cleared.connect(button._on_ext_cleared)
+		
+		# Connect self to button's select signal
+		button.selected.connect(_on_btn_selected)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -23,22 +26,29 @@ func _process(_delta):
 		input = "up"
 	elif Input.is_action_just_pressed("ui_down"):
 		input = "down"
-		
-	if not input.is_empty():
-		# Only enable highlight, if it was disabled
-		if not highlight_active:
-			highlight_active = true
-			
-		# Else, move the highlight (if the current button is visible)
-		elif buttons[highlight_index].visible:
+	
+	# If input has been pressed and the current button is visible
+	if not input.is_empty() and buttons[highlight_index].visible:
+		# If a selector highlight is currently active
+		# Or the mouse points to the current selection
+		if highlight_active or buttons[highlight_index].mouse_inside:
+			# Move the highlight respectively
 			if input == "up" && highlight_index > 0:
 				highlight_index -= 1
 			elif input == "down" && highlight_index < buttons.size() - 1:
 				highlight_index += 1
-				
+		
+		# Else only set the highlight to active so in the next pass it will move
+		highlight_active = true		
 		emit_signal("ext_selected", buttons[highlight_index])
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		highlight_active = false
 		emit_signal("ext_cleared")
+
+func _on_btn_selected(btn_node):
+	if not highlight_active:
+		for i in range(0, buttons.size()):
+			if buttons[i] == btn_node:
+				highlight_index = i

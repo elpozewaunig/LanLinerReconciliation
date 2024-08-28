@@ -6,6 +6,8 @@ class_name Area2DButton
 var mouse_inside = false
 var ext_selected = false
 var highlight_enabled = false
+
+signal selected(btn_node)
 signal clicked
 
 @onready var hover_sfx = AudioStreamPlayer.new()
@@ -39,8 +41,7 @@ func _process(_delta):
 
 func _on_mouse_entered():
 	mouse_inside = true
-	if sfx_enabled and is_inside_tree():
-		hover_sfx.play()
+	selected_action()
 
 func _on_mouse_exited():
 	mouse_inside = false
@@ -51,22 +52,27 @@ func _on_ext_selected(btn_node):
 		highlight_enabled = true
 		if btn_node == self:
 			ext_selected = true
-			if sfx_enabled and is_inside_tree():
-				hover_sfx.play()
+			selected_action()
 		else:
 			ext_selected = false
 
 # Triggered by button selector when the current selection is replaced by mouse movement
 func _on_ext_cleared():
+	if highlight_enabled and mouse_inside and visible:
+		selected_action()
 	highlight_enabled = false
-	if ext_selected:
-		ext_selected = false
+	ext_selected = false
 
 # Stuff that should always happen when the clicked signal is received
 # Useful when a "click" is triggered through a controller
 func _on_super_clicked():
 	if sfx_enabled and is_inside_tree():
 		click_sfx.play()
+
+func selected_action():
+	emit_signal("selected", self)
+	if sfx_enabled and is_inside_tree():
+		hover_sfx.play()
 
 func _on_clicked():
 	# This method should be implemented by subclasses
