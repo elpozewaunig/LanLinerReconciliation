@@ -18,7 +18,7 @@ func _process(_delta):
 		pause_button.hide()
 	
 	# Pause the game when esc is pressed
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_pause"):
 		toggle_pause()
 
 
