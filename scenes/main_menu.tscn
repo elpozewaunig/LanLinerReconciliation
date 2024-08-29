@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://b7vjspmp3umjn"]
 
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="1_1hjup"]
-[ext_resource type="Script" path="res://scripts/ButtonSelector.gd" id="2_ggmry"]
+[ext_resource type="PackedScene" uid="uid://cwawt2cjh1ek1" path="res://scenes/button_selector.tscn" id="2_2miv2"]
 [ext_resource type="Script" path="res://scripts/StartButton.gd" id="2_t2tbx"]
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="3_byn6r"]
 [ext_resource type="Script" path="res://scripts/CreditsButton.gd" id="4_7ads6"]
@@ -52,8 +52,7 @@ font_color = Color(0.0534208, 0.0534209, 0.0534209, 1)
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_1hjup")
 
-[node name="ButtonSelector" type="Node2D" parent="." node_paths=PackedStringArray("buttons")]
-script = ExtResource("2_ggmry")
+[node name="ButtonSelector" parent="." node_paths=PackedStringArray("buttons") instance=ExtResource("2_2miv2")]
 buttons = [NodePath("../StartButton"), NodePath("../CreditsButton")]
 
 [node name="StartButton" type="Area2D" parent="."]

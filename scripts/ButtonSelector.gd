@@ -28,7 +28,7 @@ func _process(_delta):
 		input = "down"
 	
 	# If input has been pressed and the current button is visible
-	if not input.is_empty() and buttons[highlight_index].visible:
+	if not input.is_empty() and buttons[highlight_index].visible and is_visible_in_tree():
 		# If a selector highlight is currently active
 		# Or the mouse points to the current selection
 		if highlight_active or buttons[highlight_index].mouse_inside:
