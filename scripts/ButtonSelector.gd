@@ -39,12 +39,14 @@ func _process(_delta):
 				highlight_index += 1
 		
 		# Else only set the highlight to active so in the next pass it will move
-		highlight_active = true		
+		highlight_active = true
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		emit_signal("ext_selected", buttons[highlight_index])
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		highlight_active = false
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		emit_signal("ext_cleared")
 
 func _on_btn_selected(btn_node):
