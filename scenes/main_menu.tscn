@@ -22,7 +22,7 @@ font = ExtResource("3_byn6r")
 font_size = 60
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mff1d"]
-size = Vector2(143, 127)
+size = Vector2(258, 127)
 
 [sub_resource type="LabelSettings" id="LabelSettings_mib0b"]
 font = ExtResource("3_byn6r")
@@ -87,7 +87,7 @@ script = ExtResource("4_7ads6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CreditsButton"]
 visible = false
 z_index = 10
-position = Vector2(5.5, 1)
+position = Vector2(2.64001, 1)
 shape = SubResource("RectangleShape2D_mff1d")
 
 [node name="Sprite2D" type="Sprite2D" parent="CreditsButton"]
