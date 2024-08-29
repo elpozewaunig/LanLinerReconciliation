@@ -14,6 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://lffvcm1ay37u" path="res://scenes/dummyplayerMAINMENU.tscn" id="11_hqdx0"]
 [ext_resource type="PackedScene" uid="uid://cn66nqh0xl87y" path="res://scenes/dummyenemyMAINMENU.tscn" id="12_p03xb"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_mib0b"]
+font = ExtResource("3_byn6r")
+font_size = 100
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3eyg"]
 size = Vector2(432, 95)
 
@@ -23,10 +27,6 @@ font_size = 60
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mff1d"]
 size = Vector2(258, 127)
-
-[sub_resource type="LabelSettings" id="LabelSettings_mib0b"]
-font = ExtResource("3_byn6r")
-font_size = 100
 
 [sub_resource type="LabelSettings" id="LabelSettings_mtqq1"]
 font = ExtResource("3_byn6r")
@@ -51,59 +51,6 @@ font_color = Color(0.0534208, 0.0534209, 0.0534209, 1)
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_1hjup")
-
-[node name="ButtonSelector" parent="." node_paths=PackedStringArray("buttons") instance=ExtResource("2_2miv2")]
-buttons = [NodePath("../StartButton"), NodePath("../CreditsButton")]
-
-[node name="StartButton" type="Area2D" parent="."]
-position = Vector2(872.575, 525.575)
-script = ExtResource("2_t2tbx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartButton"]
-visible = false
-z_index = 10
-position = Vector2(6, 6.5)
-shape = SubResource("RectangleShape2D_m3eyg")
-
-[node name="Sprite2D" type="Sprite2D" parent="StartButton"]
-
-[node name="Label" type="Label" parent="StartButton"]
-offset_left = -288.0
-offset_top = -80.0
-offset_right = 305.0
-offset_bottom = 80.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-mouse_filter = 1
-text = "Singleplayer"
-label_settings = SubResource("LabelSettings_v67xe")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CreditsButton" type="Area2D" parent="."]
-position = Vector2(923.36, 737.11)
-script = ExtResource("4_7ads6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CreditsButton"]
-visible = false
-z_index = 10
-position = Vector2(2.64001, 1)
-shape = SubResource("RectangleShape2D_mff1d")
-
-[node name="Sprite2D" type="Sprite2D" parent="CreditsButton"]
-
-[node name="Label" type="Label" parent="CreditsButton"]
-offset_left = -288.0
-offset_top = -80.0
-offset_right = 305.0
-offset_bottom = 80.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-mouse_filter = 1
-text = "Credits"
-label_settings = SubResource("LabelSettings_v67xe")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -135,6 +82,57 @@ texture_filter = 1
 position = Vector2(367.085, 126.9)
 scale = Vector2(2.71, 2.71)
 texture = ExtResource("6_dn8c2")
+
+[node name="Buttons" type="Node2D" parent="UI"]
+
+[node name="ButtonSelector" parent="UI/Buttons" node_paths=PackedStringArray("buttons") instance=ExtResource("2_2miv2")]
+buttons = [NodePath("../StartButton"), NodePath("../CreditsButton")]
+
+[node name="StartButton" type="Area2D" parent="UI/Buttons"]
+position = Vector2(872.575, 525.575)
+script = ExtResource("2_t2tbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Buttons/StartButton"]
+visible = false
+z_index = 10
+position = Vector2(6, 6.5)
+shape = SubResource("RectangleShape2D_m3eyg")
+
+[node name="Label" type="Label" parent="UI/Buttons/StartButton"]
+offset_left = -288.0
+offset_top = -80.0
+offset_right = 305.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+mouse_filter = 1
+text = "Singleplayer"
+label_settings = SubResource("LabelSettings_v67xe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsButton" type="Area2D" parent="UI/Buttons"]
+position = Vector2(923.36, 737.11)
+script = ExtResource("4_7ads6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Buttons/CreditsButton"]
+visible = false
+z_index = 10
+position = Vector2(2.64001, 1)
+shape = SubResource("RectangleShape2D_mff1d")
+
+[node name="Label" type="Label" parent="UI/Buttons/CreditsButton"]
+offset_left = -288.0
+offset_top = -80.0
+offset_right = 305.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+mouse_filter = 1
+text = "Credits"
+label_settings = SubResource("LabelSettings_v67xe")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Credits" type="ColorRect" parent="UI"]
 visible = false
@@ -262,24 +260,22 @@ rotation = -0.441568
 scale = Vector2(4.465, 4.465)
 texture = ExtResource("9_dyp3k")
 
-[node name="Node2D" type="Node2D" parent="UI"]
-
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_jtrpv")
-volume_db = -5.0
-
-[node name="Player" parent="." instance=ExtResource("11_hqdx0")]
+[node name="Player" parent="UI" instance=ExtResource("11_hqdx0")]
 z_index = -6
 position = Vector2(519, 485)
 rotation = 1.87448
 scale = Vector2(3.32, 3.32)
 
-[node name="Enemy" parent="." instance=ExtResource("12_p03xb")]
+[node name="Enemy" parent="UI" instance=ExtResource("12_p03xb")]
 z_index = -7
 position = Vector2(590, 739)
 rotation = 2.12057
 scale = Vector2(3.32, 3.32)
 
-[connection signal="clicked" from="CreditsButton" to="StartButton" method="_on_credits_button_clicked"]
-[connection signal="clicked" from="UI/Credits/CreditsExitButton" to="StartButton" method="_on_credits_exit_button_clicked"]
-[connection signal="clicked" from="UI/Credits/CreditsExitButton" to="CreditsButton" method="_on_credits_exit_button_clicked"]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_jtrpv")
+volume_db = -5.0
+
+[connection signal="clicked" from="UI/Buttons/CreditsButton" to="UI/Buttons/StartButton" method="_on_credits_button_clicked"]
+[connection signal="clicked" from="UI/Credits/CreditsExitButton" to="UI/Buttons/StartButton" method="_on_credits_exit_button_clicked"]
+[connection signal="clicked" from="UI/Credits/CreditsExitButton" to="UI/Buttons/CreditsButton" method="_on_credits_exit_button_clicked"]
