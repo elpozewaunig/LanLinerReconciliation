@@ -2,13 +2,16 @@ extends PathAgent
 
 @onready var overlay = $ChoiceOverlay
 
-@export_enum("Random Neighbour", "Best Neighbour", "Move Towards Best Lane", "Best Lane") var strategy: int = 3
+enum Strategy {RandomNeighbour, BestNeighbour, MoveTowardsBestLane, BestLane}
+var strategy: Strategy
 
 var rng = RandomNumberGenerator.new()
 var next_switch_delta = 0
 var time_elapsed = 0
 
 var overlay_shown_timer = 0
+
+var player
 
 signal force_next_choice(branch)
 signal enemy_end_reached(time)
@@ -20,7 +23,7 @@ func _ready():
 	next_switch_delta = 0
 	
 	# Connect player's force_next_choice signal to own handler method
-	var player = game_manager.player
+	player = game_manager.player
 	player.force_next_choice.connect(_on_force_next_choice)
 	
 	enemy_end_reached.connect(player._on_enemy_end_reached)
@@ -86,16 +89,24 @@ func _process(delta):
 	if time_elapsed > next_switch_delta:
 		time_elapsed = 0
 		
-		if strategy == 0:
+		# If enemy is ahead of player, play a weaker strategy
+		if total_progress > player.total_progress + 300:
+			strategy = Strategy.RandomNeighbour
+		# Otherwise, play perfectly
+		else:
+			strategy = Strategy.BestLane
+		
+		# Switch between lane according to specified strategy
+		if strategy == Strategy.RandomNeighbour:
 			switch_lane(get_random_neighbour())
-			next_switch_delta = rng.randf_range(0.5, 2.0)
-		elif strategy == 1:
+			next_switch_delta = rng.randf_range(0.5, 1.0)
+		elif strategy == Strategy.BestNeighbour:
 			switch_lane(get_best_neighbour())
-			next_switch_delta = 0.05
-		elif strategy == 2:
+			next_switch_delta = 0.1
+		elif strategy == Strategy.MoveTowardsBestLane:
 			switch_lane(get_best_lane(false))
-			next_switch_delta = 0.05
-		elif strategy == 3:
+			next_switch_delta = 0.1
+		elif strategy == Strategy.BestLane:
 			switch_lane(get_best_lane(true))
 			next_switch_delta = 0
 
@@ -110,6 +121,8 @@ func get_random_neighbour():
 	if choice > 0.5:
 		if current_lane < lane_count - 1:
 			return current_lane + 1
+	
+	return current_lane
 
 # Returns the best lane to move to
 # If teleport is on, it will immediately return the best lane
