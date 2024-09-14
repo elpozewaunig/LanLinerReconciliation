@@ -51,7 +51,7 @@ func _process(delta):
 		if candidate_branch_names.size() >= 1:
 			# Choose the branch corresponding to the random index
 			branch_choice = candidate_branch_names[random_index]
-			emit_signal("force_next_choice", branch_choice)
+			force_next_choice.emit(branch_choice)
 			
 			# Reset all choice overlay options to be hidden
 			var choice_btn
@@ -221,8 +221,8 @@ func get_sections_at(at_pos):
 	return current_sections
 
 func _on_end_reached(time):
-	emit_signal("enemy_end_reached", time)
+	enemy_end_reached.emit(time)
 	
 func _on_dead_end_reached():
 	sprite_container.hide()
-	emit_signal("enemy_dead_end_reached")
+	enemy_dead_end_reached.emit()

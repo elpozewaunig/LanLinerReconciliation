@@ -29,10 +29,10 @@ func _process(_delta):
 		if !already_handled:
 			already_handled = true
 			if end_pos.x < start_pos.x - threshold:
-				emit_signal("swipe_left")
+				swipe_left.emit()
 			elif end_pos.x > start_pos.x + threshold:
-				emit_signal("swipe_right")
+				swipe_right.emit()
 			elif end_pos.y < start_pos.y - threshold:
-				emit_signal("swipe_up")
+				swipe_up.emit()
 			else:
 				already_handled = false

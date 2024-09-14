@@ -98,7 +98,7 @@ func apply_progress(delta):
 		if branch_choice == null and branches.has("SChild"):
 			# Set the choice to the straight branch forcibly
 			branch_choice = "SChild"
-			emit_signal("no_choice_made")
+			no_choice_made.emit()
 		
 		# Reparent to the choice
 		if branch_choice != null:
@@ -113,11 +113,11 @@ func apply_progress(delta):
 		# There are no further branches
 		else:
 			if !dead_end and !end:
-				emit_signal("end_reached", finish_time)
+				end_reached.emit(finish_time)
 				end = true
 				
 			elif dead_end and !end:
-				emit_signal("dead_end_reached")
+				dead_end_reached.emit()
 				end = true
 			
 		update_available_branches()
@@ -185,7 +185,7 @@ func notify_abandoned_branches():
 					# Connect signal delete_branch to _on_delete_branch method of unchosen branch
 					delete_branch.connect(branch._on_delete_branch)
 	
-	emit_signal("delete_branch")
+	delete_branch.emit()
 
 # Reparents the player to another lane
 func switch_lane(index):

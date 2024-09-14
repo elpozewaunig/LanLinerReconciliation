@@ -33,7 +33,7 @@ func _process(_delta):
 	if ((mouse_inside and not highlight_enabled) or(ext_selected and highlight_enabled)):
 		modulate = Color(255, 0, 0)
 		if (Input.is_action_just_pressed("ui_click") or Input.is_action_just_pressed("ui_accept")) and visible:
-			emit_signal("clicked")
+			clicked.emit()
 			
 	else:
 		modulate = Color(255, 255, 255)
@@ -70,7 +70,7 @@ func _on_super_clicked():
 		click_sfx.play()
 
 func selected_action():
-	emit_signal("selected", self)
+	selected.emit(self)
 	if sfx_enabled and is_inside_tree():
 		hover_sfx.play()
 

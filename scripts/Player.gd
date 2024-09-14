@@ -86,16 +86,16 @@ func _process(delta):
 		if allow_choice:
 			if (Input.is_action_just_pressed("ui_up") or swipe_up) and branches.has("SChild"):
 				branch_choice = "SChild"
-				emit_signal("force_next_choice", branch_choice)
-				emit_signal("choice_btn_pressed", overlay.up)
+				force_next_choice.emit(branch_choice)
+				choice_btn_pressed.emit(overlay.up)
 			elif (Input.is_action_just_pressed("ui_left") or swipe_left) and branches.has("LChild"):
 				branch_choice = "LChild"
-				emit_signal("force_next_choice", branch_choice)
-				emit_signal("choice_btn_pressed", overlay.left)
+				force_next_choice.emit(branch_choice)
+				choice_btn_pressed.emit(overlay.left)
 			elif (Input.is_action_just_pressed("ui_right") or swipe_right) and branches.has("RChild"):
 				branch_choice = "RChild"
-				emit_signal("force_next_choice", branch_choice)
-				emit_signal("choice_btn_pressed", overlay.right)
+				force_next_choice.emit(branch_choice)
+				choice_btn_pressed.emit(overlay.right)
 		
 	# Speed back up
 	else:
@@ -149,15 +149,15 @@ func _process(delta):
 			
 	
 func _on_no_choice_made():
-	emit_signal("force_next_choice", branch_choice)
-	emit_signal("choice_btn_pressed", overlay.up)
+	force_next_choice.emit(branch_choice)
+	choice_btn_pressed.emit(overlay.up)
 
 func _on_end_reached(_time):
 	sound.win.play()
 
 func _on_enemy_end_reached(time):
 	sound.lose.play()
-	emit_signal("enemy_end_reached", time)
+	enemy_end_reached.emit(time)
 	
 func _on_dead_end_reached():
 	game_over = true
