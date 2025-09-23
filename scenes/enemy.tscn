@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://4cpqid7g3o70"]
 
-[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_037od"]
+[ext_resource type="Script" uid="uid://c02yeplt8tr6b" path="res://scripts/Enemy.gd" id="1_037od"]
 [ext_resource type="Texture2D" uid="uid://qn5wy2v6josb" path="res://assets/sprites/enemy.png" id="2_i4ste"]
 [ext_resource type="Texture2D" uid="uid://dy3v7b64edpb6" path="res://assets/sprites/trialsheetenemy.png" id="3_h0mle"]
-[ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="4_38np1"]
+[ext_resource type="Script" uid="uid://bei8wx6c3b32s" path="res://scripts/TrailAnimation.gd" id="4_38np1"]
 [ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/sprites/twirl_03.png" id="5_8w5pd"]
 [ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/sprites/spark_04.png" id="6_uik23"]
 [ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/choice_overlay.tscn" id="7_w7lhp"]
@@ -85,9 +85,9 @@ visible = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 1
+texture = ExtResource("5_8w5pd")
 lifetime = 1.5
 speed_scale = 2.0
-texture = ExtResource("5_8w5pd")
 emission_shape = 1
 emission_sphere_radius = 0.01
 gravity = Vector2(0, 0)
@@ -99,9 +99,9 @@ color = Color(0.443137, 0, 0.0117647, 1)
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 16
+texture = ExtResource("6_uik23")
 lifetime = 10.0
 explosiveness = 0.12
-texture = ExtResource("6_uik23")
 gravity = Vector2(260.18, 0)
 initial_velocity_max = 36.9
 angular_velocity_max = 169.2
@@ -114,9 +114,9 @@ visible = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 amount = 1
+texture = ExtResource("5_8w5pd")
 lifetime = 39.0
 speed_scale = 2.0
-texture = ExtResource("5_8w5pd")
 emission_shape = 1
 emission_sphere_radius = 0.01
 gravity = Vector2(0, 0)
@@ -128,9 +128,9 @@ color = Color(0.444371, 0, 0.0100586, 1)
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 amount = 16
+texture = ExtResource("6_uik23")
 lifetime = 10.0
 explosiveness = 0.12
-texture = ExtResource("6_uik23")
 gravity = Vector2(-260.18, 0)
 initial_velocity_max = 36.9
 angular_velocity_max = 169.2

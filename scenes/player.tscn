@@ -1,22 +1,22 @@
 [gd_scene load_steps=38 format=3 uid="uid://dc7aktr1f5opg"]
 
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_gyboe"]
-[ext_resource type="Script" path="res://scripts/Camera.gd" id="3_16twk"]
+[ext_resource type="Script" uid="uid://dmftstrm5hj45" path="res://scripts/Player.gd" id="1_gyboe"]
+[ext_resource type="Script" uid="uid://wsuyhhohkv4u" path="res://scripts/Camera.gd" id="3_16twk"]
 [ext_resource type="Texture2D" uid="uid://bv2en2yvl0kvo" path="res://assets/sprites/vignette.png" id="3_74b6m"]
 [ext_resource type="Texture2D" uid="uid://crf3x1a6mm6b5" path="res://assets/sprites/player.png" id="3_oj2jm"]
 [ext_resource type="Texture2D" uid="uid://clplopyknmamn" path="res://assets/sprites/trialsheet.png" id="4_gc2fj"]
-[ext_resource type="Script" path="res://scripts/TimerDisplay.gd" id="4_gy5f6"]
+[ext_resource type="Script" uid="uid://2sjik2tj3gsg" path="res://scripts/TimerDisplay.gd" id="4_gy5f6"]
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="4_rq0y7"]
-[ext_resource type="Script" path="res://scripts/TrailAnimation.gd" id="5_3ppbk"]
+[ext_resource type="Script" uid="uid://bei8wx6c3b32s" path="res://scripts/TrailAnimation.gd" id="5_3ppbk"]
 [ext_resource type="PackedScene" uid="uid://h5y2b18uksyl" path="res://scenes/game_buttons.tscn" id="5_mc4f4"]
-[ext_resource type="Script" path="res://scripts/Pause.gd" id="7_hqwu2"]
+[ext_resource type="Script" uid="uid://yhd3ajlj1rsy" path="res://scripts/Pause.gd" id="7_hqwu2"]
 [ext_resource type="PackedScene" uid="uid://cmhaktjvtnwyh" path="res://scenes/choice_overlay.tscn" id="7_wphgy"]
 [ext_resource type="Texture2D" uid="uid://cp0oaawxqu400" path="res://assets/sprites/twirl_03.png" id="8_15hpb"]
-[ext_resource type="Script" path="res://scripts/Area2DButton.gd" id="8_r5bv5"]
+[ext_resource type="Script" uid="uid://pliuayr01gl1" path="res://scripts/Area2DButton.gd" id="8_r5bv5"]
 [ext_resource type="Texture2D" uid="uid://b868fu7vn0f6e" path="res://assets/sprites/spark_04.png" id="9_6d0nb"]
 [ext_resource type="Texture2D" uid="uid://cp5jgoe7xxwrx" path="res://assets/sprites/tile_0727.png" id="9_27s0h"]
 [ext_resource type="AudioStream" uid="uid://calhdetumdsyc" path="res://assets/sounds/Lane_Switch_Left.mp3" id="12_g3o72"]
-[ext_resource type="Script" path="res://scripts/SoundManager.gd" id="12_pwoux"]
+[ext_resource type="Script" uid="uid://b5eqbn35fvin0" path="res://scripts/SoundManager.gd" id="12_pwoux"]
 [ext_resource type="AudioStream" uid="uid://wexbtml1h3pr" path="res://assets/sounds/Lane_Switch_Right.mp3" id="13_1hx18"]
 [ext_resource type="AudioStream" uid="uid://boh8uuifldn7" path="res://assets/sounds/Portal_A.mp3" id="15_qq2rn"]
 [ext_resource type="AudioStream" uid="uid://bbjpegiea3x8n" path="res://assets/sounds/Speed_Up.mp3" id="16_jqpko"]
@@ -24,7 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://s4k68vs8rrjy" path="res://assets/sounds/Speed_Down.mp3" id="17_22nu5"]
 [ext_resource type="AudioStream" uid="uid://q2nlk3e4qmuy" path="res://assets/sounds/Super_Speed.mp3" id="18_um1a0"]
 [ext_resource type="AudioStream" uid="uid://16dt2wvxbswh" path="res://assets/sounds/Super_Slow.mp3" id="19_t1xbk"]
-[ext_resource type="Script" path="res://scripts/SwipeInputHandler.gd" id="23_3bid3"]
+[ext_resource type="Script" uid="uid://dc6d721uqsh78" path="res://scripts/SwipeInputHandler.gd" id="23_3bid3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk7ji"]
 
@@ -282,9 +282,9 @@ visible = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 1
+texture = ExtResource("8_15hpb")
 lifetime = 1.5
 speed_scale = 2.0
-texture = ExtResource("8_15hpb")
 emission_shape = 1
 emission_sphere_radius = 0.01
 gravity = Vector2(0, 0)
@@ -296,9 +296,9 @@ color = Color(0.519225, 0.764319, 0.7809, 1)
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprites/ParticleSysMoveLeft"]
 amount = 16
+texture = ExtResource("9_6d0nb")
 lifetime = 10.0
 explosiveness = 0.12
-texture = ExtResource("9_6d0nb")
 gravity = Vector2(260.18, 0)
 initial_velocity_max = 36.9
 angular_velocity_max = 169.2
@@ -311,9 +311,9 @@ visible = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 amount = 1
+texture = ExtResource("8_15hpb")
 lifetime = 39.0
 speed_scale = 2.0
-texture = ExtResource("8_15hpb")
 emission_shape = 1
 emission_sphere_radius = 0.01
 gravity = Vector2(0, 0)
@@ -325,9 +325,9 @@ color = Color(0.519225, 0.764319, 0.7809, 1)
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="Sprites/ParticleSysMoveRight"]
 amount = 16
+texture = ExtResource("9_6d0nb")
 lifetime = 10.0
 explosiveness = 0.12
-texture = ExtResource("9_6d0nb")
 gravity = Vector2(-260.18, 0)
 initial_velocity_max = 36.9
 angular_velocity_max = 169.2

@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://h5y2b18uksyl"]
 
 [ext_resource type="PackedScene" uid="uid://cwawt2cjh1ek1" path="res://scenes/button_selector.tscn" id="1_sybgs"]
-[ext_resource type="Script" path="res://scripts/RetryButton.gd" id="1_vo7gb"]
+[ext_resource type="Script" uid="uid://bs2ytd7i48oef" path="res://scripts/RetryButton.gd" id="1_vo7gb"]
 [ext_resource type="FontFile" uid="uid://deh6c62ayb1de" path="res://assets/fonts/Kenney Mini.ttf" id="2_ympaj"]
-[ext_resource type="Script" path="res://scripts/ExitToMenuButton.gd" id="3_cbdgr"]
+[ext_resource type="Script" uid="uid://do7yap3erbem6" path="res://scripts/ExitToMenuButton.gd" id="3_cbdgr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2hi4"]
 size = Vector2(200, 80)

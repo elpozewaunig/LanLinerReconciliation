@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://x46ieo2mb8a3"]
 
-[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_3rm6l"]
-[ext_resource type="Script" path="res://scripts/PathBuilderV2.gd" id="2_j6o4c"]
+[ext_resource type="Script" uid="uid://cqreeitb04njv" path="res://scripts/GameManager.gd" id="1_3rm6l"]
+[ext_resource type="Script" uid="uid://byvsq0bdr214v" path="res://scripts/PathBuilderV2.gd" id="2_j6o4c"]
 [ext_resource type="AudioStream" uid="uid://livqmy2k31ol" path="res://assets/music/full.ogg" id="3_fp346"]
 
 [node name="GameManager" type="Node2D"]
