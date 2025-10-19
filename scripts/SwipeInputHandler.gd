@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var threshold : int = 150
+@export var threshold : int = 50
 
 var start_pos : Vector2
 var end_pos : Vector2
