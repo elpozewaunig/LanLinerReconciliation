@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwawt2cjh1ek1"]
+[gd_scene format=3 uid="uid://cwawt2cjh1ek1"]
 
 [ext_resource type="Script" uid="uid://n6cbhschmpaa" path="res://scripts/ButtonSelector.gd" id="1_16vnk"]
 
-[node name="ButtonSelector" type="Node2D"]
+[node name="ButtonSelector" type="Node2D" unique_id=2100194357]
 script = ExtResource("1_16vnk")

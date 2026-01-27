@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh3wjho3ke4am"]
+[gd_scene format=3 uid="uid://dh3wjho3ke4am"]
 
 [ext_resource type="Script" uid="uid://bqpbr7uha5c8s" path="res://scripts/Path.gd" id="1_gsf7u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c68wh"]
 
-[node name="VisiblePath" type="Path2D"]
+[node name="VisiblePath" type="Path2D" unique_id=342367573]
 material = SubResource("CanvasItemMaterial_c68wh")
 script = ExtResource("1_gsf7u")

@@ -1,20 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://x46ieo2mb8a3"]
+[gd_scene format=3 uid="uid://x46ieo2mb8a3"]
 
 [ext_resource type="Script" uid="uid://cqreeitb04njv" path="res://scripts/GameManager.gd" id="1_3rm6l"]
 [ext_resource type="Script" uid="uid://byvsq0bdr214v" path="res://scripts/PathBuilderV2.gd" id="2_j6o4c"]
 [ext_resource type="AudioStream" uid="uid://livqmy2k31ol" path="res://assets/music/full.ogg" id="3_fp346"]
 [ext_resource type="Script" uid="uid://dvrp3d3sndggj" path="res://scripts/MouseHider.gd" id="4_jyhfs"]
 
-[node name="GameManager" type="Node2D"]
+[node name="GameManager" type="Node2D" unique_id=2133987709]
 script = ExtResource("1_3rm6l")
 
-[node name="PathBuilder" type="Node2D" parent="."]
+[node name="PathBuilder" type="Node2D" parent="." unique_id=757920959]
 script = ExtResource("2_j6o4c")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=356965057]
 process_mode = 3
 stream = ExtResource("3_fp346")
 volume_db = -5.0
 
-[node name="MouseHider" type="Node" parent="."]
+[node name="MouseHider" type="Node" parent="." unique_id=1316836242]
 script = ExtResource("4_jyhfs")

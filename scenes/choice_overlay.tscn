@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmhaktjvtnwyh"]
+[gd_scene format=3 uid="uid://cmhaktjvtnwyh"]
 
 [ext_resource type="Texture2D" uid="uid://dfotr4t0son3j" path="res://assets/sprites/arrow_left.png" id="1_0cg6i"]
 [ext_resource type="Script" uid="uid://dj3ax00cyx5da" path="res://scripts/ChoiceOverlay.gd" id="1_gv640"]
@@ -6,25 +6,25 @@
 [ext_resource type="Script" uid="uid://dxjmtfc3w1j4p" path="res://scripts/ChoiceKeyOverlay.gd" id="3_exli3"]
 [ext_resource type="Texture2D" uid="uid://ce0c0p1gkceto" path="res://assets/sprites/arrow_up.png" id="3_k1t7f"]
 
-[node name="ControlOverlay" type="Node2D"]
+[node name="ControlOverlay" type="Node2D" unique_id=664783142]
 visible = false
 z_index = 99
 scale = Vector2(10, 10)
 script = ExtResource("1_gv640")
 
-[node name="Left" type="Sprite2D" parent="."]
+[node name="Left" type="Sprite2D" parent="." unique_id=1304243634]
 texture_filter = 1
 position = Vector2(-25, 2.08165e-12)
 texture = ExtResource("1_0cg6i")
 script = ExtResource("3_exli3")
 
-[node name="Right" type="Sprite2D" parent="."]
+[node name="Right" type="Sprite2D" parent="." unique_id=408906055]
 texture_filter = 1
 position = Vector2(25, 2.08165e-12)
 texture = ExtResource("2_bhwc0")
 script = ExtResource("3_exli3")
 
-[node name="Up" type="Sprite2D" parent="."]
+[node name="Up" type="Sprite2D" parent="." unique_id=1113635406]
 texture_filter = 1
 position = Vector2(2.08165e-12, -25)
 texture = ExtResource("3_k1t7f")

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bx7vpo0wa7iyy"]
+[gd_scene format=3 uid="uid://bx7vpo0wa7iyy"]
 
 [ext_resource type="Texture2D" uid="uid://deifjywux43na" path="res://assets/sprites/tile_0079_edit.png" id="1_euuwg"]
 
-[node name="SealTextLine" type="Line2D"]
+[node name="SealTextLine" type="Line2D" unique_id=586363489]
 z_index = -5
 texture_repeat = 2
 width = 50.0

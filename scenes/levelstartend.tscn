@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://t2ag5dc3kc21"]
+[gd_scene format=3 uid="uid://t2ag5dc3kc21"]
 
 [ext_resource type="Texture2D" uid="uid://l8ne3jw87bwa" path="res://assets/sprites/startendblock.png" id="1_08evn"]
 
-[node name="Block" type="Sprite2D"]
+[node name="Block" type="Sprite2D" unique_id=520215032]
 z_index = 19
 texture_filter = 1
 scale = Vector2(2, 2)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b7vjspmp3umjn"]
+[gd_scene format=3 uid="uid://b7vjspmp3umjn"]
 
 [ext_resource type="Script" uid="uid://bu6pen2pasi0f" path="res://scripts/Menu.gd" id="1_1hjup"]
 [ext_resource type="PackedScene" uid="uid://cwawt2cjh1ek1" path="res://scenes/button_selector.tscn" id="2_2miv2"]
@@ -49,17 +49,17 @@ font = ExtResource("3_byn6r")
 font_size = 15
 font_color = Color(0.0534208, 0.0534209, 0.0534209, 1)
 
-[node name="Menu" type="Node2D"]
+[node name="Menu" type="Node2D" unique_id=1497084422]
 script = ExtResource("1_1hjup")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=1923698163]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
 
-[node name="Label" type="Label" parent="UI"]
+[node name="Label" type="Label" parent="UI" unique_id=844068061]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -77,28 +77,28 @@ text = "LanLiner: Reconciliation"
 label_settings = SubResource("LabelSettings_mib0b")
 script = ExtResource("5_qn76m")
 
-[node name="Pixelline" type="Sprite2D" parent="UI/Label"]
+[node name="Pixelline" type="Sprite2D" parent="UI/Label" unique_id=1034399821]
 texture_filter = 1
 position = Vector2(367.085, 126.9)
 scale = Vector2(2.71, 2.71)
 texture = ExtResource("6_dn8c2")
 
-[node name="Buttons" type="Node2D" parent="UI"]
+[node name="Buttons" type="Node2D" parent="UI" unique_id=767847053]
 
-[node name="ButtonSelector" parent="UI/Buttons" node_paths=PackedStringArray("buttons") instance=ExtResource("2_2miv2")]
+[node name="ButtonSelector" parent="UI/Buttons" unique_id=1334484329 node_paths=PackedStringArray("buttons") instance=ExtResource("2_2miv2")]
 buttons = [NodePath("../StartButton"), NodePath("../CreditsButton")]
 
-[node name="StartButton" type="Area2D" parent="UI/Buttons"]
+[node name="StartButton" type="Area2D" parent="UI/Buttons" unique_id=1735573904]
 position = Vector2(872.575, 525.575)
 script = ExtResource("2_t2tbx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Buttons/StartButton"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Buttons/StartButton" unique_id=2030136208]
 visible = false
 z_index = 10
 position = Vector2(6, 6.5)
 shape = SubResource("RectangleShape2D_m3eyg")
 
-[node name="Label" type="Label" parent="UI/Buttons/StartButton"]
+[node name="Label" type="Label" parent="UI/Buttons/StartButton" unique_id=1986358124]
 offset_left = -288.0
 offset_top = -80.0
 offset_right = 305.0
@@ -111,17 +111,17 @@ label_settings = SubResource("LabelSettings_v67xe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CreditsButton" type="Area2D" parent="UI/Buttons"]
+[node name="CreditsButton" type="Area2D" parent="UI/Buttons" unique_id=933577020]
 position = Vector2(923.36, 737.11)
 script = ExtResource("4_7ads6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Buttons/CreditsButton"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Buttons/CreditsButton" unique_id=1130886323]
 visible = false
 z_index = 10
 position = Vector2(2.64001, 1)
 shape = SubResource("RectangleShape2D_mff1d")
 
-[node name="Label" type="Label" parent="UI/Buttons/CreditsButton"]
+[node name="Label" type="Label" parent="UI/Buttons/CreditsButton" unique_id=445867233]
 offset_left = -288.0
 offset_top = -80.0
 offset_right = 305.0
@@ -134,7 +134,7 @@ label_settings = SubResource("LabelSettings_v67xe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Credits" type="ColorRect" parent="UI"]
+[node name="Credits" type="ColorRect" parent="UI" unique_id=344508885]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -146,7 +146,7 @@ offset_bottom = 1070.28
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Title" type="Label" parent="UI/Credits"]
+[node name="Title" type="Label" parent="UI/Credits" unique_id=526187841]
 layout_mode = 0
 offset_top = 2.0
 offset_right = 1911.0
@@ -156,7 +156,7 @@ label_settings = SubResource("LabelSettings_mtqq1")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Subtitle" type="Label" parent="UI/Credits"]
+[node name="Subtitle" type="Label" parent="UI/Credits" unique_id=551377515]
 layout_mode = 0
 offset_top = 240.0
 offset_right = 1911.0
@@ -166,7 +166,7 @@ text = "Created for Kenney Jam 2024
 label_settings = SubResource("LabelSettings_850s7")
 horizontal_alignment = 1
 
-[node name="ConceptProgramming" type="Label" parent="UI/Credits"]
+[node name="ConceptProgramming" type="Label" parent="UI/Credits" unique_id=2018362270]
 layout_mode = 0
 offset_top = 430.0
 offset_right = 1911.0
@@ -175,7 +175,7 @@ text = "Concept & Programming"
 label_settings = SubResource("LabelSettings_3fhsp")
 horizontal_alignment = 1
 
-[node name="People" type="Label" parent="UI/Credits"]
+[node name="People" type="Label" parent="UI/Credits" unique_id=1659553558]
 layout_mode = 0
 offset_top = 511.0
 offset_right = 1911.0
@@ -185,7 +185,7 @@ Elias Pozewaunig"
 label_settings = SubResource("LabelSettings_n3wgl")
 horizontal_alignment = 1
 
-[node name="Music" type="Label" parent="UI/Credits"]
+[node name="Music" type="Label" parent="UI/Credits" unique_id=737911408]
 layout_mode = 0
 offset_top = 665.0
 offset_right = 1911.0
@@ -194,7 +194,7 @@ text = "Music & Sound"
 label_settings = SubResource("LabelSettings_3fhsp")
 horizontal_alignment = 1
 
-[node name="People2" type="Label" parent="UI/Credits"]
+[node name="People2" type="Label" parent="UI/Credits" unique_id=1226122319]
 layout_mode = 0
 offset_top = 748.0
 offset_right = 1911.0
@@ -203,7 +203,7 @@ text = "near_beats"
 label_settings = SubResource("LabelSettings_n3wgl")
 horizontal_alignment = 1
 
-[node name="LinkButton" type="LinkButton" parent="UI/Credits/People2"]
+[node name="LinkButton" type="LinkButton" parent="UI/Credits/People2" unique_id=2109927985]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -218,7 +218,7 @@ grow_horizontal = 2
 grow_vertical = 2
 uri = "https://www.youtube.com/@near_beats/videos"
 
-[node name="Tech" type="Label" parent="UI/Credits"]
+[node name="Tech" type="Label" parent="UI/Credits" unique_id=945034049]
 layout_mode = 0
 offset_top = 862.0
 offset_right = 1911.0
@@ -228,7 +228,7 @@ Developed in Godot 4"
 label_settings = SubResource("LabelSettings_850s7")
 horizontal_alignment = 1
 
-[node name="Tech2" type="Label" parent="UI/Credits"]
+[node name="Tech2" type="Label" parent="UI/Credits" unique_id=630332976]
 layout_mode = 0
 offset_left = 891.0
 offset_top = 1033.0
@@ -238,41 +238,41 @@ text = "count tubele;"
 label_settings = SubResource("LabelSettings_lgtv1")
 horizontal_alignment = 1
 
-[node name="CreditsExitButton" type="Area2D" parent="UI/Credits"]
+[node name="CreditsExitButton" type="Area2D" parent="UI/Credits" unique_id=751694820]
 position = Vector2(1828.81, 65.7)
 scale = Vector2(0.67, 0.67)
 script = ExtResource("7_fk0jd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Credits/CreditsExitButton"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Credits/CreditsExitButton" unique_id=1247357235]
 z_index = 10
 position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_mff1d")
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Credits/CreditsExitButton"]
+[node name="Sprite2D" type="Sprite2D" parent="UI/Credits/CreditsExitButton" unique_id=1596050785]
 texture_filter = 1
 scale = Vector2(10, 10)
 texture = ExtResource("8_1w1yt")
 
-[node name="Q1Nonowlpixel" type="Sprite2D" parent="UI/Credits"]
+[node name="Q1Nonowlpixel" type="Sprite2D" parent="UI/Credits" unique_id=185314589]
 texture_filter = 1
 position = Vector2(186.765, 181.905)
 rotation = -0.441568
 scale = Vector2(4.465, 4.465)
 texture = ExtResource("9_dyp3k")
 
-[node name="Player" parent="UI" instance=ExtResource("11_hqdx0")]
+[node name="Player" parent="UI" unique_id=1523494878 instance=ExtResource("11_hqdx0")]
 z_index = -6
 position = Vector2(519, 485)
 rotation = 1.87448
 scale = Vector2(3.32, 3.32)
 
-[node name="Enemy" parent="UI" instance=ExtResource("12_p03xb")]
+[node name="Enemy" parent="UI" unique_id=397415690 instance=ExtResource("12_p03xb")]
 z_index = -7
 position = Vector2(590, 739)
 rotation = 2.12057
 scale = Vector2(3.32, 3.32)
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1291211482]
 stream = ExtResource("10_jtrpv")
 volume_db = -5.0
 

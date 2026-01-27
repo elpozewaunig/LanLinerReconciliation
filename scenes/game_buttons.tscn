@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://h5y2b18uksyl"]
+[gd_scene format=3 uid="uid://h5y2b18uksyl"]
 
 [ext_resource type="PackedScene" uid="uid://cwawt2cjh1ek1" path="res://scenes/button_selector.tscn" id="1_sybgs"]
 [ext_resource type="Script" uid="uid://bs2ytd7i48oef" path="res://scripts/RetryButton.gd" id="1_vo7gb"]
@@ -12,19 +12,19 @@ size = Vector2(200, 80)
 font = ExtResource("2_ympaj")
 font_size = 60
 
-[node name="GameButtons" type="Node2D"]
+[node name="GameButtons" type="Node2D" unique_id=1858020316]
 
-[node name="ButtonSelector" parent="." node_paths=PackedStringArray("buttons") instance=ExtResource("1_sybgs")]
+[node name="ButtonSelector" parent="." unique_id=1457015036 node_paths=PackedStringArray("buttons") instance=ExtResource("1_sybgs")]
 buttons = [NodePath("../RetryButton"), NodePath("../ExitButton")]
 
-[node name="RetryButton" type="Area2D" parent="."]
+[node name="RetryButton" type="Area2D" parent="." unique_id=961643229]
 position = Vector2(2.08165e-12, 300)
 script = ExtResource("1_vo7gb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RetryButton"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RetryButton" unique_id=2115081835]
 shape = SubResource("RectangleShape2D_d2hi4")
 
-[node name="Label" type="Label" parent="RetryButton"]
+[node name="Label" type="Label" parent="RetryButton" unique_id=19359096]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -42,14 +42,14 @@ label_settings = SubResource("LabelSettings_7sh5l")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExitButton" type="Area2D" parent="."]
+[node name="ExitButton" type="Area2D" parent="." unique_id=1093540784]
 position = Vector2(2.08165e-12, 400)
 script = ExtResource("3_cbdgr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitButton"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitButton" unique_id=743765044]
 shape = SubResource("RectangleShape2D_d2hi4")
 
-[node name="Label" type="Label" parent="ExitButton"]
+[node name="Label" type="Label" parent="ExitButton" unique_id=156150624]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

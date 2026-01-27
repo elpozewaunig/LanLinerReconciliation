@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bh31ua7otlkev"]
+[gd_scene format=3 uid="uid://bh31ua7otlkev"]
 
 [ext_resource type="Texture2D" uid="uid://d2ix0etgbvxnt" path="res://assets/sprites/box.png" id="1_755qa"]
 
-[node name="Box" type="Sprite2D"]
+[node name="Box" type="Sprite2D" unique_id=321250257]
 z_index = 10
 texture_filter = 1
 scale = Vector2(4, 4)

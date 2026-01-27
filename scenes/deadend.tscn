@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b024f0tq7ri2t"]
+[gd_scene format=3 uid="uid://b024f0tq7ri2t"]
 
 [ext_resource type="Texture2D" uid="uid://b4x4rt7kmw21q" path="res://assets/sprites/block.png" id="1_fj3q5"]
 
-[node name="Block" type="Sprite2D"]
+[node name="Block" type="Sprite2D" unique_id=1186941307]
 texture_filter = 1
 scale = Vector2(8, 8)
 texture = ExtResource("1_fj3q5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1051201887]
 z_index = -1
 texture_filter = 1
 rotation = 1.5708

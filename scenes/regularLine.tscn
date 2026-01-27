@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmoeflkpo7hri"]
+[gd_scene format=3 uid="uid://bmoeflkpo7hri"]
 
 [ext_resource type="Texture2D" uid="uid://xtigw5ikvvyb" path="res://assets/sprites/tile_0110.png" id="1_gqsob"]
 
-[node name="regularLine" type="Line2D"]
+[node name="regularLine" type="Line2D" unique_id=1413098774]
 z_index = -7
 texture_repeat = 2
 width = 15.0
